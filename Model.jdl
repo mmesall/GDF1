@@ -1,0 +1,573 @@
+entity Etablissement {
+	nomEtablissement NomEtablissement unique,
+	photo ImageBlob,
+	region NomRegion required,
+	departement NomDepartement required,
+	email String,
+	telephone Long,
+	typeEtablissement TypeEtablissement,
+	statut StatutEtab required,
+	autreRegion String,
+	autreDepartement String,
+	cfp CFP,
+	lycee LYCEE,
+	filiere NomFiliere,
+	serie NomSerie,
+	autreFiliere String,
+	autreSerie String,
+	autreNomEtablissement String
+}
+enum NomRegion{
+	DAKAR, DIOURBEL, FATICK, KAFFRINE,
+	KAOLACK, KEDOUGOU, KOLDA, LOUGA,
+	MATAM, SAINT_LOUIS, SEDHIOU, TAMBACOUNDA,
+	THIES, ZIGINCHOR, AUTRE
+}
+
+enum NomDepartement {
+DAKAR, GUEDIAWAYE, PIKINE, RUFISQUE,
+BAMBAEY, DIOURBEL, MBACKE,
+FATICK, FOUNDIOUGNE, GOSSAS,
+BIRKILANE, KAFFRINE, KOUNGHEUR, MALEM_HODAR, 
+GUINGUINEO, KAOLOACK, NIORO,
+KEDOUGOU, SALAMATA, SARAYA, 
+KOLDA, MEDINA_YORO_FOULAH, VELINGARA, 
+KEBEMERE, LINGUERE, LOUGA, 
+KANELKANEL, MATAM, RANEROU_FERLO, 
+DAGANA, PODOR , SAINT_LOUIS, 
+BOUNKILING, GOUDOMP, SEDHIOU, 
+BAKEL, GOUDIRY, KOUMPENTOUM, TAMBACOUNDA, 
+MBOUR, THIES, TIVAOUANE,
+BIGNONA, OUSSOUYE, ZICHUINCHOR, AUTRE
+}
+
+enum CFP{
+	CEDT_G15, CFP_OUAKAM, CNQP, CFPC_DELAFOSSE, 
+    CFPJ_YMCA, CFPT_SJ, CNCPI, CFP_MEDINA_GUEULE_TAPEE,
+    CFP_DAKAR, ICCM, CFA, CFA, CFP_PIKINE, CFP_THIAROYE,
+    CFP_RUFISQUE, CFP_BARGNY, CFP_SEBIKHOTANE, CFP_NIAGA,	    
+ 	CEP_THIES, CFP_FISSEL, CFP_TIVAOUANE, CFP_JOAL, CFP_MONT_ROLLAND,	
+    CFP_NDIAGANIAO, CFP_THIADIAYE, CNAFP_THIES, CAP_ENFEFS_THIES, CFP_MBOUR,	
+    CFP_NGUEKHOKH, CFP_KHOMBOLE, CFP_TAIBA_NDIAYE, CFP_LALANE,
+	CFP_LOUGA, CFP_KEBEMER, CFP_LINGUERE, CFP_LOUGA, CFP_NGOURANE, CFP_DAHRA,	
+    CFP_SAINT_LOUIS, CRFP_SAINT_LOUIS, CDFP_RICHARD_TOLL, CFP_DAGANA, CFP_PODOR, CDFP_PODOR, CFP_AERE_LAO,	
+	CFP_MATAM , CFP_OUROSSOGUI, CFP_WAOUNDE, CFP_KANEL, 
+    CFP_RANEROU, SINTHIOU_BAMBAMBE, AGNAM_CIVOL, THIOUBALEL, MBOUMBA,	
+    CFP_DIOURBEL, CFP_BAMBEY, CFP_MBACKE, CFP_TAIF,  CDFP_MBACKE, CFP_NDOULO, CFP_TOUBA,	
+	CFP_FATICK, CFP_DIOFIOR, CFP_DIONEWAR, CFP_DJILOR_SALOUM, CFP_FAOYE, CFP_FOUNDIOUGNE,	
+	CFP_LOUL_SESSENE, CFP_NIAKHAR, CFP_GOSSAS, CFP_TOUCAR, CFP_SOKONE, CFP_DIAKHAO,	
+    CFP_KAOLACK, CFP_MBADAKHOUNE, CFP_GUINGUINEO, CFP_NIORO, CFP_POROKHANE,	
+	CFP_BAKEL2, CFP_FORAMECA, CFP_KIDIRA, CFP_VELINGARA, CFP_TAMBA, CFP_BAKEL1, MEDINA_GOUNASS	, CFP_GOUDIRY,
+    CFP_KEDOUGOU, CFP_SALEMATA, 	
+	CFP_KOLDA, CFP_DABO, CFP_KOUNKANE, CFP_MEDINA_YORO_FOULAH, CFP_SARE_YOBA, CRFP_KOLDA, CFP_VELINGARA,	    
+	CFP_SEDHIOU, CPAR_SEDHIOU, CENTRE_REFERENCE_SEDHIOU, CENTRE_REFERENCE_BOUNKILING,	
+	CRFP_ZIGUINCHOR, CFP_ABENE, CFP_BAILA, CFP_SAINT_MARC ALBADAR, CFP_SINDIAN, CFP_TENDOUCK,	
+	CFP_BIGNONA, CFP_COUBANAO, CFP_ZIGUINCHOR, CFP_FANDA, CFP_OUSSOUYE,	
+	CFP_KAFFRINE, CFP_BIRKELANE
+}
+
+enum LYCEE{
+	LTID_DAKAR, LTCD_DAKAR, LTSLL_DAKAR, LTPFXN_THIES, LTAP_SAINT_LOUIS, LT_FATICK, LTCAN_KAOLACK, LETFP_TAMBA,
+	LTIM_KEDOUGOU, LEFP_KOLDA, LTAEB_BIGNONA, LTAB_DIOURBEL
+}
+
+
+enum NomEtablissement {
+	CEDT_G15, CFP_OUAKAM, CNQP, CFPC_DELAFOSSE, 
+    CFPJ_YMCA, CFPT_SJ, CNCPI, CFP_MEDINA_GUEULE_TAPEE
+    CFP_DAKAR, ICCM, CFA, CFA, CFP_PIKINE, CFP_THIAROYE
+    CFP_RUFISQUE, CFP_BARGNY, CFP_SEBIKHOTANE, CFP_NIAGA	
+ 	LTID_DAKAR, LTCD_DAKAR, LTSLL_DAKAR
+  
+    
+ 	CEP_THIES, CFP_FISSEL, CFP_TIVAOUANE, CFP_JOAL, CFP_MONT_ROLLAND	
+    CFP_NDIAGANIAO, CFP_THIADIAYE, CNAFP_THIES, CAP_ENFEFS_THIES, CFP_MBOUR	
+    CFP_NGUEKHOKH, CFP_KHOMBOLE, CFP_TAIBA_NDIAYE, CFP_LALANE
+    LTPFXN_THIES
+    
+	CFP_LOUGA, CFP_KEBEMER, CFP_LINGUERE, CFP_LOUGA, CFP_NGOURANE, CFP_DAHRA	
+	
+    CFP_SAINT_LOUIS, CRFP_SAINT_LOUIS, CDFP_RICHARD_TOLL, CFP_DAGANA, CFP_PODOR, CDFP_PODOR, CFP_AERE_LAO	
+	LTAP_SAINT_LOUIS
+    
+    CFP_MATAM , CFP_OUROSSOGUI, CFP_WAOUNDE, CFP_KANEL, 
+    CFP_RANEROU, SINTHIOU_BAMBAMBE, AGNAM_CIVOL, THIOUBALEL, MBOUMBA	
+	
+    CFP_DIOURBEL, CFP_BAMBEY, CFP_MBACKE, CFP_TAIF,  CDFP_MBACKE, CFP_NDOULO, CFP_TOUBA, LTAB_DIOURBEL
+
+	CFP_FATICK, CFP_DIOFIOR, CFP_DIONEWAR, CFP_DJILOR_SALOUM, CFP_FAOYE, CFP_FOUNDIOUGNE	
+	CFP_LOUL_SESSENE, CFP_NIAKHAR, CFP_GOSSAS, CFP_TOUCAR, CFP_SOKONE, CFP_DIAKHAO	
+    LT_FATICK
+    
+    CFP_KAOLACK, CFP_MBADAKHOUNE, CFP_GUINGUINEO, CFP_NIORO, CFP_POROKHANE	
+	LTCAN_KAOLACK
+     
+	CFP_BAKEL2, CFP_FORAMECA, CFP_KIDIRA, CFP_VELINGARA, CFP_TAMBA, CFP_BAKEL1, MEDINA_GOUNASS	, CFP_GOUDIRY
+    LETFP_TAMBA,
+	
+    CFP_KEDOUGOU, CFP_SALEMATA, LTIM_KEDOUGOU	
+
+	CFP_KOLDA, CFP_DABO, CFP_KOUNKANE, CFP_MEDINA_YORO_FOULAH, CFP_SARE_YOBA, CRFP_KOLDA, CFP_VELINGARA	
+	LEFP_KOLDA
+    
+	CFP_SEDHIOU, CPAR_SEDHIOU, CENTRE_REFERENCE_SEDHIOU, CENTRE_REFERENCE_BOUNKILING	
+
+	CRFP_ZIGUINCHOR, CFP_ABENE, CFP_BAILA, CFP_SAINT_MARC ALBADAR, CFP_SINDIAN, CFP_TENDOUCK	
+	CFP_BIGNONA, CFP_COUBANAO, CFP_ZIGUINCHOR, CFP_FANDA, CFP_OUSSOUYE	
+	LTAEB_BIGNONA
+    
+	CFP_KAFFRINE, CFP_BIRKELANE 
+    AUTRE
+    
+}
+
+enum TypeEtablissement{
+	CFP, LYCEE_TECH
+}
+
+enum StatutEtab{
+	PRIVE, PUBLIC
+}
+
+enum NomFiliere
+{
+	AGRI_ELEVAGE
+	AGRICULTURE,
+	PECHE,
+	ELEVAGE,
+	MINE_CARRIERES,
+	ARTISANAT,
+	BATIMAT_TRAVAUX_PUBLIQUES,
+	MECANIQUE,
+	MENUISERIE_BOIS,
+	HABILLEMENT,
+	AGROALIMENTAIRE,
+	ELECTROTECHNIQUE_ELECTRIQUE_ENERGETIQUE,
+	HYDRAULIQUE,
+	STRUCTURE_METALLIQUE,
+	STRUCTURE_PLASTIQUE,
+	BEAUTE_ESTHETIQUE,
+	DEVELOPPEMENT_TERRITORIAL,
+	DROIT,
+	ECONOMIE_GESTION_COMMERCE_LOGISTIQUE,
+	INSDUSTRIE_CULTURELLE_ET_CREATIVE,
+	INFORMATIQUE_ET_NUMERIQUE,
+	RESTAURATION_ET_HOTELLORIE,
+	SANTE_BIOLOGIE_CHIMIE,
+	SPORT,
+	TOURISME,
+	ENVIRONNEMENT,
+	AUTRES
+}
+
+enum NomSerie{
+STEG, STIDD_M, STIDD_E, S3, S4, S5, F6, AUTRES
+}
+
+entity Formation {
+	nomFormation String,
+	imageFormation ImageBlob,
+	typeFormation TypeFormation,
+	duree String,
+	admission Admission,
+	diplomeRequis DiplomeRequis,
+	ficheFormation AnyBlob
+}
+
+enum TypeFormation{
+	INITIALE, CONTINUE
+}
+
+enum Admission{
+	CONCOURS, PC
+}
+
+enum DiplomeRequis{
+	ATTESTATION,
+    CAP,
+    BT,
+    DUR,
+    DNBA,
+    BEP,
+    BTS,
+    BFEM,
+    BAC,
+    LICENCE,
+    MASTER,
+    AUTRES
+}
+
+entity FormationInitiale {
+	nomFormationI String,
+	duree String,
+	admission Admission,
+	diplomeRequis DiplomeRequis,
+	niveauEtude NiveauEtude,
+	ficheFormation AnyBlob,
+	filiere NomFiliere,
+	serie NomSerie,
+	cfp CFP,
+	lycee LYCEE,
+	nomConcours String,
+	dateOuverture LocalDate,
+	dateCloture LocalDate,
+	dateConcours LocalDate,
+	nomDiplome DiplomeObtenu,
+	nomDebouche String
+}
+
+entity FormationContinue{
+	nomFormationC String,
+	duree String,
+	admission Admission,
+	diplomeRequis DiplomeRequis,
+	niveauEtude NiveauEtude,
+	filiere NomFiliere,
+	serie NomSerie,
+	cfp CFP,
+	lycee LYCEE,
+	ficheFormation AnyBlob,
+	libellePC String,
+	montantPriseEnCharge Double,
+	coutFormation Double,
+	detailPC TextBlob, 
+	nomDiplome DiplomeObtenu,
+	autreDiplome String  
+	nomDebouche String
+}
+
+enum DiplomeObtenu{
+CPS, CAP, BEP, BT, METP, BTS, CQP, BTI, TITREPROF, CAEP, TS, AUTRES
+}
+
+entity Concours {
+	nomConcours String,
+	nomEtablissement NomEtablissement,
+	niveauEtude NiveauEtude,
+	dateOuverture LocalDate,
+	dateCloture LocalDate,l
+	dateConcours LocalDate,
+	affiche ImageBlob
+}
+
+enum NiveauEtude{
+	CINQUIEME,
+	QUATRIEME,
+	TROISIEME,
+	BFEM,
+	EQUIVALENT_BFEM,
+	SECONDE,
+	PREMIERE,
+	TERMINAL,
+	BAC,
+	EQUIVALENT_BAC,
+	LICENCE1,
+	LICENCE2,
+	LICEMCE3,
+	MASTER,
+	DOCTORAT,
+	ATTESTATION,
+	CAP,
+	CAP1,
+    CAP2,
+    CAP3,
+	CPS,
+	BEP,
+    BEP1,
+    BEP2,
+	BT,
+    BT1,
+    BT2,
+    BT3,
+	BTS,
+    BTS1,
+    BTS2,
+	CQP,
+	CHEFEQUIPE,
+	CHEF_DE_CHANTIER,
+	TECHNICIENSPECIALISE,
+	METP,
+	BTI,
+	TITRE_PROFESSIONNEL,
+    AUTRES
+}
+
+entity PriseEnCharge {
+	libelle String,
+	montantPC Double
+	
+}
+
+entity Bailleur {
+	nomBailleur String required unique,
+	budgetPrevu Double,
+	budgetDepense Double,
+	budgetRestant Double,
+	nbrePC Long
+}
+
+entity Dossier {
+	numDossier String unique,
+	prenom String required,
+	nom String required,
+	nomUtilisateur String unique,
+	dateNaiss LocalDate,
+	LieuNaiss String,
+	regionNaiss NomRegion,
+	departementNaiss NomDepartement,
+	typePiece TypePiece,
+	numeroPiece Long unique,
+	sexe Sexe,
+	regionResidence NomRegion,
+	depResidence NomDepartement,
+	adresseResidence String,
+	telephone1 String,
+	telephone2 String,
+	email String,
+	niveauFormation NiveauEtude,
+	specialite NomFiliere,
+	intituleDiplome String,
+	diplome AnyBlob,
+	anneeObtention LocalDate,
+	lieuObtention String,
+	cv AnyBlob,
+	lettreMotivation AnyBlob,
+	profession String,
+	autreSpecialite String,
+	nomCompetence String,
+	niveauCompetence NIVEAUCOMP,
+	intituleExperience String,
+	posteOccupe String required,
+	dateDebut LocalDate required,
+	dateFin LocalDate required,
+	nomEntreprise String required,
+	mission TextBlob
+
+}
+
+enum FieldNumDossierOptions{
+	READ_ONLY
+}
+
+enum FieldDateNaissOptions{
+	READ_ONLY
+}
+
+enum FieldNumeroPieceOptions{
+	READ_ONLY
+}
+
+enum NIVEAUCOMP{
+	DEBUTANT, INTERMEDIAIRE, EXPERT
+}
+
+enum TypePiece{
+	CNI, PASSEPORT
+}
+ 
+enum Sexe{
+	HOMME, FEMME
+}
+
+entity User{
+	login String,
+	password String,
+	firstName String,
+	lastName String,
+	email String
+}
+
+
+entity Diplome{
+	intitule String,
+	domaine NomFiliere required,
+	niveau NiveauEtude,
+	mention Mention,
+	anneeObtention String,
+	etablissement String,
+	document AnyBlob required
+}
+
+enum Mention{
+	PASSABLE, ASSEZ_BIEN, BIEN, TRES_BIEN
+}
+
+entity Experience{
+	dateDebut LocalDate required,
+	dateFin LocalDate required,
+	nomEntreprise String required,
+	posteOccupe String required,
+	mission TextBlob
+}
+
+entity CandidatureE{
+	offreFormation NomFiliere,
+	dateDebutOffre LocalDate,
+	dateFinOffre LocalDate,
+	//formationChoisi String,
+	dateDepot LocalDate,
+	resultat Resultat
+}
+
+
+entity CandidatureP{
+	offreFormation NomFiliere,
+	dateDebutOffre LocalDate,
+	dateFinOffre LocalDate,
+	//formationChoisi String,
+	dateDepot LocalDate,
+	resultat Resultat
+}
+
+enum Resultat{
+	SOUMIS, VALIDE, APPROUVE, REJETE
+}
+
+entity Demandeur{
+	nom String,
+	prenom String,
+	dateNaiss LocalDate,
+	lieuNaiss String,
+	sexe Sexe,
+	telephone Long,
+	email String unique,
+	profil Profil
+}
+
+enum Profil {
+	ELEVE, ETUDIANT , PROFESSIONNEL
+}
+
+entity Eleve {
+	nom String required,
+	prenom String required,
+	dateNaiss LocalDate,
+	lieuNaiss String,
+	sexe Sexe,
+	telephone Long,
+	adressePhysique String,
+	regionResidence NomRegion,
+	departResidence NomDepartement,
+	niveauEtude NiveauEtude required,
+	cni Long unique
+}
+
+entity Etudiant {
+	carteEtudiant String required unique,
+	nom String required,
+	prenom String required,
+	dateNaiss LocalDate,
+	lieuNaiss String,
+	sexe Sexe,
+	telephone Long unique,
+	adressePhysique String,
+	regionResidence NomRegion,
+	departResidence NomDepartement,
+	email String unique,
+	cni Long unique required
+}
+
+enum FieldCniOptions{
+	READ_ONLY
+}
+
+
+enum FieldCarteEtudiantOptions{
+	READ_ONLY
+}
+
+entity Professionnel {
+	profession String required,
+	nom String required,
+	prenom String required,
+	dateNaiss LocalDate,
+	lieuNaiss String,
+	sexe Sexe,
+	telephone Long unique,
+	adressePhysique String,
+	regionResidence NomRegion,
+	departResidence NomDepartement,
+	email String unique,
+	cni Long required unique
+}
+
+entity Agent {
+		matricule String required unique,
+		nomAgent String,
+		prenom String,
+		dateNaiss LocalDate,
+		lieuNaiss String,
+		sexe Sexe,
+		telephone Long,
+		email String unique
+}
+
+enum FieldMatriculeOptions{
+	READ_ONLY
+}
+
+entity ServiceMFPAI {
+	imageService ImageBlob,
+	nomService String unique, 
+	chefService String required,
+	description TextBlob
+}
+
+
+relationship OneToOne {
+	FormationInitiale{formation} to Formation,
+	FormationContinue{formation} to Formation,
+	PriseEnCharge{formation} to Formation{priseEnCharge},
+	Eleve{User(login)} to User,
+	Etudiant{User(login)} to User,
+	Professionnel{User(login)} to User,
+	Agent{User(login)} to User,
+	Demandeur{User(login)} to User,
+	Dossier{Eleve(niveauEtude)} to Eleve{dossier},
+	Dossier{Etudiant(carteEtudiant)} to Etudiant{dossier},
+	Dossier{Professionnel(profession)} to Professionnel{dossier},
+    Demandeur{Dossier(numDossier)} to Dossier{demandeur},
+	Agent{ServiceMFPAI(nomService)} to ServiceMFPAI{agent},
+	Demandeur{Eleve(cni)} to Eleve{demandeur},
+	Demandeur{Etudiant(cni)} to Etudiant{demandeur},
+	Demandeur{Professionnel(cni)} to Professionnel{demandeur},	
+	Concours{Formation(nomFormation)} to Formation
+}
+
+
+relationship OneToMany {
+	Bailleur{priseEnCharge} to PriseEnCharge{Bailleur(nomBailleur)},
+	Eleve{diplome} to Diplome{Eleve(niveauEtude)} ,
+	Etudiant{diplome} to Diplome{Etudiant(carteEtudiant)} ,
+	Professionnel{diplome} to Diplome{Professionnel(profession)},
+	Eleve{experience} to Experience{Eleve(niveauEtude)},
+	Etudiant{experience} to Experience{Etudiant(carteEtudiant)},
+	Professionnel{experience} to Experience{Professionnel(profession)},
+	Eleve{CandidatureE} to CandidatureE{Eleve(niveauEtude)},
+	Etudiant{CandidatureE} to CandidatureE{Etudiant(carteEtudiant)},
+	Professionnel{CandidatureP} to CandidatureP{Professionnel(profession)},
+	Demandeur{diplome} to Diplome{Demandeur(profil)},
+	Demandeur{experience} to Experience{Demandeur(profil)} ,
+	//Demandeur{candidature} to Candidature{Demandeur(profil)} ,
+	//Formation{candidature} to Candidature{Formation(nomFormation)},
+	FormationInitiale{CandidatureE} to CandidatureE{formationInitiale(nomFormationI)},
+	FormationInitiale{CandidatureE} to CandidatureE{formationInitiale(nomFormationI)},
+	FormationContinue{CandidatureP} to CandidatureP{formationContinue(nomFormationC)},
+	Etablissement{CandidatureE} to CandidatureE{etablissement(nomEtablissement)},
+	Etablissement{CandidatureP} to CandidatureP{etablissement(nomEtablissement)}
+	//Formation{demandeur} to Demandeur{Formation(nomFormation)} ,
+	//Formation{eleve} to Eleve{Formation(nomFormation)},
+	//Formation{etudiant} to Etudiant{Formation(nomFormation)} ,
+	//Formation{professionnel} to Professionnel{Formation(nomFormation)}
+}
+
+relationship ManyToMany{
+	Formation{etablissement(nomEtablissement) required} to Etablissement{formation required}
+}
+
+// Set service options to all except few
+service all with serviceImpl
+
+
+paginate * with pagination 
+paginate * with infinite-scroll
