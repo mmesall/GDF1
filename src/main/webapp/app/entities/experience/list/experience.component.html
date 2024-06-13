@@ -1,0 +1,170 @@
+<div>
+  <h2 id="page-heading" data-cy="ExperienceHeading">
+    <span jhiTranslate="gdf1App.experience.home.title">Experiences</span>
+
+    <div class="d-flex justify-content-end">
+      <button class="btn btn-info me-2" (click)="load()" [disabled]="isLoading">
+        <fa-icon icon="sync" [spin]="isLoading"></fa-icon>
+        <span jhiTranslate="gdf1App.experience.home.refreshListLabel">Actualiser la liste</span>
+      </button>
+
+      <button
+        id="jh-create-entity"
+        data-cy="entityCreateButton"
+        class="btn btn-primary jh-create-entity create-experience"
+        [routerLink]="['/experience/new']"
+      >
+        <fa-icon icon="plus"></fa-icon>
+        <span jhiTranslate="gdf1App.experience.home.createLabel">Créer un nouveau Experience</span>
+      </button>
+    </div>
+  </h2>
+
+  <jhi-alert-error></jhi-alert-error>
+
+  <jhi-alert></jhi-alert>
+
+  @if (experiences?.length === 0) {
+    <div class="alert alert-warning" id="no-result">
+      <span jhiTranslate="gdf1App.experience.home.notFound">Aucun Experience trouvé</span>
+    </div>
+  }
+
+  @if (experiences && experiences.length > 0) {
+    <div class="table-responsive table-entities" id="entities">
+      <table class="table table-striped" aria-describedby="page-heading">
+        <thead>
+          <tr jhiSort [sortState]="sortState" (sortChange)="navigateToWithComponentValues($event)">
+            <th scope="col" jhiSortBy="id">
+              <div class="d-flex">
+                <span jhiTranslate="global.field.id">ID</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="dateDebut">
+              <div class="d-flex">
+                <span jhiTranslate="gdf1App.experience.dateDebut">Date Debut</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="dateFin">
+              <div class="d-flex">
+                <span jhiTranslate="gdf1App.experience.dateFin">Date Fin</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="nomEntreprise">
+              <div class="d-flex">
+                <span jhiTranslate="gdf1App.experience.nomEntreprise">Nom Entreprise</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="posteOccupe">
+              <div class="d-flex">
+                <span jhiTranslate="gdf1App.experience.posteOccupe">Poste Occupe</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="mission">
+              <div class="d-flex">
+                <span jhiTranslate="gdf1App.experience.mission">Mission</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="eleve.niveauEtude">
+              <div class="d-flex">
+                <span jhiTranslate="gdf1App.experience.eleve">Eleve</span>
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="etudiant.carteEtudiant">
+              <div class="d-flex">
+                <span jhiTranslate="gdf1App.experience.etudiant">Etudiant</span>
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="professionnel.profession">
+              <div class="d-flex">
+                <span jhiTranslate="gdf1App.experience.professionnel">Professionnel</span>
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="demandeur.profil">
+              <div class="d-flex">
+                <span jhiTranslate="gdf1App.experience.demandeur">Demandeur</span>
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col"></th>
+          </tr>
+        </thead>
+        <tbody infinite-scroll (scrolled)="loadNextPage()" [infiniteScrollDisabled]="!hasMorePage()" [infiniteScrollDistance]="0">
+          @for (experience of experiences; track trackId) {
+            <tr data-cy="entityTable">
+              <td>
+                <a [routerLink]="['/experience', experience.id, 'view']">{{ experience.id }}</a>
+              </td>
+              <td>{{ experience.dateDebut | formatMediumDate }}</td>
+              <td>{{ experience.dateFin | formatMediumDate }}</td>
+              <td>{{ experience.nomEntreprise }}</td>
+              <td>{{ experience.posteOccupe }}</td>
+              <td>{{ experience.mission }}</td>
+              <td>
+                @if (experience.eleve) {
+                  <div>
+                    <a [routerLink]="['/eleve', experience.eleve.id, 'view']">{{ experience.eleve.niveauEtude }}</a>
+                  </div>
+                }
+              </td>
+              <td>
+                @if (experience.etudiant) {
+                  <div>
+                    <a [routerLink]="['/etudiant', experience.etudiant.id, 'view']">{{ experience.etudiant.carteEtudiant }}</a>
+                  </div>
+                }
+              </td>
+              <td>
+                @if (experience.professionnel) {
+                  <div>
+                    <a [routerLink]="['/professionnel', experience.professionnel.id, 'view']">{{ experience.professionnel.profession }}</a>
+                  </div>
+                }
+              </td>
+              <td>
+                @if (experience.demandeur) {
+                  <div>
+                    <a [routerLink]="['/demandeur', experience.demandeur.id, 'view']">{{ experience.demandeur.profil }}</a>
+                  </div>
+                }
+              </td>
+              <td class="text-end">
+                <div class="btn-group">
+                  <a [routerLink]="['/experience', experience.id, 'view']" class="btn btn-info btn-sm" data-cy="entityDetailsButton">
+                    <fa-icon icon="eye"></fa-icon>
+                    <span class="d-none d-md-inline" jhiTranslate="entity.action.view">Voir</span>
+                  </a>
+
+                  <a [routerLink]="['/experience', experience.id, 'edit']" class="btn btn-primary btn-sm" data-cy="entityEditButton">
+                    <fa-icon icon="pencil-alt"></fa-icon>
+                    <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Editer</span>
+                  </a>
+
+                  <button type="submit" (click)="delete(experience)" class="btn btn-danger btn-sm" data-cy="entityDeleteButton">
+                    <fa-icon icon="times"></fa-icon>
+                    <span class="d-none d-md-inline" jhiTranslate="entity.action.delete">Supprimer</span>
+                  </button>
+                </div>
+              </td>
+            </tr>
+          }
+        </tbody>
+      </table>
+    </div>
+  }
+</div>

@@ -1,0 +1,211 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    <form name="editForm" novalidate (ngSubmit)="save()" [formGroup]="editForm">
+      <h2 id="jhi-diplome-heading" data-cy="DiplomeCreateUpdateHeading" jhiTranslate="gdf1App.diplome.home.createOrEditLabel">
+        Créer ou éditer un Diplome
+      </h2>
+
+      <div>
+        <jhi-alert-error></jhi-alert-error>
+
+        @if (editForm.controls.id.value !== null) {
+          <div class="mb-3">
+            <label class="form-label" for="field_id" jhiTranslate="gdf1App.diplome.id">ID</label>
+            <input type="number" class="form-control" name="id" id="field_id" data-cy="id" formControlName="id" [readonly]="true" />
+          </div>
+        }
+
+        <div class="mb-3">
+          <label class="form-label" for="field_intitule" jhiTranslate="gdf1App.diplome.intitule">Intitule</label>
+          <input type="text" class="form-control" name="intitule" id="field_intitule" data-cy="intitule" formControlName="intitule" />
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_domaine" jhiTranslate="gdf1App.diplome.domaine">Domaine</label>
+          <select class="form-control" name="domaine" formControlName="domaine" id="field_domaine" data-cy="domaine">
+            <option [ngValue]="null">{{ 'gdf1App.NomFiliere.null' | translate }}</option>
+            @for (nomFiliere of nomFiliereValues; track $index) {
+              <option [value]="nomFiliere">{{ 'gdf1App.NomFiliere.' + nomFiliere | translate }}</option>
+            }
+          </select>
+          @if (editForm.get('domaine')!.invalid && (editForm.get('domaine')!.dirty || editForm.get('domaine')!.touched)) {
+            <div>
+              @if (editForm.get('domaine')?.errors?.required) {
+                <small class="form-text text-danger" jhiTranslate="entity.validation.required">Ce champ est obligatoire.</small>
+              }
+            </div>
+          }
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_niveau" jhiTranslate="gdf1App.diplome.niveau">Niveau</label>
+          <select class="form-control" name="niveau" formControlName="niveau" id="field_niveau" data-cy="niveau">
+            <option [ngValue]="null">{{ 'gdf1App.NiveauEtude.null' | translate }}</option>
+            @for (niveauEtude of niveauEtudeValues; track $index) {
+              <option [value]="niveauEtude">{{ 'gdf1App.NiveauEtude.' + niveauEtude | translate }}</option>
+            }
+          </select>
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_mention" jhiTranslate="gdf1App.diplome.mention">Mention</label>
+          <select class="form-control" name="mention" formControlName="mention" id="field_mention" data-cy="mention">
+            <option [ngValue]="null">{{ 'gdf1App.Mention.null' | translate }}</option>
+            @for (mention of mentionValues; track $index) {
+              <option [value]="mention">{{ 'gdf1App.Mention.' + mention | translate }}</option>
+            }
+          </select>
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_anneeObtention" jhiTranslate="gdf1App.diplome.anneeObtention">Annee Obtention</label>
+          <input
+            type="text"
+            class="form-control"
+            name="anneeObtention"
+            id="field_anneeObtention"
+            data-cy="anneeObtention"
+            formControlName="anneeObtention"
+          />
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_etablissement" jhiTranslate="gdf1App.diplome.etablissement">Etablissement</label>
+          <input
+            type="text"
+            class="form-control"
+            name="etablissement"
+            id="field_etablissement"
+            data-cy="etablissement"
+            formControlName="etablissement"
+          />
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_document" jhiTranslate="gdf1App.diplome.document">Document</label>
+          <div>
+            @if (editForm.get('document')!.value) {
+              <div class="form-text text-danger clearfix">
+                <a
+                  class="pull-start"
+                  (click)="openFile(editForm.get('document')!.value!, editForm.get('documentContentType')!.value!)"
+                  jhiTranslate="entity.action.open"
+                  >Ouvrir</a
+                ><br />
+                <span class="pull-start"
+                  >{{ editForm.get('documentContentType')!.value }}, {{ byteSize(editForm.get('document')!.value!) }}</span
+                >
+                <button
+                  type="button"
+                  (click)="editForm.patchValue({ document: undefined, documentContentType: undefined })"
+                  class="btn btn-secondary btn-xs pull-end"
+                >
+                  <fa-icon icon="times"></fa-icon>
+                </button>
+              </div>
+            }
+            <input
+              type="file"
+              id="file_document"
+              data-cy="document"
+              (change)="setFileData($event, 'document', false)"
+              jhiTranslate="entity.action.addblob"
+            />
+          </div>
+          <input type="hidden" class="form-control" name="document" id="field_document" data-cy="document" formControlName="document" />
+          <input
+            type="hidden"
+            class="form-control"
+            name="documentContentType"
+            id="field_documentContentType"
+            formControlName="documentContentType"
+          />
+          @if (editForm.get('document')!.invalid && (editForm.get('document')!.dirty || editForm.get('document')!.touched)) {
+            <div>
+              @if (editForm.get('document')?.errors?.required) {
+                <small class="form-text text-danger" jhiTranslate="entity.validation.required">Ce champ est obligatoire.</small>
+              }
+            </div>
+          }
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_eleve" jhiTranslate="gdf1App.diplome.eleve">Eleve</label>
+          <select class="form-control" id="field_eleve" data-cy="eleve" name="eleve" formControlName="eleve" [compareWith]="compareEleve">
+            <option [ngValue]="null"></option>
+            @for (eleveOption of elevesSharedCollection; track $index) {
+              <option [ngValue]="eleveOption">{{ eleveOption.niveauEtude }}</option>
+            }
+          </select>
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_etudiant" jhiTranslate="gdf1App.diplome.etudiant">Etudiant</label>
+          <select
+            class="form-control"
+            id="field_etudiant"
+            data-cy="etudiant"
+            name="etudiant"
+            formControlName="etudiant"
+            [compareWith]="compareEtudiant"
+          >
+            <option [ngValue]="null"></option>
+            @for (etudiantOption of etudiantsSharedCollection; track $index) {
+              <option [ngValue]="etudiantOption">{{ etudiantOption.carteEtudiant }}</option>
+            }
+          </select>
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_professionnel" jhiTranslate="gdf1App.diplome.professionnel">Professionnel</label>
+          <select
+            class="form-control"
+            id="field_professionnel"
+            data-cy="professionnel"
+            name="professionnel"
+            formControlName="professionnel"
+            [compareWith]="compareProfessionnel"
+          >
+            <option [ngValue]="null"></option>
+            @for (professionnelOption of professionnelsSharedCollection; track $index) {
+              <option [ngValue]="professionnelOption">{{ professionnelOption.profession }}</option>
+            }
+          </select>
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_demandeur" jhiTranslate="gdf1App.diplome.demandeur">Demandeur</label>
+          <select
+            class="form-control"
+            id="field_demandeur"
+            data-cy="demandeur"
+            name="demandeur"
+            formControlName="demandeur"
+            [compareWith]="compareDemandeur"
+          >
+            <option [ngValue]="null"></option>
+            @for (demandeurOption of demandeursSharedCollection; track $index) {
+              <option [ngValue]="demandeurOption">{{ demandeurOption.profil }}</option>
+            }
+          </select>
+        </div>
+      </div>
+
+      <div>
+        <button type="button" id="cancel-save" data-cy="entityCreateCancelButton" class="btn btn-secondary" (click)="previousState()">
+          <fa-icon icon="ban"></fa-icon>&nbsp;<span jhiTranslate="entity.action.cancel">Annuler</span>
+        </button>
+
+        <button
+          type="submit"
+          id="save-entity"
+          data-cy="entityCreateSaveButton"
+          [disabled]="editForm.invalid || isSaving"
+          class="btn btn-primary"
+        >
+          <fa-icon icon="save"></fa-icon>&nbsp;<span jhiTranslate="entity.action.save">Sauvegarder</span>
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

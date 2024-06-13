@@ -1,0 +1,258 @@
+<div>
+  <h2 id="page-heading" data-cy="ProfessionnelHeading">
+    <span jhiTranslate="gdf1App.professionnel.home.title">Professionnels</span>
+
+    <div class="d-flex justify-content-end">
+      <button class="btn btn-info me-2" (click)="load()" [disabled]="isLoading">
+        <fa-icon icon="sync" [spin]="isLoading"></fa-icon>
+        <span jhiTranslate="gdf1App.professionnel.home.refreshListLabel">Actualiser la liste</span>
+      </button>
+
+      <button
+        id="jh-create-entity"
+        data-cy="entityCreateButton"
+        class="btn btn-primary jh-create-entity create-professionnel"
+        [routerLink]="['/professionnel/new']"
+      >
+        <fa-icon icon="plus"></fa-icon>
+        <span jhiTranslate="gdf1App.professionnel.home.createLabel">Créer un nouveau Professionnel</span>
+      </button>
+    </div>
+  </h2>
+
+  <jhi-alert-error></jhi-alert-error>
+
+  <jhi-alert></jhi-alert>
+
+  @if (professionnels?.length === 0) {
+    <div class="alert alert-warning" id="no-result">
+      <span jhiTranslate="gdf1App.professionnel.home.notFound">Aucun Professionnel trouvé</span>
+    </div>
+  }
+
+  @if (professionnels && professionnels.length > 0) {
+    <div class="table-responsive table-entities" id="entities">
+      <table class="table table-striped" aria-describedby="page-heading">
+        <thead>
+          <tr jhiSort [sortState]="sortState" (sortChange)="navigateToWithComponentValues($event)">
+            <th scope="col" jhiSortBy="id">
+              <div class="d-flex">
+                <span jhiTranslate="global.field.id">ID</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="profession">
+              <div class="d-flex">
+                <span jhiTranslate="gdf1App.professionnel.profession">Profession</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="nom">
+              <div class="d-flex">
+                <span jhiTranslate="gdf1App.professionnel.nom">Nom</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="prenom">
+              <div class="d-flex">
+                <span jhiTranslate="gdf1App.professionnel.prenom">Prenom</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="dateNaiss">
+              <div class="d-flex">
+                <span jhiTranslate="gdf1App.professionnel.dateNaiss">Date Naiss</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="lieuNaiss">
+              <div class="d-flex">
+                <span jhiTranslate="gdf1App.professionnel.lieuNaiss">Lieu Naiss</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="sexe">
+              <div class="d-flex">
+                <span jhiTranslate="gdf1App.professionnel.sexe">Sexe</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="telephone">
+              <div class="d-flex">
+                <span jhiTranslate="gdf1App.professionnel.telephone">Telephone</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="adressePhysique">
+              <div class="d-flex">
+                <span jhiTranslate="gdf1App.professionnel.adressePhysique">Adresse Physique</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="regionResidence">
+              <div class="d-flex">
+                <span jhiTranslate="gdf1App.professionnel.regionResidence">Region Residence</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="departResidence">
+              <div class="d-flex">
+                <span jhiTranslate="gdf1App.professionnel.departResidence">Depart Residence</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="email">
+              <div class="d-flex">
+                <span jhiTranslate="gdf1App.professionnel.email">Email</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="cni">
+              <div class="d-flex">
+                <span jhiTranslate="gdf1App.professionnel.cni">Cni</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="user.login">
+              <div class="d-flex">
+                <span jhiTranslate="gdf1App.professionnel.user">User</span>
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col"></th>
+          </tr>
+        </thead>
+        <tbody infinite-scroll (scrolled)="loadNextPage()" [infiniteScrollDisabled]="!hasMorePage()" [infiniteScrollDistance]="0">
+          @for (professionnel of professionnels; track trackId) {
+            <tr data-cy="entityTable">
+              <td>
+                <a [routerLink]="['/professionnel', professionnel.id, 'view']">{{ professionnel.id }}</a>
+              </td>
+              <td>{{ professionnel.profession }}</td>
+              <td>{{ professionnel.nom }}</td>
+              <td>{{ professionnel.prenom }}</td>
+              <td>{{ professionnel.dateNaiss | formatMediumDate }}</td>
+              <td>{{ professionnel.lieuNaiss }}</td>
+              <td [jhiTranslate]="'gdf1App.Sexe.' + (professionnel.sexe ?? 'null')">
+                {{ { null: '', HOMME: 'HOMME', FEMME: 'FEMME' }[professionnel.sexe ?? 'null'] }}
+              </td>
+              <td>{{ professionnel.telephone }}</td>
+              <td>{{ professionnel.adressePhysique }}</td>
+              <td [jhiTranslate]="'gdf1App.NomRegion.' + (professionnel.regionResidence ?? 'null')">
+                {{
+                  {
+                    null: '',
+                    DAKAR: 'DAKAR',
+                    DIOURBEL: 'DIOURBEL',
+                    FATICK: 'FATICK',
+                    KAFFRINE: 'KAFFRINE',
+                    KAOLACK: 'KAOLACK',
+                    KEDOUGOU: 'KEDOUGOU',
+                    KOLDA: 'KOLDA',
+                    LOUGA: 'LOUGA',
+                    MATAM: 'MATAM',
+                    SAINT_LOUIS: 'SAINT_LOUIS',
+                    SEDHIOU: 'SEDHIOU',
+                    TAMBACOUNDA: 'TAMBACOUNDA',
+                    THIES: 'THIES',
+                    ZIGINCHOR: 'ZIGINCHOR',
+                    AUTRE: 'AUTRE'
+                  }[professionnel.regionResidence ?? 'null']
+                }}
+              </td>
+              <td [jhiTranslate]="'gdf1App.NomDepartement.' + (professionnel.departResidence ?? 'null')">
+                {{
+                  {
+                    null: '',
+                    DAKAR: 'DAKAR',
+                    GUEDIAWAYE: 'GUEDIAWAYE',
+                    PIKINE: 'PIKINE',
+                    RUFISQUE: 'RUFISQUE',
+                    BAMBAEY: 'BAMBAEY',
+                    DIOURBEL: 'DIOURBEL',
+                    MBACKE: 'MBACKE',
+                    FATICK: 'FATICK',
+                    FOUNDIOUGNE: 'FOUNDIOUGNE',
+                    GOSSAS: 'GOSSAS',
+                    BIRKILANE: 'BIRKILANE',
+                    KAFFRINE: 'KAFFRINE',
+                    KOUNGHEUR: 'KOUNGHEUR',
+                    MALEM_HODAR: 'MALEM_HODAR',
+                    GUINGUINEO: 'GUINGUINEO',
+                    KAOLOACK: 'KAOLOACK',
+                    NIORO: 'NIORO',
+                    KEDOUGOU: 'KEDOUGOU',
+                    SALAMATA: 'SALAMATA',
+                    SARAYA: 'SARAYA',
+                    KOLDA: 'KOLDA',
+                    MEDINA_YORO_FOULAH: 'MEDINA_YORO_FOULAH',
+                    VELINGARA: 'VELINGARA',
+                    KEBEMERE: 'KEBEMERE',
+                    LINGUERE: 'LINGUERE',
+                    LOUGA: 'LOUGA',
+                    KANELKANEL: 'KANELKANEL',
+                    MATAM: 'MATAM',
+                    RANEROU_FERLO: 'RANEROU_FERLO',
+                    DAGANA: 'DAGANA',
+                    PODOR: 'PODOR',
+                    SAINT_LOUIS: 'SAINT_LOUIS',
+                    BOUNKILING: 'BOUNKILING',
+                    GOUDOMP: 'GOUDOMP',
+                    SEDHIOU: 'SEDHIOU',
+                    BAKEL: 'BAKEL',
+                    GOUDIRY: 'GOUDIRY',
+                    KOUMPENTOUM: 'KOUMPENTOUM',
+                    TAMBACOUNDA: 'TAMBACOUNDA',
+                    MBOUR: 'MBOUR',
+                    THIES: 'THIES',
+                    TIVAOUANE: 'TIVAOUANE',
+                    BIGNONA: 'BIGNONA',
+                    OUSSOUYE: 'OUSSOUYE',
+                    ZICHUINCHOR: 'ZICHUINCHOR',
+                    AUTRE: 'AUTRE'
+                  }[professionnel.departResidence ?? 'null']
+                }}
+              </td>
+              <td>{{ professionnel.email }}</td>
+              <td>{{ professionnel.cni }}</td>
+              <td>
+                {{ professionnel.user?.login }}
+              </td>
+              <td class="text-end">
+                <div class="btn-group">
+                  <a [routerLink]="['/professionnel', professionnel.id, 'view']" class="btn btn-info btn-sm" data-cy="entityDetailsButton">
+                    <fa-icon icon="eye"></fa-icon>
+                    <span class="d-none d-md-inline" jhiTranslate="entity.action.view">Voir</span>
+                  </a>
+
+                  <a [routerLink]="['/professionnel', professionnel.id, 'edit']" class="btn btn-primary btn-sm" data-cy="entityEditButton">
+                    <fa-icon icon="pencil-alt"></fa-icon>
+                    <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Editer</span>
+                  </a>
+
+                  <button type="submit" (click)="delete(professionnel)" class="btn btn-danger btn-sm" data-cy="entityDeleteButton">
+                    <fa-icon icon="times"></fa-icon>
+                    <span class="d-none d-md-inline" jhiTranslate="entity.action.delete">Supprimer</span>
+                  </button>
+                </div>
+              </td>
+            </tr>
+          }
+        </tbody>
+      </table>
+    </div>
+  }
+</div>

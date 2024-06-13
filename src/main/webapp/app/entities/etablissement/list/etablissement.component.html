@@ -1,0 +1,57 @@
+<div>
+  <h2 id="page-heading" data-cy="EtablissementHeading">
+    <span>Etablissements de formations professionnelles et techniques</span>
+
+    <div class="d-flex justify-content-end">
+      <button
+        *jhiHasAnyAuthority="'ROLE_ADMIN'"
+        id="jh-create-entity"
+        data-cy="entityCreateButton"
+        class="btn btn-primary jh-create-entity create-etablissement"
+        [routerLink]="['/etablissement/new']"
+      >
+        <fa-icon icon="plus"></fa-icon>
+        <span jhiTranslate="gdf1App.etablissement.home.createLabel">Créer un nouveau Etablissement</span>
+      </button>
+    </div>
+  </h2>
+
+  <jhi-alert-error></jhi-alert-error>
+  <jhi-alert></jhi-alert>
+
+  @if (etablissements?.length === 0) {
+    <div class="alert alert-warning" id="no-result">
+      <span jhiTranslate="gdf1App.etablissement.home.notFound">Aucun Etablissement trouvé</span>
+    </div>
+  }
+
+  @if (etablissements && etablissements.length > 0) {
+    <div class="card-container row">
+      @for (etablissement of etablissements; track trackId) {
+        <div class="card col-md-4" data-cy="entityCard">
+          <div class="card-body">
+            <h5 class="card-title">
+              <a [routerLink]="['/etablissement', etablissement.id, 'view']">{{ etablissement.nomEtablissement }}</a>
+            </h5>
+            <!-- <h6 class="card-subtitle mb-2 text-muted">{{ etablissement.region }}</h6> -->
+            <img
+              *ngIf="etablissement.photo"
+              [src]="'data:' + etablissement.photoContentType + ';base64,' + etablissement.photo"
+              class="img-fluid"
+              alt="etablissement"
+            />
+            <p class="card-text">
+              <strong>Email:</strong> {{ etablissement.email }}<br />
+              <strong>Telephone:</strong> {{ etablissement.telephone }}<br />
+              <strong>Type:</strong> {{ etablissement.typeEtablissement }}<br />
+              <strong>Statut:</strong> {{ etablissement.statut }}
+            </p>
+            <a [routerLink]="['/etablissement', etablissement.id, 'edit']" *jhiHasAnyAuthority="'ROLE_ADMIN'" class="btn btn-primary">
+              Modifier
+            </a>
+          </div>
+        </div>
+      }
+    </div>
+  }
+</div>

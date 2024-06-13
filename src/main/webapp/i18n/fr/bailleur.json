@@ -1,0 +1,29 @@
+{
+  "gdf1App": {
+    "bailleur": {
+      "home": {
+        "title": "Bailleurs",
+        "refreshListLabel": "Actualiser la liste",
+        "createLabel": "Créer un nouveau Bailleur",
+        "createOrEditLabel": "Créer ou éditer un Bailleur",
+        "notFound": "Aucun Bailleur trouvé"
+      },
+      "created": "Un nouveau Bailleur a été créé avec l'identifiant {{ param }}",
+      "updated": "Le Bailleur avec l'identifiant {{ param }} a été mis à jour",
+      "deleted": "Le Bailleur avec l'identifiant {{ param }} a été supprimé",
+      "delete": {
+        "question": "Êtes-vous certain de vouloir supprimer le Bailleur {{ id }} ?"
+      },
+      "detail": {
+        "title": "Bailleur"
+      },
+      "id": "ID",
+      "nomBailleur": "Nom Bailleur",
+      "budgetPrevu": "Budget Prevu",
+      "budgetDepense": "Budget Depense",
+      "budgetRestant": "Budget Restant",
+      "nbrePC": "Nbre PC",
+      "priseEnCharge": "Prise En Charge"
+    }
+  }
+}

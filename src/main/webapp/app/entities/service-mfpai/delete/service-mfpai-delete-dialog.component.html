@@ -1,0 +1,28 @@
+@if (serviceMFPAI) {
+  <form name="deleteForm" (ngSubmit)="confirmDelete(serviceMFPAI.id!)">
+    <div class="modal-header">
+      <h4 class="modal-title" data-cy="serviceMFPAIDeleteDialogHeading" jhiTranslate="entity.delete.title">Confirmation de suppression</h4>
+    </div>
+
+    <div class="modal-body">
+      <jhi-alert-error></jhi-alert-error>
+      <p
+        id="jhi-delete-serviceMFPAI-heading"
+        jhiTranslate="gdf1App.serviceMFPAI.delete.question"
+        [translateValues]="{ id: serviceMFPAI.id }"
+      >
+        Êtes-vous certain de vouloir supprimer le Service MFPAI {{ serviceMFPAI.id }} ?
+      </p>
+    </div>
+
+    <div class="modal-footer">
+      <button type="button" class="btn btn-secondary" data-dismiss="modal" (click)="cancel()">
+        <fa-icon icon="ban"></fa-icon>&nbsp;<span jhiTranslate="entity.action.cancel">Annuler</span>
+      </button>
+
+      <button id="jhi-confirm-delete-serviceMFPAI" data-cy="entityConfirmDeleteButton" type="submit" class="btn btn-danger">
+        <fa-icon icon="times"></fa-icon>&nbsp;<span jhiTranslate="entity.action.delete">Supprimer</span>
+      </button>
+    </div>
+  </form>
+}

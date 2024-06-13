@@ -1,0 +1,73 @@
+<div>
+  <h2 id="page-heading" data-cy="FormationInitialeHeading">
+    <p style="text-align: center; font-weight: bold">Formations Initiales</p>
+
+    <div class="d-flex justify-content-end">
+      <button
+        *jhiHasAnyAuthority="'ROLE_ADMIN'"
+        id="jh-create-entity"
+        data-cy="entityCreateButton"
+        class="btn btn-primary jh-create-entity create-formation-initiale"
+        [routerLink]="['/formation-initiale/new']"
+      >
+        <fa-icon icon="plus"></fa-icon>
+        <span>Créer un nouvelle Formation Initiale</span>
+      </button>
+    </div>
+  </h2>
+
+  <jhi-alert-error></jhi-alert-error>
+  <jhi-alert></jhi-alert>
+
+  @if (formationInitiales?.length === 0) {
+    <div class="alert alert-warning" id="no-result">
+      <span jhiTranslate="gdf1App.formationInitiale.home.notFound">Aucun Formation Initiale trouvé</span>
+    </div>
+  }
+
+  @if (formationInitiales && formationInitiales.length > 0) {
+    <div class="card-container">
+      @for (formationInitiale of formationInitiales; track trackId) {
+        <div class="card">
+          <div class="card-body">
+            <h5 class="card-title">{{ formationInitiale.nomFormationI }}</h5>
+            <p class="card-text"><strong>Duree:</strong> {{ formationInitiale.duree }}</p>
+            <p class="card-text">
+              <strong>Admission:</strong> {{ { null: '', CONCOURS: 'CONCOURS', PC: 'PC' }[formationInitiale.admission ?? 'null'] }}
+            </p>
+            <p class="card-text">
+              <strong>Diplome Requis:</strong>
+              {{
+                {
+                  null: '',
+                  ATTESTATION: 'ATTESTATION',
+                  CAP: 'CAP',
+                  BT: 'BT',
+                  DUR: 'DUR',
+                  DNBA: 'DNBA',
+                  BEP: 'BEP',
+                  BTS: 'BTS',
+                  BFEM: 'BFEM',
+                  BAC: 'BAC',
+                  LICENCE: 'LICENCE',
+                  MASTER: 'MASTER',
+                  AUTRES: 'AUTRES'
+                }[formationInitiale.diplomeRequis ?? 'null']
+              }}
+            </p>
+            <!-- Ajoutez d'autres champs ici selon vos besoins -->
+            <a [routerLink]="['/formation-initiale', formationInitiale.id, 'view']" class="btn btn-primary">Voir les détails</a>
+            <a
+              [routerLink]="[
+                '/candidature-e/new',
+                { offreFormation: formationInitiale.nomFormationI, formationInitiale: formationInitiale.id }
+              ]"
+              class="btn btn-success"
+              >Postuler</a
+            >
+          </div>
+        </div>
+      }
+    </div>
+  }
+</div>

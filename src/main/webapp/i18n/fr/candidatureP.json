@@ -1,0 +1,31 @@
+{
+  "gdf1App": {
+    "candidatureP": {
+      "home": {
+        "title": "CandidaturePS",
+        "refreshListLabel": "Actualiser la liste",
+        "createLabel": "Créer un nouveau Candidature P",
+        "createOrEditLabel": "Créer ou éditer un Candidature P",
+        "notFound": "Aucun Candidature P trouvé"
+      },
+      "created": "Un nouveau Candidature P a été créé avec l'identifiant {{ param }}",
+      "updated": "Le Candidature P avec l'identifiant {{ param }} a été mis à jour",
+      "deleted": "Le Candidature P avec l'identifiant {{ param }} a été supprimé",
+      "delete": {
+        "question": "Êtes-vous certain de vouloir supprimer le Candidature P {{ id }} ?"
+      },
+      "detail": {
+        "title": "Candidature P"
+      },
+      "id": "ID",
+      "offreFormation": "Offre Formation",
+      "dateDebutOffre": "Date Debut Offre",
+      "dateFinOffre": "Date Fin Offre",
+      "dateDepot": "Date Depot",
+      "resultat": "Resultat",
+      "professionnel": "Professionnel",
+      "formationContinue": "Formation Continue",
+      "etablissement": "Etablissement"
+    }
+  }
+}

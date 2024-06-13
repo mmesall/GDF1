@@ -1,0 +1,102 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    @if (demandeur()) {
+      <div>
+        <h2 data-cy="demandeurDetailsHeading"><span jhiTranslate="gdf1App.demandeur.detail.title">Demandeur</span></h2>
+
+        <hr />
+
+        <jhi-alert-error></jhi-alert-error>
+
+        <jhi-alert></jhi-alert>
+
+        <dl class="row-md jh-entity-details">
+          <dt><span jhiTranslate="global.field.id">ID</span></dt>
+          <dd>
+            <span>{{ demandeur()!.id }}</span>
+          </dd>
+          <dt><span jhiTranslate="gdf1App.demandeur.nom">Nom</span></dt>
+          <dd>
+            <span>{{ demandeur()!.nom }}</span>
+          </dd>
+          <dt><span jhiTranslate="gdf1App.demandeur.prenom">Prenom</span></dt>
+          <dd>
+            <span>{{ demandeur()!.prenom }}</span>
+          </dd>
+          <dt><span jhiTranslate="gdf1App.demandeur.dateNaiss">Date Naiss</span></dt>
+          <dd>
+            <span>{{ demandeur()!.dateNaiss | formatMediumDate }}</span>
+          </dd>
+          <dt><span jhiTranslate="gdf1App.demandeur.lieuNaiss">Lieu Naiss</span></dt>
+          <dd>
+            <span>{{ demandeur()!.lieuNaiss }}</span>
+          </dd>
+          <dt><span jhiTranslate="gdf1App.demandeur.sexe">Sexe</span></dt>
+          <dd>
+            <span [jhiTranslate]="'gdf1App.Sexe.' + (demandeur()!.sexe ?? 'null')">{{
+              { null: '', HOMME: 'HOMME', FEMME: 'FEMME' }[demandeur()!.sexe ?? 'null']
+            }}</span>
+          </dd>
+          <dt><span jhiTranslate="gdf1App.demandeur.telephone">Telephone</span></dt>
+          <dd>
+            <span>{{ demandeur()!.telephone }}</span>
+          </dd>
+          <dt><span jhiTranslate="gdf1App.demandeur.email">Email</span></dt>
+          <dd>
+            <span>{{ demandeur()!.email }}</span>
+          </dd>
+          <dt><span jhiTranslate="gdf1App.demandeur.profil">Profil</span></dt>
+          <dd>
+            <span [jhiTranslate]="'gdf1App.Profil.' + (demandeur()!.profil ?? 'null')">{{
+              { null: '', ELEVE: 'ELEVE', ETUDIANT: 'ETUDIANT', PROFESSIONNEL: 'PROFESSIONNEL' }[demandeur()!.profil ?? 'null']
+            }}</span>
+          </dd>
+          <dt><span jhiTranslate="gdf1App.demandeur.user">User</span></dt>
+          <dd>
+            <span>{{ demandeur()!.user?.login }}</span>
+          </dd>
+          <dt><span jhiTranslate="gdf1App.demandeur.dossier">Dossier</span></dt>
+          <dd>
+            @if (demandeur()!.dossier) {
+              <div>
+                <a [routerLink]="['/dossier', demandeur()!.dossier?.id, 'view']">{{ demandeur()!.dossier?.numDossier }}</a>
+              </div>
+            }
+          </dd>
+          <dt><span jhiTranslate="gdf1App.demandeur.eleve">Eleve</span></dt>
+          <dd>
+            @if (demandeur()!.eleve) {
+              <div>
+                <a [routerLink]="['/eleve', demandeur()!.eleve?.id, 'view']">{{ demandeur()!.eleve?.cni }}</a>
+              </div>
+            }
+          </dd>
+          <dt><span jhiTranslate="gdf1App.demandeur.etudiant">Etudiant</span></dt>
+          <dd>
+            @if (demandeur()!.etudiant) {
+              <div>
+                <a [routerLink]="['/etudiant', demandeur()!.etudiant?.id, 'view']">{{ demandeur()!.etudiant?.cni }}</a>
+              </div>
+            }
+          </dd>
+          <dt><span jhiTranslate="gdf1App.demandeur.professionnel">Professionnel</span></dt>
+          <dd>
+            @if (demandeur()!.professionnel) {
+              <div>
+                <a [routerLink]="['/professionnel', demandeur()!.professionnel?.id, 'view']">{{ demandeur()!.professionnel?.cni }}</a>
+              </div>
+            }
+          </dd>
+        </dl>
+
+        <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+          <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Retour</span>
+        </button>
+
+        <button type="button" [routerLink]="['/demandeur', demandeur()!.id, 'edit']" class="btn btn-primary">
+          <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Editer</span>
+        </button>
+      </div>
+    }
+  </div>
+</div>

@@ -1,0 +1,38 @@
+{
+  "gdf1App": {
+    "demandeur": {
+      "home": {
+        "title": "Demandeurs",
+        "refreshListLabel": "Refresh list",
+        "createLabel": "Create a new Demandeur",
+        "createOrEditLabel": "Create or edit a Demandeur",
+        "notFound": "No Demandeurs found"
+      },
+      "created": "A new Demandeur is created with identifier {{ param }}",
+      "updated": "A Demandeur is updated with identifier {{ param }}",
+      "deleted": "A Demandeur is deleted with identifier {{ param }}",
+      "delete": {
+        "question": "Are you sure you want to delete Demandeur {{ id }}?"
+      },
+      "detail": {
+        "title": "Demandeur"
+      },
+      "id": "ID",
+      "nom": "Nom",
+      "prenom": "Prenom",
+      "dateNaiss": "Date Naiss",
+      "lieuNaiss": "Lieu Naiss",
+      "sexe": "Sexe",
+      "telephone": "Telephone",
+      "email": "Email",
+      "profil": "Profil",
+      "user": "User",
+      "dossier": "Dossier",
+      "eleve": "Eleve",
+      "etudiant": "Etudiant",
+      "professionnel": "Professionnel",
+      "diplome": "Diplome",
+      "experience": "Experience"
+    }
+  }
+}

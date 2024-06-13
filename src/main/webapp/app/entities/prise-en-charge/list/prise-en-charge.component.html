@@ -1,0 +1,48 @@
+<div>
+  <h2 id="page-heading" data-cy="PriseEnChargeHeading">
+    <span>Bons de formation</span>
+
+    <div class="d-flex justify-content-end">
+      <!-- <button class="btn btn-info me-2" (click)="load()" [disabled]="isLoading">
+        <fa-icon icon="sync" [spin]="isLoading"></fa-icon>
+        <span jhiTranslate="gdf1App.PriseEnCharge.home.refreshListLabel">Actualiser la liste</span>
+      </button> -->
+
+      <button
+        id="jh-create-entity"
+        data-cy="entityCreateButton"
+        class="btn btn-primary jh-create-entity create-prise-en-charge"
+        [routerLink]="['/prise-en-charge/new']"
+      >
+        <fa-icon icon="plus"></fa-icon>
+        <span jhiTranslate="gdf1App.priseEnCharge.home.createLabel">Créer une prise en charge</span>
+      </button>
+    </div>
+  </h2>
+
+  <jhi-alert-error></jhi-alert-error>
+  <jhi-alert></jhi-alert>
+
+  @if (priseEnCharges?.length === 0) {
+    <div class="alert alert-warning" id="no-result">
+      <span jhiTranslate="gdf1App.PriseEnCharge.home.notFound">Aucune prise en charge trouvée </span>
+    </div>
+  }
+
+  @if (priseEnCharges && priseEnCharges.length > 0) {
+    <div class="card-container">
+      @for (priseEnCharge of priseEnCharges; track trackId) {
+        <div class="card">
+          <div class="card-body">
+            <h5 class="card-title">{{ priseEnCharge.libelle }}</h5>
+            <p class="card-text"><strong>Montant:</strong> {{ priseEnCharge.montantPC }}</p>
+            <p class="card-text"><strong>Formation:</strong> {{ priseEnCharge.formation }}</p>
+            <p class="card-text"><strong>Bailleur:</strong> {{ priseEnCharge.bailleur }}</p>
+            <!-- Ajoutez d'autres champs ici selon vos besoins -->
+            <a [routerLink]="['/priseEnCharge', priseEnCharge.id, 'view']" class="btn btn-primary">Voir les détails</a>
+          </div>
+        </div>
+      }
+    </div>
+  }
+</div>

@@ -1,0 +1,80 @@
+{
+  "annotations": {
+    "changelogDate": "20240605154331"
+  },
+  "applications": "*",
+  "fields": [
+    {
+      "fieldName": "intitule",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "domaine",
+      "fieldType": "NomFiliere",
+      "fieldValidateRules": ["required"],
+      "fieldValues": "AGRI_ELEVAGE,AGRICULTURE,PECHE,ELEVAGE,MINE_CARRIERES,ARTISANAT,BATIMAT_TRAVAUX_PUBLIQUES,MECANIQUE,MENUISERIE_BOIS,HABILLEMENT,AGROALIMENTAIRE,ELECTROTECHNIQUE_ELECTRIQUE_ENERGETIQUE,HYDRAULIQUE,STRUCTURE_METALLIQUE,STRUCTURE_PLASTIQUE,BEAUTE_ESTHETIQUE,DEVELOPPEMENT_TERRITORIAL,DROIT,ECONOMIE_GESTION_COMMERCE_LOGISTIQUE,INSDUSTRIE_CULTURELLE_ET_CREATIVE,INFORMATIQUE_ET_NUMERIQUE,RESTAURATION_ET_HOTELLORIE,SANTE_BIOLOGIE_CHIMIE,SPORT,TOURISME,ENVIRONNEMENT,AUTRES"
+    },
+    {
+      "fieldName": "niveau",
+      "fieldType": "NiveauEtude",
+      "fieldValues": "CINQUIEME,QUATRIEME,TROISIEME,BFEM,EQUIVALENT_BFEM,SECONDE,PREMIERE,TERMINAL,BAC,EQUIVALENT_BAC,LICENCE1,LICENCE2,LICEMCE3,MASTER,DOCTORAT,ATTESTATION,CAP,CAP1,CAP2,CAP3,CPS,BEP,BEP1,BEP2,BT,BT1,BT2,BT3,BTS,BTS1,BTS2,CQP,CHEFEQUIPE,CHEF_DE_CHANTIER,TECHNICIENSPECIALISE,METP,BTI,TITRE_PROFESSIONNEL,AUTRES"
+    },
+    {
+      "fieldName": "mention",
+      "fieldType": "Mention",
+      "fieldValues": "PASSABLE,ASSEZ_BIEN,BIEN,TRES_BIEN"
+    },
+    {
+      "fieldName": "anneeObtention",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "etablissement",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "document",
+      "fieldType": "byte[]",
+      "fieldTypeBlobContent": "any",
+      "fieldValidateRules": ["required"]
+    }
+  ],
+  "name": "Diplome",
+  "pagination": "infinite-scroll",
+  "relationships": [
+    {
+      "otherEntityField": "niveauEtude",
+      "otherEntityName": "eleve",
+      "otherEntityRelationshipName": "diplome",
+      "relationshipName": "eleve",
+      "relationshipSide": "right",
+      "relationshipType": "many-to-one"
+    },
+    {
+      "otherEntityField": "carteEtudiant",
+      "otherEntityName": "etudiant",
+      "otherEntityRelationshipName": "diplome",
+      "relationshipName": "etudiant",
+      "relationshipSide": "right",
+      "relationshipType": "many-to-one"
+    },
+    {
+      "otherEntityField": "profession",
+      "otherEntityName": "professionnel",
+      "otherEntityRelationshipName": "diplome",
+      "relationshipName": "professionnel",
+      "relationshipSide": "right",
+      "relationshipType": "many-to-one"
+    },
+    {
+      "otherEntityField": "profil",
+      "otherEntityName": "demandeur",
+      "otherEntityRelationshipName": "diplome",
+      "relationshipName": "demandeur",
+      "relationshipSide": "right",
+      "relationshipType": "many-to-one"
+    }
+  ],
+  "searchEngine": "no",
+  "service": "serviceImpl"
+}

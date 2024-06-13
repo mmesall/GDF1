@@ -1,0 +1,31 @@
+// .card-container {
+//     margin-top: 15px;
+//   }
+
+//   .card {
+//     margin: 2px;
+//   }
+
+.card-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px; /* Espace entre les cartes */
+}
+
+.card {
+  flex: 1 1 calc(33.333% - 20px); /* Trois cartes par ligne avec espace */
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  padding: 20px;
+  margin-bottom: 20px;
+}
+
+.card-title {
+  font-size: 1.25rem;
+  margin-bottom: 0.75rem;
+}
+
+.card-text {
+  margin-bottom: 0.5rem;
+}

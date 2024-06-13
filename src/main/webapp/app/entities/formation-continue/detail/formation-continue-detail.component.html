@@ -1,0 +1,359 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    @if (formationContinue()) {
+      <div>
+        <h2 data-cy="formationContinueDetailsHeading">
+          <span jhiTranslate="gdf1App.formationContinue.detail.title">Formation Continue</span>
+        </h2>
+
+        <hr />
+
+        <jhi-alert-error></jhi-alert-error>
+
+        <jhi-alert></jhi-alert>
+
+        <dl class="row-md jh-entity-details">
+          <dt><span jhiTranslate="global.field.id">ID</span></dt>
+          <dd>
+            <span>{{ formationContinue()!.id }}</span>
+          </dd>
+          <dt><span jhiTranslate="gdf1App.formationContinue.nomFormationC">Nom Formation C</span></dt>
+          <dd>
+            <span>{{ formationContinue()!.nomFormationC }}</span>
+          </dd>
+          <dt><span jhiTranslate="gdf1App.formationContinue.duree">Duree</span></dt>
+          <dd>
+            <span>{{ formationContinue()!.duree }}</span>
+          </dd>
+          <dt><span jhiTranslate="gdf1App.formationContinue.admission">Admission</span></dt>
+          <dd>
+            <span [jhiTranslate]="'gdf1App.Admission.' + (formationContinue()!.admission ?? 'null')">{{
+              { null: '', CONCOURS: 'CONCOURS', PC: 'PC' }[formationContinue()!.admission ?? 'null']
+            }}</span>
+          </dd>
+          <dt><span jhiTranslate="gdf1App.formationContinue.diplomeRequis">Diplome Requis</span></dt>
+          <dd>
+            <span [jhiTranslate]="'gdf1App.DiplomeRequis.' + (formationContinue()!.diplomeRequis ?? 'null')">{{
+              {
+                null: '',
+                ATTESTATION: 'ATTESTATION',
+                CAP: 'CAP',
+                BT: 'BT',
+                DUR: 'DUR',
+                DNBA: 'DNBA',
+                BEP: 'BEP',
+                BTS: 'BTS',
+                BFEM: 'BFEM',
+                BAC: 'BAC',
+                LICENCE: 'LICENCE',
+                MASTER: 'MASTER',
+                AUTRES: 'AUTRES'
+              }[formationContinue()!.diplomeRequis ?? 'null']
+            }}</span>
+          </dd>
+          <dt><span jhiTranslate="gdf1App.formationContinue.niveauEtude">Niveau Etude</span></dt>
+          <dd>
+            <span [jhiTranslate]="'gdf1App.NiveauEtude.' + (formationContinue()!.niveauEtude ?? 'null')">{{
+              {
+                null: '',
+                CINQUIEME: 'CINQUIEME',
+                QUATRIEME: 'QUATRIEME',
+                TROISIEME: 'TROISIEME',
+                BFEM: 'BFEM',
+                EQUIVALENT_BFEM: 'EQUIVALENT_BFEM',
+                SECONDE: 'SECONDE',
+                PREMIERE: 'PREMIERE',
+                TERMINAL: 'TERMINAL',
+                BAC: 'BAC',
+                EQUIVALENT_BAC: 'EQUIVALENT_BAC',
+                LICENCE1: 'LICENCE1',
+                LICENCE2: 'LICENCE2',
+                LICEMCE3: 'LICEMCE3',
+                MASTER: 'MASTER',
+                DOCTORAT: 'DOCTORAT',
+                ATTESTATION: 'ATTESTATION',
+                CAP: 'CAP',
+                CAP1: 'CAP1',
+                CAP2: 'CAP2',
+                CAP3: 'CAP3',
+                CPS: 'CPS',
+                BEP: 'BEP',
+                BEP1: 'BEP1',
+                BEP2: 'BEP2',
+                BT: 'BT',
+                BT1: 'BT1',
+                BT2: 'BT2',
+                BT3: 'BT3',
+                BTS: 'BTS',
+                BTS1: 'BTS1',
+                BTS2: 'BTS2',
+                CQP: 'CQP',
+                CHEFEQUIPE: 'CHEFEQUIPE',
+                CHEF_DE_CHANTIER: 'CHEF_DE_CHANTIER',
+                TECHNICIENSPECIALISE: 'TECHNICIENSPECIALISE',
+                METP: 'METP',
+                BTI: 'BTI',
+                TITRE_PROFESSIONNEL: 'TITRE_PROFESSIONNEL',
+                AUTRES: 'AUTRES'
+              }[formationContinue()!.niveauEtude ?? 'null']
+            }}</span>
+          </dd>
+          <dt><span jhiTranslate="gdf1App.formationContinue.filiere">Filiere</span></dt>
+          <dd>
+            <span [jhiTranslate]="'gdf1App.NomFiliere.' + (formationContinue()!.filiere ?? 'null')">{{
+              {
+                null: '',
+                AGRI_ELEVAGE: 'AGRI_ELEVAGE',
+                AGRICULTURE: 'AGRICULTURE',
+                PECHE: 'PECHE',
+                ELEVAGE: 'ELEVAGE',
+                MINE_CARRIERES: 'MINE_CARRIERES',
+                ARTISANAT: 'ARTISANAT',
+                BATIMAT_TRAVAUX_PUBLIQUES: 'BATIMAT_TRAVAUX_PUBLIQUES',
+                MECANIQUE: 'MECANIQUE',
+                MENUISERIE_BOIS: 'MENUISERIE_BOIS',
+                HABILLEMENT: 'HABILLEMENT',
+                AGROALIMENTAIRE: 'AGROALIMENTAIRE',
+                ELECTROTECHNIQUE_ELECTRIQUE_ENERGETIQUE: 'ELECTROTECHNIQUE_ELECTRIQUE_ENERGETIQUE',
+                HYDRAULIQUE: 'HYDRAULIQUE',
+                STRUCTURE_METALLIQUE: 'STRUCTURE_METALLIQUE',
+                STRUCTURE_PLASTIQUE: 'STRUCTURE_PLASTIQUE',
+                BEAUTE_ESTHETIQUE: 'BEAUTE_ESTHETIQUE',
+                DEVELOPPEMENT_TERRITORIAL: 'DEVELOPPEMENT_TERRITORIAL',
+                DROIT: 'DROIT',
+                ECONOMIE_GESTION_COMMERCE_LOGISTIQUE: 'ECONOMIE_GESTION_COMMERCE_LOGISTIQUE',
+                INSDUSTRIE_CULTURELLE_ET_CREATIVE: 'INSDUSTRIE_CULTURELLE_ET_CREATIVE',
+                INFORMATIQUE_ET_NUMERIQUE: 'INFORMATIQUE_ET_NUMERIQUE',
+                RESTAURATION_ET_HOTELLORIE: 'RESTAURATION_ET_HOTELLORIE',
+                SANTE_BIOLOGIE_CHIMIE: 'SANTE_BIOLOGIE_CHIMIE',
+                SPORT: 'SPORT',
+                TOURISME: 'TOURISME',
+                ENVIRONNEMENT: 'ENVIRONNEMENT',
+                AUTRES: 'AUTRES'
+              }[formationContinue()!.filiere ?? 'null']
+            }}</span>
+          </dd>
+          <dt><span jhiTranslate="gdf1App.formationContinue.serie">Serie</span></dt>
+          <dd>
+            <span [jhiTranslate]="'gdf1App.NomSerie.' + (formationContinue()!.serie ?? 'null')">{{
+              { null: '', STEG: 'STEG', STIDD_M: 'STIDD_M', STIDD_E: 'STIDD_E', S3: 'S3', S4: 'S4', S5: 'S5', F6: 'F6', AUTRES: 'AUTRES' }[
+                formationContinue()!.serie ?? 'null'
+              ]
+            }}</span>
+          </dd>
+          <dt><span jhiTranslate="gdf1App.formationContinue.cfp">Cfp</span></dt>
+          <dd>
+            <span [jhiTranslate]="'gdf1App.CFP.' + (formationContinue()!.cfp ?? 'null')">{{
+              {
+                null: '',
+                CEDT_G15: 'CEDT_G15',
+                CFP_OUAKAM: 'CFP_OUAKAM',
+                CNQP: 'CNQP',
+                CFPC_DELAFOSSE: 'CFPC_DELAFOSSE',
+                CFPJ_YMCA: 'CFPJ_YMCA',
+                CFPT_SJ: 'CFPT_SJ',
+                CNCPI: 'CNCPI',
+                CFP_MEDINA_GUEULE_TAPEE: 'CFP_MEDINA_GUEULE_TAPEE',
+                CFP_DAKAR: 'CFP_DAKAR',
+                ICCM: 'ICCM',
+                CFA: 'CFA',
+                CFP_PIKINE: 'CFP_PIKINE',
+                CFP_THIAROYE: 'CFP_THIAROYE',
+                CFP_RUFISQUE: 'CFP_RUFISQUE',
+                CFP_BARGNY: 'CFP_BARGNY',
+                CFP_SEBIKHOTANE: 'CFP_SEBIKHOTANE',
+                CFP_NIAGA: 'CFP_NIAGA',
+                CEP_THIES: 'CEP_THIES',
+                CFP_FISSEL: 'CFP_FISSEL',
+                CFP_TIVAOUANE: 'CFP_TIVAOUANE',
+                CFP_JOAL: 'CFP_JOAL',
+                CFP_MONT_ROLLAND: 'CFP_MONT_ROLLAND',
+                CFP_NDIAGANIAO: 'CFP_NDIAGANIAO',
+                CFP_THIADIAYE: 'CFP_THIADIAYE',
+                CNAFP_THIES: 'CNAFP_THIES',
+                CAP_ENFEFS_THIES: 'CAP_ENFEFS_THIES',
+                CFP_MBOUR: 'CFP_MBOUR',
+                CFP_NGUEKHOKH: 'CFP_NGUEKHOKH',
+                CFP_KHOMBOLE: 'CFP_KHOMBOLE',
+                CFP_TAIBA_NDIAYE: 'CFP_TAIBA_NDIAYE',
+                CFP_LALANE: 'CFP_LALANE',
+                CFP_LOUGA: 'CFP_LOUGA',
+                CFP_KEBEMER: 'CFP_KEBEMER',
+                CFP_LINGUERE: 'CFP_LINGUERE',
+                CFP_NGOURANE: 'CFP_NGOURANE',
+                CFP_DAHRA: 'CFP_DAHRA',
+                CFP_SAINT_LOUIS: 'CFP_SAINT_LOUIS',
+                CRFP_SAINT_LOUIS: 'CRFP_SAINT_LOUIS',
+                CDFP_RICHARD_TOLL: 'CDFP_RICHARD_TOLL',
+                CFP_DAGANA: 'CFP_DAGANA',
+                CFP_PODOR: 'CFP_PODOR',
+                CDFP_PODOR: 'CDFP_PODOR',
+                CFP_AERE_LAO: 'CFP_AERE_LAO',
+                CFP_MATAM: 'CFP_MATAM',
+                CFP_OUROSSOGUI: 'CFP_OUROSSOGUI',
+                CFP_WAOUNDE: 'CFP_WAOUNDE',
+                CFP_KANEL: 'CFP_KANEL',
+                CFP_RANEROU: 'CFP_RANEROU',
+                SINTHIOU_BAMBAMBE: 'SINTHIOU_BAMBAMBE',
+                AGNAM_CIVOL: 'AGNAM_CIVOL',
+                THIOUBALEL: 'THIOUBALEL',
+                MBOUMBA: 'MBOUMBA',
+                CFP_DIOURBEL: 'CFP_DIOURBEL',
+                CFP_BAMBEY: 'CFP_BAMBEY',
+                CFP_MBACKE: 'CFP_MBACKE',
+                CFP_TAIF: 'CFP_TAIF',
+                CDFP_MBACKE: 'CDFP_MBACKE',
+                CFP_NDOULO: 'CFP_NDOULO',
+                CFP_TOUBA: 'CFP_TOUBA',
+                CFP_FATICK: 'CFP_FATICK',
+                CFP_DIOFIOR: 'CFP_DIOFIOR',
+                CFP_DIONEWAR: 'CFP_DIONEWAR',
+                CFP_DJILOR_SALOUM: 'CFP_DJILOR_SALOUM',
+                CFP_FAOYE: 'CFP_FAOYE',
+                CFP_FOUNDIOUGNE: 'CFP_FOUNDIOUGNE',
+                CFP_LOUL_SESSENE: 'CFP_LOUL_SESSENE',
+                CFP_NIAKHAR: 'CFP_NIAKHAR',
+                CFP_GOSSAS: 'CFP_GOSSAS',
+                CFP_TOUCAR: 'CFP_TOUCAR',
+                CFP_SOKONE: 'CFP_SOKONE',
+                CFP_DIAKHAO: 'CFP_DIAKHAO',
+                CFP_KAOLACK: 'CFP_KAOLACK',
+                CFP_MBADAKHOUNE: 'CFP_MBADAKHOUNE',
+                CFP_GUINGUINEO: 'CFP_GUINGUINEO',
+                CFP_NIORO: 'CFP_NIORO',
+                CFP_POROKHANE: 'CFP_POROKHANE',
+                CFP_BAKEL2: 'CFP_BAKEL2',
+                CFP_FORAMECA: 'CFP_FORAMECA',
+                CFP_KIDIRA: 'CFP_KIDIRA',
+                CFP_VELINGARA: 'CFP_VELINGARA',
+                CFP_TAMBA: 'CFP_TAMBA',
+                CFP_BAKEL1: 'CFP_BAKEL1',
+                MEDINA_GOUNASS: 'MEDINA_GOUNASS',
+                CFP_GOUDIRY: 'CFP_GOUDIRY',
+                CFP_KEDOUGOU: 'CFP_KEDOUGOU',
+                CFP_SALEMATA: 'CFP_SALEMATA',
+                CFP_KOLDA: 'CFP_KOLDA',
+                CFP_DABO: 'CFP_DABO',
+                CFP_KOUNKANE: 'CFP_KOUNKANE',
+                CFP_MEDINA_YORO_FOULAH: 'CFP_MEDINA_YORO_FOULAH',
+                CFP_SARE_YOBA: 'CFP_SARE_YOBA',
+                CRFP_KOLDA: 'CRFP_KOLDA',
+                CFP_SEDHIOU: 'CFP_SEDHIOU',
+                CPAR_SEDHIOU: 'CPAR_SEDHIOU',
+                CENTRE_REFERENCE_SEDHIOU: 'CENTRE_REFERENCE_SEDHIOU',
+                CENTRE_REFERENCE_BOUNKILING: 'CENTRE_REFERENCE_BOUNKILING',
+                CRFP_ZIGUINCHOR: 'CRFP_ZIGUINCHOR',
+                CFP_ABENE: 'CFP_ABENE',
+                CFP_BAILA: 'CFP_BAILA',
+                CFP_SAINT_MARC: 'CFP_SAINT_MARC',
+                ALBADAR: 'ALBADAR',
+                CFP_SINDIAN: 'CFP_SINDIAN',
+                CFP_TENDOUCK: 'CFP_TENDOUCK',
+                CFP_BIGNONA: 'CFP_BIGNONA',
+                CFP_COUBANAO: 'CFP_COUBANAO',
+                CFP_ZIGUINCHOR: 'CFP_ZIGUINCHOR',
+                CFP_FANDA: 'CFP_FANDA',
+                CFP_OUSSOUYE: 'CFP_OUSSOUYE',
+                CFP_KAFFRINE: 'CFP_KAFFRINE',
+                CFP_BIRKELANE: 'CFP_BIRKELANE'
+              }[formationContinue()!.cfp ?? 'null']
+            }}</span>
+          </dd>
+          <dt><span jhiTranslate="gdf1App.formationContinue.lycee">Lycee</span></dt>
+          <dd>
+            <span [jhiTranslate]="'gdf1App.LYCEE.' + (formationContinue()!.lycee ?? 'null')">{{
+              {
+                null: '',
+                LTID_DAKAR: 'LTID_DAKAR',
+                LTCD_DAKAR: 'LTCD_DAKAR',
+                LTSLL_DAKAR: 'LTSLL_DAKAR',
+                LTPFXN_THIES: 'LTPFXN_THIES',
+                LTAP_SAINT_LOUIS: 'LTAP_SAINT_LOUIS',
+                LT_FATICK: 'LT_FATICK',
+                LTCAN_KAOLACK: 'LTCAN_KAOLACK',
+                LETFP_TAMBA: 'LETFP_TAMBA',
+                LTIM_KEDOUGOU: 'LTIM_KEDOUGOU',
+                LEFP_KOLDA: 'LEFP_KOLDA',
+                LTAEB_BIGNONA: 'LTAEB_BIGNONA',
+                LTAB_DIOURBEL: 'LTAB_DIOURBEL'
+              }[formationContinue()!.lycee ?? 'null']
+            }}</span>
+          </dd>
+          <dt><span jhiTranslate="gdf1App.formationContinue.ficheFormation">Fiche Formation</span></dt>
+          <dd>
+            @if (formationContinue()!.ficheFormation) {
+              <div>
+                <a
+                  (click)="openFile(formationContinue()!.ficheFormation ?? '', formationContinue()!.ficheFormationContentType)"
+                  jhiTranslate="entity.action.open"
+                  >Ouvrir</a
+                >
+                {{ formationContinue()!.ficheFormationContentType }}, {{ byteSize(formationContinue()!.ficheFormation ?? '') }}
+              </div>
+            }
+          </dd>
+          <dt><span jhiTranslate="gdf1App.formationContinue.libellePC">Libelle PC</span></dt>
+          <dd>
+            <span>{{ formationContinue()!.libellePC }}</span>
+          </dd>
+          <dt><span jhiTranslate="gdf1App.formationContinue.montantPriseEnCharge">Montant Prise En Charge</span></dt>
+          <dd>
+            <span>{{ formationContinue()!.montantPriseEnCharge }}</span>
+          </dd>
+          <dt><span jhiTranslate="gdf1App.formationContinue.coutFormation">Cout Formation</span></dt>
+          <dd>
+            <span>{{ formationContinue()!.coutFormation }}</span>
+          </dd>
+          <dt><span jhiTranslate="gdf1App.formationContinue.detailPC">Detail PC</span></dt>
+          <dd>
+            <span>{{ formationContinue()!.detailPC }}</span>
+          </dd>
+          <dt><span jhiTranslate="gdf1App.formationContinue.nomDiplome">Nom Diplome</span></dt>
+          <dd>
+            <span [jhiTranslate]="'gdf1App.DiplomeObtenu.' + (formationContinue()!.nomDiplome ?? 'null')">{{
+              {
+                null: '',
+                CPS: 'CPS',
+                CAP: 'CAP',
+                BEP: 'BEP',
+                BT: 'BT',
+                METP: 'METP',
+                BTS: 'BTS',
+                CQP: 'CQP',
+                BTI: 'BTI',
+                TITREPROF: 'TITREPROF',
+                CAEP: 'CAEP',
+                TS: 'TS',
+                AUTRES: 'AUTRES'
+              }[formationContinue()!.nomDiplome ?? 'null']
+            }}</span>
+          </dd>
+          <dt><span jhiTranslate="gdf1App.formationContinue.autreDiplome">Autre Diplome</span></dt>
+          <dd>
+            <span>{{ formationContinue()!.autreDiplome }}</span>
+          </dd>
+          <dt><span jhiTranslate="gdf1App.formationContinue.nomDebouche">Nom Debouche</span></dt>
+          <dd>
+            <span>{{ formationContinue()!.nomDebouche }}</span>
+          </dd>
+          <dt><span jhiTranslate="gdf1App.formationContinue.formation">Formation</span></dt>
+          <dd>
+            @if (formationContinue()!.formation) {
+              <div>
+                <a [routerLink]="['/formation', formationContinue()!.formation?.id, 'view']">{{ formationContinue()!.formation?.id }}</a>
+              </div>
+            }
+          </dd>
+        </dl>
+
+        <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+          <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Retour</span>
+        </button>
+
+        <button type="button" [routerLink]="['/formation-continue', formationContinue()!.id, 'edit']" class="btn btn-primary">
+          <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Editer</span>
+        </button>
+      </div>
+    }
+  </div>
+</div>

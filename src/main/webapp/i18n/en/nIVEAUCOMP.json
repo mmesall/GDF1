@@ -1,0 +1,10 @@
+{
+  "gdf1App": {
+    "NIVEAUCOMP": {
+      "null": "",
+      "DEBUTANT": "DEBUTANT",
+      "INTERMEDIAIRE": "INTERMEDIAIRE",
+      "EXPERT": "EXPERT"
+    }
+  }
+}

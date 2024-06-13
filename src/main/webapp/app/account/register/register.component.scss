@@ -1,0 +1,26 @@
+body {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  background-size: cover;
+}
+
+.register-page {
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-image: url('./../../../content/images/image_bg2.jpeg') no-repeat center center fixed;
+}
+
+.bg-light {
+  background-color: rgba(255, 255, 255, 0.8) !important; /* Slightly transparent background */
+}
+
+.shadow {
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.text-warning {
+  color: #045736 !important; /* Bootstrap warning color */
+}

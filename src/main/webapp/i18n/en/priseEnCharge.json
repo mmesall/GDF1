@@ -1,0 +1,27 @@
+{
+  "gdf1App": {
+    "priseEnCharge": {
+      "home": {
+        "title": "Prise En Charges",
+        "refreshListLabel": "Refresh list",
+        "createLabel": "Create a new Prise En Charge",
+        "createOrEditLabel": "Create or edit a Prise En Charge",
+        "notFound": "No Prise En Charges found"
+      },
+      "created": "A new Prise En Charge is created with identifier {{ param }}",
+      "updated": "A Prise En Charge is updated with identifier {{ param }}",
+      "deleted": "A Prise En Charge is deleted with identifier {{ param }}",
+      "delete": {
+        "question": "Are you sure you want to delete Prise En Charge {{ id }}?"
+      },
+      "detail": {
+        "title": "Prise En Charge"
+      },
+      "id": "ID",
+      "libelle": "Libelle",
+      "montantPC": "Montant PC",
+      "formation": "Formation",
+      "bailleur": "Bailleur"
+    }
+  }
+}

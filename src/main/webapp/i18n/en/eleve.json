@@ -1,0 +1,40 @@
+{
+  "gdf1App": {
+    "eleve": {
+      "home": {
+        "title": "Eleves",
+        "refreshListLabel": "Refresh list",
+        "createLabel": "Create a new Eleve",
+        "createOrEditLabel": "Create or edit a Eleve",
+        "notFound": "No Eleves found"
+      },
+      "created": "A new Eleve is created with identifier {{ param }}",
+      "updated": "A Eleve is updated with identifier {{ param }}",
+      "deleted": "A Eleve is deleted with identifier {{ param }}",
+      "delete": {
+        "question": "Are you sure you want to delete Eleve {{ id }}?"
+      },
+      "detail": {
+        "title": "Eleve"
+      },
+      "id": "ID",
+      "nom": "Nom",
+      "prenom": "Prenom",
+      "dateNaiss": "Date Naiss",
+      "lieuNaiss": "Lieu Naiss",
+      "sexe": "Sexe",
+      "telephone": "Telephone",
+      "adressePhysique": "Adresse Physique",
+      "regionResidence": "Region Residence",
+      "departResidence": "Depart Residence",
+      "niveauEtude": "Niveau Etude",
+      "cni": "Cni",
+      "user": "User",
+      "diplome": "Diplome",
+      "experience": "Experience",
+      "candidatureE": "Candidature E",
+      "dossier": "Dossier",
+      "demandeur": "Demandeur"
+    }
+  }
+}

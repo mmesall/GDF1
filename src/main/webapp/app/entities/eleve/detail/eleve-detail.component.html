@@ -1,0 +1,192 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    @if (eleve()) {
+      <div>
+        <h2 data-cy="eleveDetailsHeading"><span jhiTranslate="gdf1App.eleve.detail.title">Eleve</span></h2>
+
+        <hr />
+
+        <jhi-alert-error></jhi-alert-error>
+
+        <jhi-alert></jhi-alert>
+
+        <dl class="row-md jh-entity-details">
+          <dt><span jhiTranslate="global.field.id">ID</span></dt>
+          <dd>
+            <span>{{ eleve()!.id }}</span>
+          </dd>
+          <dt><span jhiTranslate="gdf1App.eleve.nom">Nom</span></dt>
+          <dd>
+            <span>{{ eleve()!.nom }}</span>
+          </dd>
+          <dt><span jhiTranslate="gdf1App.eleve.prenom">Prenom</span></dt>
+          <dd>
+            <span>{{ eleve()!.prenom }}</span>
+          </dd>
+          <dt><span jhiTranslate="gdf1App.eleve.dateNaiss">Date Naiss</span></dt>
+          <dd>
+            <span>{{ eleve()!.dateNaiss | formatMediumDate }}</span>
+          </dd>
+          <dt><span jhiTranslate="gdf1App.eleve.lieuNaiss">Lieu Naiss</span></dt>
+          <dd>
+            <span>{{ eleve()!.lieuNaiss }}</span>
+          </dd>
+          <dt><span jhiTranslate="gdf1App.eleve.sexe">Sexe</span></dt>
+          <dd>
+            <span [jhiTranslate]="'gdf1App.Sexe.' + (eleve()!.sexe ?? 'null')">{{
+              { null: '', HOMME: 'HOMME', FEMME: 'FEMME' }[eleve()!.sexe ?? 'null']
+            }}</span>
+          </dd>
+          <dt><span jhiTranslate="gdf1App.eleve.telephone">Telephone</span></dt>
+          <dd>
+            <span>{{ eleve()!.telephone }}</span>
+          </dd>
+          <dt><span jhiTranslate="gdf1App.eleve.adressePhysique">Adresse Physique</span></dt>
+          <dd>
+            <span>{{ eleve()!.adressePhysique }}</span>
+          </dd>
+          <dt><span jhiTranslate="gdf1App.eleve.regionResidence">Region Residence</span></dt>
+          <dd>
+            <span [jhiTranslate]="'gdf1App.NomRegion.' + (eleve()!.regionResidence ?? 'null')">{{
+              {
+                null: '',
+                DAKAR: 'DAKAR',
+                DIOURBEL: 'DIOURBEL',
+                FATICK: 'FATICK',
+                KAFFRINE: 'KAFFRINE',
+                KAOLACK: 'KAOLACK',
+                KEDOUGOU: 'KEDOUGOU',
+                KOLDA: 'KOLDA',
+                LOUGA: 'LOUGA',
+                MATAM: 'MATAM',
+                SAINT_LOUIS: 'SAINT_LOUIS',
+                SEDHIOU: 'SEDHIOU',
+                TAMBACOUNDA: 'TAMBACOUNDA',
+                THIES: 'THIES',
+                ZIGINCHOR: 'ZIGINCHOR',
+                AUTRE: 'AUTRE'
+              }[eleve()!.regionResidence ?? 'null']
+            }}</span>
+          </dd>
+          <dt><span jhiTranslate="gdf1App.eleve.departResidence">Depart Residence</span></dt>
+          <dd>
+            <span [jhiTranslate]="'gdf1App.NomDepartement.' + (eleve()!.departResidence ?? 'null')">{{
+              {
+                null: '',
+                DAKAR: 'DAKAR',
+                GUEDIAWAYE: 'GUEDIAWAYE',
+                PIKINE: 'PIKINE',
+                RUFISQUE: 'RUFISQUE',
+                BAMBAEY: 'BAMBAEY',
+                DIOURBEL: 'DIOURBEL',
+                MBACKE: 'MBACKE',
+                FATICK: 'FATICK',
+                FOUNDIOUGNE: 'FOUNDIOUGNE',
+                GOSSAS: 'GOSSAS',
+                BIRKILANE: 'BIRKILANE',
+                KAFFRINE: 'KAFFRINE',
+                KOUNGHEUR: 'KOUNGHEUR',
+                MALEM_HODAR: 'MALEM_HODAR',
+                GUINGUINEO: 'GUINGUINEO',
+                KAOLOACK: 'KAOLOACK',
+                NIORO: 'NIORO',
+                KEDOUGOU: 'KEDOUGOU',
+                SALAMATA: 'SALAMATA',
+                SARAYA: 'SARAYA',
+                KOLDA: 'KOLDA',
+                MEDINA_YORO_FOULAH: 'MEDINA_YORO_FOULAH',
+                VELINGARA: 'VELINGARA',
+                KEBEMERE: 'KEBEMERE',
+                LINGUERE: 'LINGUERE',
+                LOUGA: 'LOUGA',
+                KANELKANEL: 'KANELKANEL',
+                MATAM: 'MATAM',
+                RANEROU_FERLO: 'RANEROU_FERLO',
+                DAGANA: 'DAGANA',
+                PODOR: 'PODOR',
+                SAINT_LOUIS: 'SAINT_LOUIS',
+                BOUNKILING: 'BOUNKILING',
+                GOUDOMP: 'GOUDOMP',
+                SEDHIOU: 'SEDHIOU',
+                BAKEL: 'BAKEL',
+                GOUDIRY: 'GOUDIRY',
+                KOUMPENTOUM: 'KOUMPENTOUM',
+                TAMBACOUNDA: 'TAMBACOUNDA',
+                MBOUR: 'MBOUR',
+                THIES: 'THIES',
+                TIVAOUANE: 'TIVAOUANE',
+                BIGNONA: 'BIGNONA',
+                OUSSOUYE: 'OUSSOUYE',
+                ZICHUINCHOR: 'ZICHUINCHOR',
+                AUTRE: 'AUTRE'
+              }[eleve()!.departResidence ?? 'null']
+            }}</span>
+          </dd>
+          <dt><span jhiTranslate="gdf1App.eleve.niveauEtude">Niveau Etude</span></dt>
+          <dd>
+            <span [jhiTranslate]="'gdf1App.NiveauEtude.' + (eleve()!.niveauEtude ?? 'null')">{{
+              {
+                null: '',
+                CINQUIEME: 'CINQUIEME',
+                QUATRIEME: 'QUATRIEME',
+                TROISIEME: 'TROISIEME',
+                BFEM: 'BFEM',
+                EQUIVALENT_BFEM: 'EQUIVALENT_BFEM',
+                SECONDE: 'SECONDE',
+                PREMIERE: 'PREMIERE',
+                TERMINAL: 'TERMINAL',
+                BAC: 'BAC',
+                EQUIVALENT_BAC: 'EQUIVALENT_BAC',
+                LICENCE1: 'LICENCE1',
+                LICENCE2: 'LICENCE2',
+                LICEMCE3: 'LICEMCE3',
+                MASTER: 'MASTER',
+                DOCTORAT: 'DOCTORAT',
+                ATTESTATION: 'ATTESTATION',
+                CAP: 'CAP',
+                CAP1: 'CAP1',
+                CAP2: 'CAP2',
+                CAP3: 'CAP3',
+                CPS: 'CPS',
+                BEP: 'BEP',
+                BEP1: 'BEP1',
+                BEP2: 'BEP2',
+                BT: 'BT',
+                BT1: 'BT1',
+                BT2: 'BT2',
+                BT3: 'BT3',
+                BTS: 'BTS',
+                BTS1: 'BTS1',
+                BTS2: 'BTS2',
+                CQP: 'CQP',
+                CHEFEQUIPE: 'CHEFEQUIPE',
+                CHEF_DE_CHANTIER: 'CHEF_DE_CHANTIER',
+                TECHNICIENSPECIALISE: 'TECHNICIENSPECIALISE',
+                METP: 'METP',
+                BTI: 'BTI',
+                TITRE_PROFESSIONNEL: 'TITRE_PROFESSIONNEL',
+                AUTRES: 'AUTRES'
+              }[eleve()!.niveauEtude ?? 'null']
+            }}</span>
+          </dd>
+          <dt><span jhiTranslate="gdf1App.eleve.cni">Cni</span></dt>
+          <dd>
+            <span>{{ eleve()!.cni }}</span>
+          </dd>
+          <dt><span jhiTranslate="gdf1App.eleve.user">User</span></dt>
+          <dd>
+            <span>{{ eleve()!.user?.login }}</span>
+          </dd>
+        </dl>
+
+        <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+          <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Retour</span>
+        </button>
+
+        <button type="button" [routerLink]="['/eleve', eleve()!.id, 'edit']" class="btn btn-primary">
+          <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Editer</span>
+        </button>
+      </div>
+    }
+  </div>
+</div>

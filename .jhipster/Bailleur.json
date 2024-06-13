@@ -1,0 +1,42 @@
+{
+  "annotations": {
+    "changelogDate": "20240605154328"
+  },
+  "applications": "*",
+  "fields": [
+    {
+      "fieldName": "nomBailleur",
+      "fieldType": "String",
+      "fieldValidateRules": ["required", "unique"]
+    },
+    {
+      "fieldName": "budgetPrevu",
+      "fieldType": "Double"
+    },
+    {
+      "fieldName": "budgetDepense",
+      "fieldType": "Double"
+    },
+    {
+      "fieldName": "budgetRestant",
+      "fieldType": "Double"
+    },
+    {
+      "fieldName": "nbrePC",
+      "fieldType": "Long"
+    }
+  ],
+  "name": "Bailleur",
+  "pagination": "infinite-scroll",
+  "relationships": [
+    {
+      "otherEntityName": "priseEnCharge",
+      "otherEntityRelationshipName": "bailleur",
+      "relationshipName": "priseEnCharge",
+      "relationshipSide": "left",
+      "relationshipType": "one-to-many"
+    }
+  ],
+  "searchEngine": "no",
+  "service": "serviceImpl"
+}

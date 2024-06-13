@@ -1,0 +1,31 @@
+{
+  "gdf1App": {
+    "concours": {
+      "home": {
+        "title": "Concours",
+        "refreshListLabel": "Refresh list",
+        "createLabel": "Create a new Concours",
+        "createOrEditLabel": "Create or edit a Concours",
+        "notFound": "No Concours found"
+      },
+      "created": "A new Concours is created with identifier {{ param }}",
+      "updated": "A Concours is updated with identifier {{ param }}",
+      "deleted": "A Concours is deleted with identifier {{ param }}",
+      "delete": {
+        "question": "Are you sure you want to delete Concours {{ id }}?"
+      },
+      "detail": {
+        "title": "Concours"
+      },
+      "id": "ID",
+      "nomConcours": "Nom Concours",
+      "nomEtablissement": "Nom Etablissement",
+      "niveauEtude": "Niveau Etude",
+      "dateOuverture": "Date Ouverture",
+      "dateCloture": "Date Cloture",
+      "dateConcours": "Date Concours",
+      "affiche": "Affiche",
+      "formation": "Formation"
+    }
+  }
+}

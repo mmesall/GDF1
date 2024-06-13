@@ -1,0 +1,218 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    <form name="editForm" novalidate (ngSubmit)="save()" [formGroup]="editForm">
+      <h2 id="jhi-formation-heading" data-cy="FormationCreateUpdateHeading" jhiTranslate="gdf1App.formation.home.createOrEditLabel">
+        Créer ou éditer un Formation
+      </h2>
+
+      <div>
+        <jhi-alert-error></jhi-alert-error>
+
+        @if (editForm.controls.id.value !== null) {
+          <div class="mb-3">
+            <label class="form-label" for="field_id" jhiTranslate="gdf1App.formation.id">ID</label>
+            <input type="number" class="form-control" name="id" id="field_id" data-cy="id" formControlName="id" [readonly]="true" />
+          </div>
+        }
+
+        <div class="mb-3">
+          <label class="form-label" for="field_nomFormation" jhiTranslate="gdf1App.formation.nomFormation">Nom Formation</label>
+          <input
+            type="text"
+            class="form-control"
+            name="nomFormation"
+            id="field_nomFormation"
+            data-cy="nomFormation"
+            formControlName="nomFormation"
+          />
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_imageFormation" jhiTranslate="gdf1App.formation.imageFormation">Image Formation</label>
+          <div>
+            @if (editForm.get('imageFormation')!.value) {
+              <div class="form-text text-danger clearfix">
+                <a
+                  class="pull-start"
+                  (click)="openFile(editForm.get('imageFormation')!.value!, editForm.get('imageFormationContentType')!.value!)"
+                  jhiTranslate="entity.action.open"
+                  >Ouvrir</a
+                ><br />
+                <span class="pull-start"
+                  >{{ editForm.get('imageFormationContentType')!.value }}, {{ byteSize(editForm.get('imageFormation')!.value!) }}</span
+                >
+                <button
+                  type="button"
+                  (click)="editForm.patchValue({ imageFormation: undefined, imageFormationContentType: undefined })"
+                  class="btn btn-secondary btn-xs pull-end"
+                >
+                  <fa-icon icon="times"></fa-icon>
+                </button>
+              </div>
+            }
+            <input
+              type="file"
+              id="file_imageFormation"
+              data-cy="imageFormation"
+              (change)="setFileData($event, 'imageFormation', false)"
+              jhiTranslate="entity.action.addblob"
+            />
+          </div>
+          <input
+            type="hidden"
+            class="form-control"
+            name="imageFormation"
+            id="field_imageFormation"
+            data-cy="imageFormation"
+            formControlName="imageFormation"
+          />
+          <input
+            type="hidden"
+            class="form-control"
+            name="imageFormationContentType"
+            id="field_imageFormationContentType"
+            formControlName="imageFormationContentType"
+          />
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_typeFormation" jhiTranslate="gdf1App.formation.typeFormation">Type Formation</label>
+          <select
+            class="form-control"
+            name="typeFormation"
+            formControlName="typeFormation"
+            id="field_typeFormation"
+            data-cy="typeFormation"
+          >
+            <option [ngValue]="null">{{ 'gdf1App.TypeFormation.null' | translate }}</option>
+            @for (typeFormation of typeFormationValues; track $index) {
+              <option [value]="typeFormation">{{ 'gdf1App.TypeFormation.' + typeFormation | translate }}</option>
+            }
+          </select>
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_duree" jhiTranslate="gdf1App.formation.duree">Duree</label>
+          <input type="text" class="form-control" name="duree" id="field_duree" data-cy="duree" formControlName="duree" />
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_admission" jhiTranslate="gdf1App.formation.admission">Admission</label>
+          <select class="form-control" name="admission" formControlName="admission" id="field_admission" data-cy="admission">
+            <option [ngValue]="null">{{ 'gdf1App.Admission.null' | translate }}</option>
+            @for (admission of admissionValues; track $index) {
+              <option [value]="admission">{{ 'gdf1App.Admission.' + admission | translate }}</option>
+            }
+          </select>
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_diplomeRequis" jhiTranslate="gdf1App.formation.diplomeRequis">Diplome Requis</label>
+          <select
+            class="form-control"
+            name="diplomeRequis"
+            formControlName="diplomeRequis"
+            id="field_diplomeRequis"
+            data-cy="diplomeRequis"
+          >
+            <option [ngValue]="null">{{ 'gdf1App.DiplomeRequis.null' | translate }}</option>
+            @for (diplomeRequis of diplomeRequisValues; track $index) {
+              <option [value]="diplomeRequis">{{ 'gdf1App.DiplomeRequis.' + diplomeRequis | translate }}</option>
+            }
+          </select>
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_ficheFormation" jhiTranslate="gdf1App.formation.ficheFormation">Fiche Formation</label>
+          <div>
+            @if (editForm.get('ficheFormation')!.value) {
+              <div class="form-text text-danger clearfix">
+                <a
+                  class="pull-start"
+                  (click)="openFile(editForm.get('ficheFormation')!.value!, editForm.get('ficheFormationContentType')!.value!)"
+                  jhiTranslate="entity.action.open"
+                  >Ouvrir</a
+                ><br />
+                <span class="pull-start"
+                  >{{ editForm.get('ficheFormationContentType')!.value }}, {{ byteSize(editForm.get('ficheFormation')!.value!) }}</span
+                >
+                <button
+                  type="button"
+                  (click)="editForm.patchValue({ ficheFormation: undefined, ficheFormationContentType: undefined })"
+                  class="btn btn-secondary btn-xs pull-end"
+                >
+                  <fa-icon icon="times"></fa-icon>
+                </button>
+              </div>
+            }
+            <input
+              type="file"
+              id="file_ficheFormation"
+              data-cy="ficheFormation"
+              (change)="setFileData($event, 'ficheFormation', false)"
+              jhiTranslate="entity.action.addblob"
+            />
+          </div>
+          <input
+            type="hidden"
+            class="form-control"
+            name="ficheFormation"
+            id="field_ficheFormation"
+            data-cy="ficheFormation"
+            formControlName="ficheFormation"
+          />
+          <input
+            type="hidden"
+            class="form-control"
+            name="ficheFormationContentType"
+            id="field_ficheFormationContentType"
+            formControlName="ficheFormationContentType"
+          />
+        </div>
+
+        <div class="mb-3">
+          <label for="field_etablissements" jhiTranslate="gdf1App.formation.etablissement">Etablissement</label>
+          <select
+            class="form-control"
+            id="field_etablissements"
+            data-cy="etablissement"
+            multiple
+            name="etablissements"
+            formControlName="etablissements"
+            [compareWith]="compareEtablissement"
+          >
+            @for (etablissementOption of etablissementsSharedCollection; track $index) {
+              <option [ngValue]="etablissementOption">{{ etablissementOption.nomEtablissement }}</option>
+            }
+          </select>
+        </div>
+        @if (
+          editForm.get(['etablissements'])!.invalid &&
+          (editForm.get(['etablissements'])!.dirty || editForm.get(['etablissements'])!.touched)
+        ) {
+          <div>
+            @if (editForm.get(['etablissements'])?.errors?.required) {
+              <small class="form-text text-danger" jhiTranslate="entity.validation.required">Ce champ est obligatoire.</small>
+            }
+          </div>
+        }
+      </div>
+
+      <div>
+        <button type="button" id="cancel-save" data-cy="entityCreateCancelButton" class="btn btn-secondary" (click)="previousState()">
+          <fa-icon icon="ban"></fa-icon>&nbsp;<span jhiTranslate="entity.action.cancel">Annuler</span>
+        </button>
+
+        <button
+          type="submit"
+          id="save-entity"
+          data-cy="entityCreateSaveButton"
+          [disabled]="editForm.invalid || isSaving"
+          class="btn btn-primary"
+        >
+          <fa-icon icon="save"></fa-icon>&nbsp;<span jhiTranslate="entity.action.save">Sauvegarder</span>
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

@@ -1,0 +1,62 @@
+{
+  "gdf1App": {
+    "dossier": {
+      "home": {
+        "title": "Dossiers",
+        "refreshListLabel": "Refresh list",
+        "createLabel": "Create a new Dossier",
+        "createOrEditLabel": "Create or edit a Dossier",
+        "notFound": "No Dossiers found"
+      },
+      "created": "A new Dossier is created with identifier {{ param }}",
+      "updated": "A Dossier is updated with identifier {{ param }}",
+      "deleted": "A Dossier is deleted with identifier {{ param }}",
+      "delete": {
+        "question": "Are you sure you want to delete Dossier {{ id }}?"
+      },
+      "detail": {
+        "title": "Dossier"
+      },
+      "id": "ID",
+      "numDossier": "Num Dossier",
+      "prenom": "Prenom",
+      "nom": "Nom",
+      "nomUtilisateur": "Nom Utilisateur",
+      "dateNaiss": "Date Naiss",
+      "lieuNaiss": "Lieu Naiss",
+      "regionNaiss": "Region Naiss",
+      "departementNaiss": "Departement Naiss",
+      "typePiece": "Type Piece",
+      "numeroPiece": "Numero Piece",
+      "sexe": "Sexe",
+      "regionResidence": "Region Residence",
+      "depResidence": "Dep Residence",
+      "adresseResidence": "Adresse Residence",
+      "telephone1": "Telephone 1",
+      "telephone2": "Telephone 2",
+      "email": "Email",
+      "niveauFormation": "Niveau Formation",
+      "specialite": "Specialite",
+      "intituleDiplome": "Intitule Diplome",
+      "diplome": "Diplome",
+      "anneeObtention": "Annee Obtention",
+      "lieuObtention": "Lieu Obtention",
+      "cv": "Cv",
+      "lettreMotivation": "Lettre Motivation",
+      "profession": "Profession",
+      "autreSpecialite": "Autre Specialite",
+      "nomCompetence": "Nom Competence",
+      "niveauCompetence": "Niveau Competence",
+      "intituleExperience": "Intitule Experience",
+      "posteOccupe": "Poste Occupe",
+      "dateDebut": "Date Debut",
+      "dateFin": "Date Fin",
+      "nomEntreprise": "Nom Entreprise",
+      "mission": "Mission",
+      "eleve": "Eleve",
+      "etudiant": "Etudiant",
+      "professionnel": "Professionnel",
+      "demandeur": "Demandeur"
+    }
+  }
+}

@@ -1,0 +1,108 @@
+{
+  "annotations": {
+    "changelogDate": "20240605154336"
+  },
+  "applications": "*",
+  "fields": [
+    {
+      "fieldName": "nom",
+      "fieldType": "String",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "prenom",
+      "fieldType": "String",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "dateNaiss",
+      "fieldType": "LocalDate"
+    },
+    {
+      "fieldName": "lieuNaiss",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "sexe",
+      "fieldType": "Sexe",
+      "fieldValues": "HOMME,FEMME"
+    },
+    {
+      "fieldName": "telephone",
+      "fieldType": "Long"
+    },
+    {
+      "fieldName": "adressePhysique",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "regionResidence",
+      "fieldType": "NomRegion",
+      "fieldValues": "DAKAR,DIOURBEL,FATICK,KAFFRINE,KAOLACK,KEDOUGOU,KOLDA,LOUGA,MATAM,SAINT_LOUIS,SEDHIOU,TAMBACOUNDA,THIES,ZIGINCHOR,AUTRE"
+    },
+    {
+      "fieldName": "departResidence",
+      "fieldType": "NomDepartement",
+      "fieldValues": "DAKAR,GUEDIAWAYE,PIKINE,RUFISQUE,BAMBAEY,DIOURBEL,MBACKE,FATICK,FOUNDIOUGNE,GOSSAS,BIRKILANE,KAFFRINE,KOUNGHEUR,MALEM_HODAR,GUINGUINEO,KAOLOACK,NIORO,KEDOUGOU,SALAMATA,SARAYA,KOLDA,MEDINA_YORO_FOULAH,VELINGARA,KEBEMERE,LINGUERE,LOUGA,KANELKANEL,MATAM,RANEROU_FERLO,DAGANA,PODOR,SAINT_LOUIS,BOUNKILING,GOUDOMP,SEDHIOU,BAKEL,GOUDIRY,KOUMPENTOUM,TAMBACOUNDA,MBOUR,THIES,TIVAOUANE,BIGNONA,OUSSOUYE,ZICHUINCHOR,AUTRE"
+    },
+    {
+      "fieldName": "niveauEtude",
+      "fieldType": "NiveauEtude",
+      "fieldValidateRules": ["required"],
+      "fieldValues": "CINQUIEME,QUATRIEME,TROISIEME,BFEM,EQUIVALENT_BFEM,SECONDE,PREMIERE,TERMINAL,BAC,EQUIVALENT_BAC,LICENCE1,LICENCE2,LICEMCE3,MASTER,DOCTORAT,ATTESTATION,CAP,CAP1,CAP2,CAP3,CPS,BEP,BEP1,BEP2,BT,BT1,BT2,BT3,BTS,BTS1,BTS2,CQP,CHEFEQUIPE,CHEF_DE_CHANTIER,TECHNICIENSPECIALISE,METP,BTI,TITRE_PROFESSIONNEL,AUTRES"
+    },
+    {
+      "fieldName": "cni",
+      "fieldType": "Long",
+      "fieldValidateRules": ["unique"]
+    }
+  ],
+  "name": "Eleve",
+  "pagination": "infinite-scroll",
+  "relationships": [
+    {
+      "otherEntityField": "login",
+      "otherEntityName": "user",
+      "relationshipName": "user",
+      "relationshipSide": "left",
+      "relationshipType": "one-to-one"
+    },
+    {
+      "otherEntityName": "diplome",
+      "otherEntityRelationshipName": "eleve",
+      "relationshipName": "diplome",
+      "relationshipSide": "left",
+      "relationshipType": "one-to-many"
+    },
+    {
+      "otherEntityName": "experience",
+      "otherEntityRelationshipName": "eleve",
+      "relationshipName": "experience",
+      "relationshipSide": "left",
+      "relationshipType": "one-to-many"
+    },
+    {
+      "otherEntityName": "candidatureE",
+      "otherEntityRelationshipName": "eleve",
+      "relationshipName": "candidatureE",
+      "relationshipSide": "left",
+      "relationshipType": "one-to-many"
+    },
+    {
+      "otherEntityName": "dossier",
+      "otherEntityRelationshipName": "eleve",
+      "relationshipName": "dossier",
+      "relationshipSide": "right",
+      "relationshipType": "one-to-one"
+    },
+    {
+      "otherEntityName": "demandeur",
+      "otherEntityRelationshipName": "eleve",
+      "relationshipName": "demandeur",
+      "relationshipSide": "right",
+      "relationshipType": "one-to-one"
+    }
+  ],
+  "searchEngine": "no",
+  "service": "serviceImpl"
+}

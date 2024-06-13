@@ -1,0 +1,170 @@
+<div>
+  <h2 id="page-heading" data-cy="FormationHeading">
+    <span jhiTranslate="gdf1App.formation.home.title">Formations</span>
+
+    <div class="d-flex justify-content-end">
+      <button class="btn btn-info me-2" (click)="load()" [disabled]="isLoading">
+        <fa-icon icon="sync" [spin]="isLoading"></fa-icon>
+        <span jhiTranslate="gdf1App.formation.home.refreshListLabel">Actualiser la liste</span>
+      </button>
+
+      <button
+        id="jh-create-entity"
+        data-cy="entityCreateButton"
+        class="btn btn-primary jh-create-entity create-formation"
+        [routerLink]="['/formation/new']"
+      >
+        <fa-icon icon="plus"></fa-icon>
+        <span jhiTranslate="gdf1App.formation.home.createLabel">Créer un nouveau Formation</span>
+      </button>
+    </div>
+  </h2>
+
+  <jhi-alert-error></jhi-alert-error>
+
+  <jhi-alert></jhi-alert>
+
+  @if (formations?.length === 0) {
+    <div class="alert alert-warning" id="no-result">
+      <span jhiTranslate="gdf1App.formation.home.notFound">Aucun Formation trouvé</span>
+    </div>
+  }
+
+  @if (formations && formations.length > 0) {
+    <div class="table-responsive table-entities" id="entities">
+      <table class="table table-striped" aria-describedby="page-heading">
+        <thead>
+          <tr jhiSort [sortState]="sortState" (sortChange)="navigateToWithComponentValues($event)">
+            <th scope="col" jhiSortBy="id">
+              <div class="d-flex">
+                <span jhiTranslate="global.field.id">ID</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="nomFormation">
+              <div class="d-flex">
+                <span jhiTranslate="gdf1App.formation.nomFormation">Nom Formation</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="imageFormation">
+              <div class="d-flex">
+                <span jhiTranslate="gdf1App.formation.imageFormation">Image Formation</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="typeFormation">
+              <div class="d-flex">
+                <span jhiTranslate="gdf1App.formation.typeFormation">Type Formation</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="duree">
+              <div class="d-flex">
+                <span jhiTranslate="gdf1App.formation.duree">Duree</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="admission">
+              <div class="d-flex">
+                <span jhiTranslate="gdf1App.formation.admission">Admission</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="diplomeRequis">
+              <div class="d-flex">
+                <span jhiTranslate="gdf1App.formation.diplomeRequis">Diplome Requis</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="ficheFormation">
+              <div class="d-flex">
+                <span jhiTranslate="gdf1App.formation.ficheFormation">Fiche Formation</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col"></th>
+          </tr>
+        </thead>
+        <tbody infinite-scroll (scrolled)="loadNextPage()" [infiniteScrollDisabled]="!hasMorePage()" [infiniteScrollDistance]="0">
+          @for (formation of formations; track trackId) {
+            <tr data-cy="entityTable">
+              <td>
+                <a [routerLink]="['/formation', formation.id, 'view']">{{ formation.id }}</a>
+              </td>
+              <td>{{ formation.nomFormation }}</td>
+              <td>
+                @if (formation.imageFormation) {
+                  <a (click)="openFile(formation.imageFormation, formation.imageFormationContentType)" jhiTranslate="entity.action.open"
+                    >Ouvrir</a
+                  >
+                  <span>{{ formation.imageFormationContentType }}, {{ byteSize(formation.imageFormation) }}</span>
+                }
+              </td>
+              <td [jhiTranslate]="'gdf1App.TypeFormation.' + (formation.typeFormation ?? 'null')">
+                {{ { null: '', INITIALE: 'INITIALE', CONTINUE: 'CONTINUE' }[formation.typeFormation ?? 'null'] }}
+              </td>
+              <td>{{ formation.duree }}</td>
+              <td [jhiTranslate]="'gdf1App.Admission.' + (formation.admission ?? 'null')">
+                {{ { null: '', CONCOURS: 'CONCOURS', PC: 'PC' }[formation.admission ?? 'null'] }}
+              </td>
+              <td [jhiTranslate]="'gdf1App.DiplomeRequis.' + (formation.diplomeRequis ?? 'null')">
+                {{
+                  {
+                    null: '',
+                    ATTESTATION: 'ATTESTATION',
+                    CAP: 'CAP',
+                    BT: 'BT',
+                    DUR: 'DUR',
+                    DNBA: 'DNBA',
+                    BEP: 'BEP',
+                    BTS: 'BTS',
+                    BFEM: 'BFEM',
+                    BAC: 'BAC',
+                    LICENCE: 'LICENCE',
+                    MASTER: 'MASTER',
+                    AUTRES: 'AUTRES'
+                  }[formation.diplomeRequis ?? 'null']
+                }}
+              </td>
+              <td>
+                @if (formation.ficheFormation) {
+                  <a (click)="openFile(formation.ficheFormation, formation.ficheFormationContentType)" jhiTranslate="entity.action.open"
+                    >Ouvrir</a
+                  >
+                  <span>{{ formation.ficheFormationContentType }}, {{ byteSize(formation.ficheFormation) }}</span>
+                }
+              </td>
+              <td class="text-end">
+                <div class="btn-group">
+                  <a [routerLink]="['/formation', formation.id, 'view']" class="btn btn-info btn-sm" data-cy="entityDetailsButton">
+                    <fa-icon icon="eye"></fa-icon>
+                    <span class="d-none d-md-inline" jhiTranslate="entity.action.view">Voir</span>
+                  </a>
+
+                  <a [routerLink]="['/formation', formation.id, 'edit']" class="btn btn-primary btn-sm" data-cy="entityEditButton">
+                    <fa-icon icon="pencil-alt"></fa-icon>
+                    <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Editer</span>
+                  </a>
+
+                  <button type="submit" (click)="delete(formation)" class="btn btn-danger btn-sm" data-cy="entityDeleteButton">
+                    <fa-icon icon="times"></fa-icon>
+                    <span class="d-none d-md-inline" jhiTranslate="entity.action.delete">Supprimer</span>
+                  </button>
+                </div>
+              </td>
+            </tr>
+          }
+        </tbody>
+      </table>
+    </div>
+  }
+</div>

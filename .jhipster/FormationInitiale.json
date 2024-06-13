@@ -1,0 +1,100 @@
+{
+  "annotations": {
+    "changelogDate": "20240605154324"
+  },
+  "applications": "*",
+  "fields": [
+    {
+      "fieldName": "nomFormationI",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "duree",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "admission",
+      "fieldType": "Admission",
+      "fieldValues": "CONCOURS,PC"
+    },
+    {
+      "fieldName": "diplomeRequis",
+      "fieldType": "DiplomeRequis",
+      "fieldValues": "ATTESTATION,CAP,BT,DUR,DNBA,BEP,BTS,BFEM,BAC,LICENCE,MASTER,AUTRES"
+    },
+    {
+      "fieldName": "niveauEtude",
+      "fieldType": "NiveauEtude",
+      "fieldValues": "CINQUIEME,QUATRIEME,TROISIEME,BFEM,EQUIVALENT_BFEM,SECONDE,PREMIERE,TERMINAL,BAC,EQUIVALENT_BAC,LICENCE1,LICENCE2,LICEMCE3,MASTER,DOCTORAT,ATTESTATION,CAP,CAP1,CAP2,CAP3,CPS,BEP,BEP1,BEP2,BT,BT1,BT2,BT3,BTS,BTS1,BTS2,CQP,CHEFEQUIPE,CHEF_DE_CHANTIER,TECHNICIENSPECIALISE,METP,BTI,TITRE_PROFESSIONNEL,AUTRES"
+    },
+    {
+      "fieldName": "ficheFormation",
+      "fieldType": "byte[]",
+      "fieldTypeBlobContent": "any"
+    },
+    {
+      "fieldName": "filiere",
+      "fieldType": "NomFiliere",
+      "fieldValues": "AGRI_ELEVAGE,AGRICULTURE,PECHE,ELEVAGE,MINE_CARRIERES,ARTISANAT,BATIMAT_TRAVAUX_PUBLIQUES,MECANIQUE,MENUISERIE_BOIS,HABILLEMENT,AGROALIMENTAIRE,ELECTROTECHNIQUE_ELECTRIQUE_ENERGETIQUE,HYDRAULIQUE,STRUCTURE_METALLIQUE,STRUCTURE_PLASTIQUE,BEAUTE_ESTHETIQUE,DEVELOPPEMENT_TERRITORIAL,DROIT,ECONOMIE_GESTION_COMMERCE_LOGISTIQUE,INSDUSTRIE_CULTURELLE_ET_CREATIVE,INFORMATIQUE_ET_NUMERIQUE,RESTAURATION_ET_HOTELLORIE,SANTE_BIOLOGIE_CHIMIE,SPORT,TOURISME,ENVIRONNEMENT,AUTRES"
+    },
+    {
+      "fieldName": "serie",
+      "fieldType": "NomSerie",
+      "fieldValues": "STEG,STIDD_M,STIDD_E,S3,S4,S5,F6,AUTRES"
+    },
+    {
+      "fieldName": "cfp",
+      "fieldType": "CFP",
+      "fieldValues": "CEDT_G15,CFP_OUAKAM,CNQP,CFPC_DELAFOSSE,CFPJ_YMCA,CFPT_SJ,CNCPI,CFP_MEDINA_GUEULE_TAPEE,CFP_DAKAR,ICCM,CFA,CFP_PIKINE,CFP_THIAROYE,CFP_RUFISQUE,CFP_BARGNY,CFP_SEBIKHOTANE,CFP_NIAGA,CEP_THIES,CFP_FISSEL,CFP_TIVAOUANE,CFP_JOAL,CFP_MONT_ROLLAND,CFP_NDIAGANIAO,CFP_THIADIAYE,CNAFP_THIES,CAP_ENFEFS_THIES,CFP_MBOUR,CFP_NGUEKHOKH,CFP_KHOMBOLE,CFP_TAIBA_NDIAYE,CFP_LALANE,CFP_LOUGA,CFP_KEBEMER,CFP_LINGUERE,CFP_NGOURANE,CFP_DAHRA,CFP_SAINT_LOUIS,CRFP_SAINT_LOUIS,CDFP_RICHARD_TOLL,CFP_DAGANA,CFP_PODOR,CDFP_PODOR,CFP_AERE_LAO,CFP_MATAM,CFP_OUROSSOGUI,CFP_WAOUNDE,CFP_KANEL,CFP_RANEROU,SINTHIOU_BAMBAMBE,AGNAM_CIVOL,THIOUBALEL,MBOUMBA,CFP_DIOURBEL,CFP_BAMBEY,CFP_MBACKE,CFP_TAIF,CDFP_MBACKE,CFP_NDOULO,CFP_TOUBA,CFP_FATICK,CFP_DIOFIOR,CFP_DIONEWAR,CFP_DJILOR_SALOUM,CFP_FAOYE,CFP_FOUNDIOUGNE,CFP_LOUL_SESSENE,CFP_NIAKHAR,CFP_GOSSAS,CFP_TOUCAR,CFP_SOKONE,CFP_DIAKHAO,CFP_KAOLACK,CFP_MBADAKHOUNE,CFP_GUINGUINEO,CFP_NIORO,CFP_POROKHANE,CFP_BAKEL2,CFP_FORAMECA,CFP_KIDIRA,CFP_VELINGARA,CFP_TAMBA,CFP_BAKEL1,MEDINA_GOUNASS,CFP_GOUDIRY,CFP_KEDOUGOU,CFP_SALEMATA,CFP_KOLDA,CFP_DABO,CFP_KOUNKANE,CFP_MEDINA_YORO_FOULAH,CFP_SARE_YOBA,CRFP_KOLDA,CFP_SEDHIOU,CPAR_SEDHIOU,CENTRE_REFERENCE_SEDHIOU,CENTRE_REFERENCE_BOUNKILING,CRFP_ZIGUINCHOR,CFP_ABENE,CFP_BAILA,CFP_SAINT_MARC,ALBADAR,CFP_SINDIAN,CFP_TENDOUCK,CFP_BIGNONA,CFP_COUBANAO,CFP_ZIGUINCHOR,CFP_FANDA,CFP_OUSSOUYE,CFP_KAFFRINE,CFP_BIRKELANE"
+    },
+    {
+      "fieldName": "lycee",
+      "fieldType": "LYCEE",
+      "fieldValues": "LTID_DAKAR,LTCD_DAKAR,LTSLL_DAKAR,LTPFXN_THIES,LTAP_SAINT_LOUIS,LT_FATICK,LTCAN_KAOLACK,LETFP_TAMBA,LTIM_KEDOUGOU,LEFP_KOLDA,LTAEB_BIGNONA,LTAB_DIOURBEL"
+    },
+    {
+      "fieldName": "nomConcours",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "dateOuverture",
+      "fieldType": "LocalDate"
+    },
+    {
+      "fieldName": "dateCloture",
+      "fieldType": "LocalDate"
+    },
+    {
+      "fieldName": "dateConcours",
+      "fieldType": "LocalDate"
+    },
+    {
+      "fieldName": "nomDiplome",
+      "fieldType": "DiplomeObtenu",
+      "fieldValues": "CPS,CAP,BEP,BT,METP,BTS,CQP,BTI,TITREPROF,CAEP,TS,AUTRES"
+    },
+    {
+      "fieldName": "nomDebouche",
+      "fieldType": "String"
+    }
+  ],
+  "name": "FormationInitiale",
+  "pagination": "infinite-scroll",
+  "relationships": [
+    {
+      "otherEntityName": "formation",
+      "relationshipName": "formation",
+      "relationshipSide": "left",
+      "relationshipType": "one-to-one"
+    },
+    {
+      "otherEntityName": "candidatureE",
+      "otherEntityRelationshipName": "formationInitiale",
+      "relationshipName": "candidatureE",
+      "relationshipSide": "left",
+      "relationshipType": "one-to-many"
+    }
+  ],
+  "searchEngine": "no",
+  "service": "serviceImpl"
+}

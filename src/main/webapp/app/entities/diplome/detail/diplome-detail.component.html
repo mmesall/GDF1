@@ -1,0 +1,175 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    @if (diplome()) {
+      <div>
+        <h2 data-cy="diplomeDetailsHeading"><span jhiTranslate="gdf1App.diplome.detail.title">Diplome</span></h2>
+
+        <hr />
+
+        <jhi-alert-error></jhi-alert-error>
+
+        <jhi-alert></jhi-alert>
+
+        <dl class="row-md jh-entity-details">
+          <dt><span jhiTranslate="global.field.id">ID</span></dt>
+          <dd>
+            <span>{{ diplome()!.id }}</span>
+          </dd>
+          <dt><span jhiTranslate="gdf1App.diplome.intitule">Intitule</span></dt>
+          <dd>
+            <span>{{ diplome()!.intitule }}</span>
+          </dd>
+          <dt><span jhiTranslate="gdf1App.diplome.domaine">Domaine</span></dt>
+          <dd>
+            <span [jhiTranslate]="'gdf1App.NomFiliere.' + (diplome()!.domaine ?? 'null')">{{
+              {
+                null: '',
+                AGRI_ELEVAGE: 'AGRI_ELEVAGE',
+                AGRICULTURE: 'AGRICULTURE',
+                PECHE: 'PECHE',
+                ELEVAGE: 'ELEVAGE',
+                MINE_CARRIERES: 'MINE_CARRIERES',
+                ARTISANAT: 'ARTISANAT',
+                BATIMAT_TRAVAUX_PUBLIQUES: 'BATIMAT_TRAVAUX_PUBLIQUES',
+                MECANIQUE: 'MECANIQUE',
+                MENUISERIE_BOIS: 'MENUISERIE_BOIS',
+                HABILLEMENT: 'HABILLEMENT',
+                AGROALIMENTAIRE: 'AGROALIMENTAIRE',
+                ELECTROTECHNIQUE_ELECTRIQUE_ENERGETIQUE: 'ELECTROTECHNIQUE_ELECTRIQUE_ENERGETIQUE',
+                HYDRAULIQUE: 'HYDRAULIQUE',
+                STRUCTURE_METALLIQUE: 'STRUCTURE_METALLIQUE',
+                STRUCTURE_PLASTIQUE: 'STRUCTURE_PLASTIQUE',
+                BEAUTE_ESTHETIQUE: 'BEAUTE_ESTHETIQUE',
+                DEVELOPPEMENT_TERRITORIAL: 'DEVELOPPEMENT_TERRITORIAL',
+                DROIT: 'DROIT',
+                ECONOMIE_GESTION_COMMERCE_LOGISTIQUE: 'ECONOMIE_GESTION_COMMERCE_LOGISTIQUE',
+                INSDUSTRIE_CULTURELLE_ET_CREATIVE: 'INSDUSTRIE_CULTURELLE_ET_CREATIVE',
+                INFORMATIQUE_ET_NUMERIQUE: 'INFORMATIQUE_ET_NUMERIQUE',
+                RESTAURATION_ET_HOTELLORIE: 'RESTAURATION_ET_HOTELLORIE',
+                SANTE_BIOLOGIE_CHIMIE: 'SANTE_BIOLOGIE_CHIMIE',
+                SPORT: 'SPORT',
+                TOURISME: 'TOURISME',
+                ENVIRONNEMENT: 'ENVIRONNEMENT',
+                AUTRES: 'AUTRES'
+              }[diplome()!.domaine ?? 'null']
+            }}</span>
+          </dd>
+          <dt><span jhiTranslate="gdf1App.diplome.niveau">Niveau</span></dt>
+          <dd>
+            <span [jhiTranslate]="'gdf1App.NiveauEtude.' + (diplome()!.niveau ?? 'null')">{{
+              {
+                null: '',
+                CINQUIEME: 'CINQUIEME',
+                QUATRIEME: 'QUATRIEME',
+                TROISIEME: 'TROISIEME',
+                BFEM: 'BFEM',
+                EQUIVALENT_BFEM: 'EQUIVALENT_BFEM',
+                SECONDE: 'SECONDE',
+                PREMIERE: 'PREMIERE',
+                TERMINAL: 'TERMINAL',
+                BAC: 'BAC',
+                EQUIVALENT_BAC: 'EQUIVALENT_BAC',
+                LICENCE1: 'LICENCE1',
+                LICENCE2: 'LICENCE2',
+                LICEMCE3: 'LICEMCE3',
+                MASTER: 'MASTER',
+                DOCTORAT: 'DOCTORAT',
+                ATTESTATION: 'ATTESTATION',
+                CAP: 'CAP',
+                CAP1: 'CAP1',
+                CAP2: 'CAP2',
+                CAP3: 'CAP3',
+                CPS: 'CPS',
+                BEP: 'BEP',
+                BEP1: 'BEP1',
+                BEP2: 'BEP2',
+                BT: 'BT',
+                BT1: 'BT1',
+                BT2: 'BT2',
+                BT3: 'BT3',
+                BTS: 'BTS',
+                BTS1: 'BTS1',
+                BTS2: 'BTS2',
+                CQP: 'CQP',
+                CHEFEQUIPE: 'CHEFEQUIPE',
+                CHEF_DE_CHANTIER: 'CHEF_DE_CHANTIER',
+                TECHNICIENSPECIALISE: 'TECHNICIENSPECIALISE',
+                METP: 'METP',
+                BTI: 'BTI',
+                TITRE_PROFESSIONNEL: 'TITRE_PROFESSIONNEL',
+                AUTRES: 'AUTRES'
+              }[diplome()!.niveau ?? 'null']
+            }}</span>
+          </dd>
+          <dt><span jhiTranslate="gdf1App.diplome.mention">Mention</span></dt>
+          <dd>
+            <span [jhiTranslate]="'gdf1App.Mention.' + (diplome()!.mention ?? 'null')">{{
+              { null: '', PASSABLE: 'PASSABLE', ASSEZ_BIEN: 'ASSEZ_BIEN', BIEN: 'BIEN', TRES_BIEN: 'TRES_BIEN' }[
+                diplome()!.mention ?? 'null'
+              ]
+            }}</span>
+          </dd>
+          <dt><span jhiTranslate="gdf1App.diplome.anneeObtention">Annee Obtention</span></dt>
+          <dd>
+            <span>{{ diplome()!.anneeObtention }}</span>
+          </dd>
+          <dt><span jhiTranslate="gdf1App.diplome.etablissement">Etablissement</span></dt>
+          <dd>
+            <span>{{ diplome()!.etablissement }}</span>
+          </dd>
+          <dt><span jhiTranslate="gdf1App.diplome.document">Document</span></dt>
+          <dd>
+            @if (diplome()!.document) {
+              <div>
+                <a (click)="openFile(diplome()!.document ?? '', diplome()!.documentContentType)" jhiTranslate="entity.action.open"
+                  >Ouvrir</a
+                >
+                {{ diplome()!.documentContentType }}, {{ byteSize(diplome()!.document ?? '') }}
+              </div>
+            }
+          </dd>
+          <dt><span jhiTranslate="gdf1App.diplome.eleve">Eleve</span></dt>
+          <dd>
+            @if (diplome()!.eleve) {
+              <div>
+                <a [routerLink]="['/eleve', diplome()!.eleve?.id, 'view']">{{ diplome()!.eleve?.niveauEtude }}</a>
+              </div>
+            }
+          </dd>
+          <dt><span jhiTranslate="gdf1App.diplome.etudiant">Etudiant</span></dt>
+          <dd>
+            @if (diplome()!.etudiant) {
+              <div>
+                <a [routerLink]="['/etudiant', diplome()!.etudiant?.id, 'view']">{{ diplome()!.etudiant?.carteEtudiant }}</a>
+              </div>
+            }
+          </dd>
+          <dt><span jhiTranslate="gdf1App.diplome.professionnel">Professionnel</span></dt>
+          <dd>
+            @if (diplome()!.professionnel) {
+              <div>
+                <a [routerLink]="['/professionnel', diplome()!.professionnel?.id, 'view']">{{ diplome()!.professionnel?.profession }}</a>
+              </div>
+            }
+          </dd>
+          <dt><span jhiTranslate="gdf1App.diplome.demandeur">Demandeur</span></dt>
+          <dd>
+            @if (diplome()!.demandeur) {
+              <div>
+                <a [routerLink]="['/demandeur', diplome()!.demandeur?.id, 'view']">{{ diplome()!.demandeur?.profil }}</a>
+              </div>
+            }
+          </dd>
+        </dl>
+
+        <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+          <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Retour</span>
+        </button>
+
+        <button type="button" [routerLink]="['/diplome', diplome()!.id, 'edit']" class="btn btn-primary">
+          <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Editer</span>
+        </button>
+      </div>
+    }
+  </div>
+</div>

@@ -1,0 +1,32 @@
+{
+  "gdf1App": {
+    "candidatureE": {
+      "home": {
+        "title": "Candidature ES",
+        "refreshListLabel": "Refresh list",
+        "createLabel": "Create a new Candidature E",
+        "createOrEditLabel": "Create or edit a Candidature E",
+        "notFound": "No Candidature ES found"
+      },
+      "created": "A new Candidature E is created with identifier {{ param }}",
+      "updated": "A Candidature E is updated with identifier {{ param }}",
+      "deleted": "A Candidature E is deleted with identifier {{ param }}",
+      "delete": {
+        "question": "Are you sure you want to delete Candidature E {{ id }}?"
+      },
+      "detail": {
+        "title": "Candidature E"
+      },
+      "id": "ID",
+      "offreFormation": "Offre Formation",
+      "dateDebutOffre": "Date Debut Offre",
+      "dateFinOffre": "Date Fin Offre",
+      "dateDepot": "Date Depot",
+      "resultat": "Resultat",
+      "eleve": "Eleve",
+      "etudiant": "Etudiant",
+      "formationInitiale": "Formation Initiale",
+      "etablissement": "Etablissement"
+    }
+  }
+}

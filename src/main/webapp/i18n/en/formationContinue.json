@@ -1,0 +1,42 @@
+{
+  "gdf1App": {
+    "formationContinue": {
+      "home": {
+        "title": "Formation Continues",
+        "refreshListLabel": "Refresh list",
+        "createLabel": "Create a new Formation Continue",
+        "createOrEditLabel": "Create or edit a Formation Continue",
+        "notFound": "No Formation Continues found"
+      },
+      "created": "A new Formation Continue is created with identifier {{ param }}",
+      "updated": "A Formation Continue is updated with identifier {{ param }}",
+      "deleted": "A Formation Continue is deleted with identifier {{ param }}",
+      "delete": {
+        "question": "Are you sure you want to delete Formation Continue {{ id }}?"
+      },
+      "detail": {
+        "title": "Formation Continue"
+      },
+      "id": "ID",
+      "nomFormationC": "Nom Formation C",
+      "duree": "Duree",
+      "admission": "Admission",
+      "diplomeRequis": "Diplome Requis",
+      "niveauEtude": "Niveau Etude",
+      "filiere": "Filiere",
+      "serie": "Serie",
+      "cfp": "Cfp",
+      "lycee": "Lycee",
+      "ficheFormation": "Fiche Formation",
+      "libellePC": "Libelle PC",
+      "montantPriseEnCharge": "Montant Prise En Charge",
+      "coutFormation": "Cout Formation",
+      "detailPC": "Detail PC",
+      "nomDiplome": "Nom Diplome",
+      "autreDiplome": "Autre Diplome",
+      "nomDebouche": "Nom Debouche",
+      "formation": "Formation",
+      "candidatureP": "Candidature P"
+    }
+  }
+}

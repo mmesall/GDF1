@@ -1,0 +1,42 @@
+{
+  "gdf1App": {
+    "formationContinue": {
+      "home": {
+        "title": "FormationContinues",
+        "refreshListLabel": "Actualiser la liste",
+        "createLabel": "Créer un nouveau Formation Continue",
+        "createOrEditLabel": "Créer ou éditer un Formation Continue",
+        "notFound": "Aucun Formation Continue trouvé"
+      },
+      "created": "Un nouveau Formation Continue a été créé avec l'identifiant {{ param }}",
+      "updated": "Le Formation Continue avec l'identifiant {{ param }} a été mis à jour",
+      "deleted": "Le Formation Continue avec l'identifiant {{ param }} a été supprimé",
+      "delete": {
+        "question": "Êtes-vous certain de vouloir supprimer le Formation Continue {{ id }} ?"
+      },
+      "detail": {
+        "title": "Formation Continue"
+      },
+      "id": "ID",
+      "nomFormationC": "Nom Formation C",
+      "duree": "Duree",
+      "admission": "Admission",
+      "diplomeRequis": "Diplome Requis",
+      "niveauEtude": "Niveau Etude",
+      "filiere": "Filiere",
+      "serie": "Serie",
+      "cfp": "Cfp",
+      "lycee": "Lycee",
+      "ficheFormation": "Fiche Formation",
+      "libellePC": "Libelle PC",
+      "montantPriseEnCharge": "Montant Prise En Charge",
+      "coutFormation": "Cout Formation",
+      "detailPC": "Detail PC",
+      "nomDiplome": "Nom Diplome",
+      "autreDiplome": "Autre Diplome",
+      "nomDebouche": "Nom Debouche",
+      "formation": "Formation",
+      "candidatureP": "Candidature P"
+    }
+  }
+}

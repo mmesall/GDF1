@@ -5,13 +5,47 @@
     xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-latest.xsd">
     <property name="now" value="now()" dbms="mysql"/>
     <property name="floatType" value="float" dbms="mysql"/>
-    <property name="clobType" value="clob" dbms="mysql"/>
-    <property name="blobType" value="longblob" dbms="mysql"/>
+    <property name="clob" value="clob" dbms="mysql"/>
+    <property name="Blob" value="longblob" dbms="mysql"/>
     <property name="uuidType" value="varchar(36)" dbms="mysql"/>
     <property name="datetimeType" value="datetime(6)" dbms="mysql"/>
 
     <include file="config/liquibase/changelog/00000000000000_initial_schema.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20240605154322_added_entity_Etablissement.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20240605154323_added_entity_Formation.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20240605154324_added_entity_FormationInitiale.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20240605154325_added_entity_FormationContinue.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20240605154326_added_entity_Concours.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20240605154327_added_entity_PriseEnCharge.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20240605154328_added_entity_Bailleur.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20240605154329_added_entity_Dossier.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20240605154331_added_entity_Diplome.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20240605154332_added_entity_Experience.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20240605154333_added_entity_CandidatureE.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20240605154334_added_entity_CandidatureP.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20240605154335_added_entity_Demandeur.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20240605154336_added_entity_Eleve.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20240605154337_added_entity_Etudiant.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20240605154338_added_entity_Professionnel.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20240605154339_added_entity_Agent.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20240605154340_added_entity_ServiceMFPAI.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20240605154330_added_entity_User.xml" relativeToChangelogFile="false"/>
     <!-- jhipster-needle-liquibase-add-changelog - JHipster will add liquibase changelogs here -->
+    <include file="config/liquibase/changelog/20240605154323_added_entity_constraints_Formation.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20240605154324_added_entity_constraints_FormationInitiale.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20240605154325_added_entity_constraints_FormationContinue.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20240605154326_added_entity_constraints_Concours.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20240605154327_added_entity_constraints_PriseEnCharge.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20240605154329_added_entity_constraints_Dossier.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20240605154331_added_entity_constraints_Diplome.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20240605154332_added_entity_constraints_Experience.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20240605154333_added_entity_constraints_CandidatureE.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20240605154334_added_entity_constraints_CandidatureP.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20240605154335_added_entity_constraints_Demandeur.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20240605154336_added_entity_constraints_Eleve.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20240605154337_added_entity_constraints_Etudiant.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20240605154338_added_entity_constraints_Professionnel.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20240605154339_added_entity_constraints_Agent.xml" relativeToChangelogFile="false"/>
     <!-- jhipster-needle-liquibase-add-constraints-changelog - JHipster will add liquibase constraints changelogs here -->
     <!-- jhipster-needle-liquibase-add-incremental-changelog - JHipster will add incremental liquibase changelogs here -->
 </databaseChangeLog>

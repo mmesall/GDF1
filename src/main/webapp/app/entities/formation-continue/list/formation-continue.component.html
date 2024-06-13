@@ -1,0 +1,76 @@
+<div>
+  <h2 id="page-heading" data-cy="FormationContinueHeading">
+    <p style="text-align: center; font-weight: bold">Formations Continues</p>
+
+    <div class="d-flex justify-content-end">
+      <button
+        *jhiHasAnyAuthority="'ROLE_ADMIN'"
+        id="jh-create-entity"
+        data-cy="entityCreateButton"
+        class="btn btn-primary jh-create-entity create-formation-continue"
+        [routerLink]="['/formation-continue/new']"
+      >
+        <fa-icon icon="plus"></fa-icon>
+        <span>Créer un nouvelle Formation Continue</span>
+      </button>
+    </div>
+  </h2>
+
+  <jhi-alert-error></jhi-alert-error>
+
+  <jhi-alert></jhi-alert>
+
+  @if (formationContinues?.length === 0) {
+    <div class="alert alert-warning" id="no-result">
+      <span jhiTranslate="gdf1App.formationContinue.home.notFound">Aucun Formation Continue trouvé</span>
+    </div>
+  }
+
+  @if (formationContinues && formationContinues.length > 0) {
+    <div class="card-deck" style="display: flex; flex-wrap: wrap; gap: 20px">
+      @for (formationContinue of formationContinues; track trackId) {
+        <div class="card" style="flex: 0 1 calc(33% - 20px); margin-bottom: 20px">
+          <div class="card-body">
+            <h5 class="card-title">{{ formationContinue.nomFormationC }}</h5>
+            <p class="card-text">
+              <strong>Duree:</strong> {{ formationContinue.duree }}<br />
+              <strong>Admission:</strong> {{ formationContinue.admission }}<br />
+              <strong>Diplome Requis:</strong> {{ formationContinue.diplomeRequis }}<br />
+              <!-- <strong>Niveau Etude:</strong> {{ formationContinue.niveauEtude }}<br> -->
+              <!-- <strong>Filiere:</strong> {{ formationContinue.filiere }}<br> -->
+              <!-- <strong>Serie:</strong> {{ formationContinue.serie }}<br>
+              <strong>Cfp:</strong> {{ formationContinue.cfp }}<br>
+              <strong>Lycee:</strong> {{ formationContinue.lycee }}<br>
+              <strong>Libelle PC:</strong> {{ formationContinue.libellePC }}<br> -->
+              <strong>Montant Prise En Charge:</strong> {{ formationContinue.montantPriseEnCharge }}<br />
+              <!-- <strong>Cout Formation:</strong> {{ formationContinue.coutFormation }}<br> -->
+              <!-- <strong>Detail PC:</strong> {{ formationContinue.detailPC }}<br>
+              <strong>Nom Diplome:</strong> {{ formationContinue.nomDiplome }}<br>
+              <strong>Autre Diplome:</strong> {{ formationContinue.autreDiplome }}<br>
+              <strong>Nom Debouche:</strong> {{ formationContinue.nomDebouche }}<br> -->
+            </p>
+            @if (formationContinue.ficheFormation) {
+              <a (click)="openFile(formationContinue.ficheFormation, formationContinue.ficheFormationContentType)" class="btn btn-primary"
+                >Ouvrir Fiche Formation</a
+              >
+            }
+          </div>
+          <div class="card-footer">
+            <small class="text-muted">
+              <a
+                [routerLink]="['/formation-continue', formationContinue.id, 'view']"
+                class="btn btn-info btn-sm"
+                data-cy="entityDetailsButton"
+              >
+                Voir Détails
+              </a>
+            </small>
+            <small class="text-muted">
+              <a [routerLink]="['/candidature-p/new']" class="btn btn-info btn-sm" data-cy="entityDetailsButton"> Postuler </a>
+            </small>
+          </div>
+        </div>
+      }
+    </div>
+  }
+</div>

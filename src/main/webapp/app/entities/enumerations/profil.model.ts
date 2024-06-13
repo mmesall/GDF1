@@ -1,0 +1,7 @@
+export enum Profil {
+  ELEVE = 'ELEVE',
+
+  ETUDIANT = 'ETUDIANT',
+
+  PROFESSIONNEL = 'PROFESSIONNEL',
+}

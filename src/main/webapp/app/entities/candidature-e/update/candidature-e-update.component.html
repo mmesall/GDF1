@@ -1,0 +1,178 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    <form name="editForm" novalidate (ngSubmit)="save()" [formGroup]="editForm">
+      <h2 id="jhi-candidature-e-heading" data-cy="CandidatureECreateUpdateHeading">
+        <p style="text-align: center; font-weight: bold">Nouvelle Candidature</p>
+      </h2>
+
+      <div>
+        <jhi-alert-error></jhi-alert-error>
+
+        @if (editForm.controls.id.value !== null) {
+          <div class="mb-3">
+            <label class="form-label" for="field_id" jhiTranslate="gdf1App.candidatureE.id">ID</label>
+            <input type="number" class="form-control" name="id" id="field_id" data-cy="id" formControlName="id" [readonly]="true" />
+          </div>
+        }
+
+        <div class="mb-3">
+          <label class="form-label" for="field_dateDebutOffre">Date de début d'Offre</label>
+          <div class="input-group">
+            <input
+              id="field_dateDebutOffre"
+              data-cy="dateDebutOffre"
+              type="text"
+              class="form-control"
+              name="dateDebutOffre"
+              ngbDatepicker
+              #dateDebutOffreDp="ngbDatepicker"
+              formControlName="dateDebutOffre"
+            />
+            <button type="button" class="btn btn-secondary" (click)="dateDebutOffreDp.toggle()">
+              <fa-icon icon="calendar-alt"></fa-icon>
+            </button>
+          </div>
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_dateFinOffre">Date de fin d'Offre</label>
+          <div class="input-group">
+            <input
+              id="field_dateFinOffre"
+              data-cy="dateFinOffre"
+              type="text"
+              class="form-control"
+              name="dateFinOffre"
+              ngbDatepicker
+              #dateFinOffreDp="ngbDatepicker"
+              formControlName="dateFinOffre"
+            />
+            <button type="button" class="btn btn-secondary" (click)="dateFinOffreDp.toggle()">
+              <fa-icon icon="calendar-alt"></fa-icon>
+            </button>
+          </div>
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_dateDepot">Date de dépot de candidature</label>
+          <div class="input-group">
+            <input
+              id="field_dateDepot"
+              data-cy="dateDepot"
+              type="text"
+              class="form-control"
+              name="dateDepot"
+              ngbDatepicker
+              #dateDepotDp="ngbDatepicker"
+              formControlName="dateDepot"
+            />
+            <button type="button" class="btn btn-secondary" (click)="dateDepotDp.toggle()"><fa-icon icon="calendar-alt"></fa-icon></button>
+          </div>
+        </div>
+
+        <div *jhiHasAnyAuthority="'ROLE_ADMIN'" class="mb-3">
+          <label class="form-label" for="field_resultat" jhiTranslate="gdf1App.candidatureE.resultat">Resultat</label>
+          <select class="form-control" name="resultat" formControlName="resultat" id="field_resultat" data-cy="resultat">
+            <option [ngValue]="null">{{ 'gdf1App.Resultat.null' | translate }}</option>
+            @for (resultat of resultatValues; track $index) {
+              <option [value]="resultat">{{ 'gdf1App.Resultat.' + resultat | translate }}</option>
+            }
+          </select>
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_eleve">Choisissez votre niveau d'étude d'élève</label>
+          <select class="form-control" id="field_eleve" data-cy="eleve" name="eleve" formControlName="eleve" [compareWith]="compareEleve">
+            <option [ngValue]="null"></option>
+            @for (eleveOption of elevesSharedCollection; track $index) {
+              <option [ngValue]="eleveOption">{{ eleveOption.niveauEtude }}</option>
+            }
+          </select>
+        </div>
+
+        <!-- <div class="mb-3">
+          <label class="form-label" for="field_etudiant" jhiTranslate="gdf1App.candidatureE.etudiant">Etudiant</label>
+          <select
+            class="form-control"
+            id="field_etudiant"
+            data-cy="etudiant"
+            name="etudiant"
+            formControlName="etudiant"
+            [compareWith]="compareEtudiant"
+          >
+            <option [ngValue]="null"></option>
+            @for (etudiantOption of etudiantsSharedCollection; track $index) {
+              <option [ngValue]="etudiantOption">{{ etudiantOption.carteEtudiant }}</option>
+            }
+          </select>
+        </div> -->
+
+        <div class="mb-3">
+          <label class="form-label" for="field_formationInitiale">Choisissez une formation initiale</label>
+          <select
+            class="form-control"
+            id="field_formationInitiale"
+            data-cy="formationInitiale"
+            name="formationInitiale"
+            formControlName="formationInitiale"
+            [compareWith]="compareFormationInitiale"
+          >
+            <option [ngValue]="null"></option>
+            @for (formationInitialeOption of formationInitialesSharedCollection; track $index) {
+              <option [ngValue]="formationInitialeOption">{{ formationInitialeOption.nomFormationI }}</option>
+            }
+          </select>
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_offreFormation">Choisissez la filiére</label>
+          <select
+            class="form-control"
+            name="offreFormation"
+            formControlName="offreFormation"
+            id="field_offreFormation"
+            data-cy="offreFormation"
+          >
+            <option [ngValue]="null">{{ 'gdf1App.NomFiliere.null' | translate }}</option>
+            @for (nomFiliere of nomFiliereValues; track $index) {
+              <option [value]="nomFiliere">{{ 'gdf1App.NomFiliere.' + nomFiliere | translate }}</option>
+            }
+          </select>
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_etablissement">Choisissez un établissement</label>
+          <select
+            class="form-control"
+            id="field_etablissement"
+            data-cy="etablissement"
+            name="etablissement"
+            formControlName="etablissement"
+            [compareWith]="compareEtablissement"
+          >
+            <option [ngValue]="null"></option>
+            @for (etablissementOption of etablissementsSharedCollection; track $index) {
+              <option [ngValue]="etablissementOption">{{ etablissementOption.nomEtablissement }}</option>
+            }
+          </select>
+        </div>
+      </div>
+
+      <div>
+        <button type="button" id="cancel-save" data-cy="entityCreateCancelButton" class="btn btn-secondary" (click)="previousState()">
+          <fa-icon icon="ban"></fa-icon>&nbsp;<span jhiTranslate="entity.action.cancel">Annuler</span>
+        </button>
+
+        <button
+          type="submit"
+          id="save-entity"
+          data-cy="entityCreateSaveButton"
+          [disabled]="editForm.invalid || isSaving"
+          class="btn btn-primary"
+        >
+          <fa-icon icon="save"></fa-icon>&nbsp;<span jhiTranslate="entity.action.save">Sauvegarder</span>
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

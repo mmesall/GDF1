@@ -1,0 +1,32 @@
+{
+  "gdf1App": {
+    "experience": {
+      "home": {
+        "title": "Experiences",
+        "refreshListLabel": "Actualiser la liste",
+        "createLabel": "Créer un nouveau Experience",
+        "createOrEditLabel": "Créer ou éditer un Experience",
+        "notFound": "Aucun Experience trouvé"
+      },
+      "created": "Un nouveau Experience a été créé avec l'identifiant {{ param }}",
+      "updated": "Le Experience avec l'identifiant {{ param }} a été mis à jour",
+      "deleted": "Le Experience avec l'identifiant {{ param }} a été supprimé",
+      "delete": {
+        "question": "Êtes-vous certain de vouloir supprimer le Experience {{ id }} ?"
+      },
+      "detail": {
+        "title": "Experience"
+      },
+      "id": "ID",
+      "dateDebut": "Date Debut",
+      "dateFin": "Date Fin",
+      "nomEntreprise": "Nom Entreprise",
+      "posteOccupe": "Poste Occupe",
+      "mission": "Mission",
+      "eleve": "Eleve",
+      "etudiant": "Etudiant",
+      "professionnel": "Professionnel",
+      "demandeur": "Demandeur"
+    }
+  }
+}

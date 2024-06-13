@@ -1,0 +1,35 @@
+{
+  "gdf1App": {
+    "formation": {
+      "home": {
+        "title": "Formations",
+        "refreshListLabel": "Refresh list",
+        "createLabel": "Create a new Formation",
+        "createOrEditLabel": "Create or edit a Formation",
+        "notFound": "No Formations found"
+      },
+      "created": "A new Formation is created with identifier {{ param }}",
+      "updated": "A Formation is updated with identifier {{ param }}",
+      "deleted": "A Formation is deleted with identifier {{ param }}",
+      "delete": {
+        "question": "Are you sure you want to delete Formation {{ id }}?"
+      },
+      "detail": {
+        "title": "Formation"
+      },
+      "id": "ID",
+      "nomFormation": "Nom Formation",
+      "imageFormation": "Image Formation",
+      "typeFormation": "Type Formation",
+      "duree": "Duree",
+      "admission": "Admission",
+      "diplomeRequis": "Diplome Requis",
+      "ficheFormation": "Fiche Formation",
+      "etablissement": "Etablissement",
+      "priseEnCharge": "Prise En Charge",
+      "formationInitiale": "Formation Initiale",
+      "formationContinue": "Formation Continue",
+      "concours": "Concours"
+    }
+  }
+}

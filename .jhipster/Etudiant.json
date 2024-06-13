@@ -1,0 +1,113 @@
+{
+  "annotations": {
+    "changelogDate": "20240605154337"
+  },
+  "applications": "*",
+  "fields": [
+    {
+      "fieldName": "carteEtudiant",
+      "fieldType": "String",
+      "fieldValidateRules": ["required", "unique"]
+    },
+    {
+      "fieldName": "nom",
+      "fieldType": "String",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "prenom",
+      "fieldType": "String",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "dateNaiss",
+      "fieldType": "LocalDate"
+    },
+    {
+      "fieldName": "lieuNaiss",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "sexe",
+      "fieldType": "Sexe",
+      "fieldValues": "HOMME,FEMME"
+    },
+    {
+      "fieldName": "telephone",
+      "fieldType": "Long",
+      "fieldValidateRules": ["unique"]
+    },
+    {
+      "fieldName": "adressePhysique",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "regionResidence",
+      "fieldType": "NomRegion",
+      "fieldValues": "DAKAR,DIOURBEL,FATICK,KAFFRINE,KAOLACK,KEDOUGOU,KOLDA,LOUGA,MATAM,SAINT_LOUIS,SEDHIOU,TAMBACOUNDA,THIES,ZIGINCHOR,AUTRE"
+    },
+    {
+      "fieldName": "departResidence",
+      "fieldType": "NomDepartement",
+      "fieldValues": "DAKAR,GUEDIAWAYE,PIKINE,RUFISQUE,BAMBAEY,DIOURBEL,MBACKE,FATICK,FOUNDIOUGNE,GOSSAS,BIRKILANE,KAFFRINE,KOUNGHEUR,MALEM_HODAR,GUINGUINEO,KAOLOACK,NIORO,KEDOUGOU,SALAMATA,SARAYA,KOLDA,MEDINA_YORO_FOULAH,VELINGARA,KEBEMERE,LINGUERE,LOUGA,KANELKANEL,MATAM,RANEROU_FERLO,DAGANA,PODOR,SAINT_LOUIS,BOUNKILING,GOUDOMP,SEDHIOU,BAKEL,GOUDIRY,KOUMPENTOUM,TAMBACOUNDA,MBOUR,THIES,TIVAOUANE,BIGNONA,OUSSOUYE,ZICHUINCHOR,AUTRE"
+    },
+    {
+      "fieldName": "email",
+      "fieldType": "String",
+      "fieldValidateRules": ["unique"]
+    },
+    {
+      "fieldName": "cni",
+      "fieldType": "Long",
+      "fieldValidateRules": ["unique", "required"]
+    }
+  ],
+  "name": "Etudiant",
+  "pagination": "infinite-scroll",
+  "relationships": [
+    {
+      "otherEntityField": "login",
+      "otherEntityName": "user",
+      "relationshipName": "user",
+      "relationshipSide": "left",
+      "relationshipType": "one-to-one"
+    },
+    {
+      "otherEntityName": "diplome",
+      "otherEntityRelationshipName": "etudiant",
+      "relationshipName": "diplome",
+      "relationshipSide": "left",
+      "relationshipType": "one-to-many"
+    },
+    {
+      "otherEntityName": "experience",
+      "otherEntityRelationshipName": "etudiant",
+      "relationshipName": "experience",
+      "relationshipSide": "left",
+      "relationshipType": "one-to-many"
+    },
+    {
+      "otherEntityName": "candidatureE",
+      "otherEntityRelationshipName": "etudiant",
+      "relationshipName": "candidatureE",
+      "relationshipSide": "left",
+      "relationshipType": "one-to-many"
+    },
+    {
+      "otherEntityName": "dossier",
+      "otherEntityRelationshipName": "etudiant",
+      "relationshipName": "dossier",
+      "relationshipSide": "right",
+      "relationshipType": "one-to-one"
+    },
+    {
+      "otherEntityName": "demandeur",
+      "otherEntityRelationshipName": "etudiant",
+      "relationshipName": "demandeur",
+      "relationshipSide": "right",
+      "relationshipType": "one-to-one"
+    }
+  ],
+  "searchEngine": "no",
+  "service": "serviceImpl"
+}

@@ -1,0 +1,117 @@
+<div>
+  <h2 id="page-heading" data-cy="ServiceMFPAIHeading">
+    <span jhiTranslate="gdf1App.serviceMFPAI.home.title">ServiceMFPAIS</span>
+
+    <div class="d-flex justify-content-end">
+      <button class="btn btn-info me-2" (click)="load()" [disabled]="isLoading">
+        <fa-icon icon="sync" [spin]="isLoading"></fa-icon>
+        <span jhiTranslate="gdf1App.serviceMFPAI.home.refreshListLabel">Actualiser la liste</span>
+      </button>
+
+      <button
+        id="jh-create-entity"
+        data-cy="entityCreateButton"
+        class="btn btn-primary jh-create-entity create-service-mfpai"
+        [routerLink]="['/service-mfpai/new']"
+      >
+        <fa-icon icon="plus"></fa-icon>
+        <span jhiTranslate="gdf1App.serviceMFPAI.home.createLabel">Créer un nouveau Service MFPAI</span>
+      </button>
+    </div>
+  </h2>
+
+  <jhi-alert-error></jhi-alert-error>
+
+  <jhi-alert></jhi-alert>
+
+  @if (serviceMFPAIS?.length === 0) {
+    <div class="alert alert-warning" id="no-result">
+      <span jhiTranslate="gdf1App.serviceMFPAI.home.notFound">Aucun Service MFPAI trouvé</span>
+    </div>
+  }
+
+  @if (serviceMFPAIS && serviceMFPAIS.length > 0) {
+    <div class="table-responsive table-entities" id="entities">
+      <table class="table table-striped" aria-describedby="page-heading">
+        <thead>
+          <tr jhiSort [sortState]="sortState" (sortChange)="navigateToWithComponentValues($event)">
+            <th scope="col" jhiSortBy="id">
+              <div class="d-flex">
+                <span jhiTranslate="global.field.id">ID</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="imageService">
+              <div class="d-flex">
+                <span jhiTranslate="gdf1App.serviceMFPAI.imageService">Image Service</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="nomService">
+              <div class="d-flex">
+                <span jhiTranslate="gdf1App.serviceMFPAI.nomService">Nom Service</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="chefService">
+              <div class="d-flex">
+                <span jhiTranslate="gdf1App.serviceMFPAI.chefService">Chef Service</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="description">
+              <div class="d-flex">
+                <span jhiTranslate="gdf1App.serviceMFPAI.description">Description</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col"></th>
+          </tr>
+        </thead>
+        <tbody infinite-scroll (scrolled)="loadNextPage()" [infiniteScrollDisabled]="!hasMorePage()" [infiniteScrollDistance]="0">
+          @for (serviceMFPAI of serviceMFPAIS; track trackId) {
+            <tr data-cy="entityTable">
+              <td>
+                <a [routerLink]="['/service-mfpai', serviceMFPAI.id, 'view']">{{ serviceMFPAI.id }}</a>
+              </td>
+              <td>
+                @if (serviceMFPAI.imageService) {
+                  <a (click)="openFile(serviceMFPAI.imageService, serviceMFPAI.imageServiceContentType)" jhiTranslate="entity.action.open"
+                    >Ouvrir</a
+                  >
+                  <span>{{ serviceMFPAI.imageServiceContentType }}, {{ byteSize(serviceMFPAI.imageService) }}</span>
+                }
+              </td>
+              <td>{{ serviceMFPAI.nomService }}</td>
+              <td>{{ serviceMFPAI.chefService }}</td>
+              <td>{{ serviceMFPAI.description }}</td>
+              <td class="text-end">
+                <div class="btn-group">
+                  <a [routerLink]="['/service-mfpai', serviceMFPAI.id, 'view']" class="btn btn-info btn-sm" data-cy="entityDetailsButton">
+                    <fa-icon icon="eye"></fa-icon>
+                    <span class="d-none d-md-inline" jhiTranslate="entity.action.view">Voir</span>
+                  </a>
+
+                  <a [routerLink]="['/service-mfpai', serviceMFPAI.id, 'edit']" class="btn btn-primary btn-sm" data-cy="entityEditButton">
+                    <fa-icon icon="pencil-alt"></fa-icon>
+                    <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Editer</span>
+                  </a>
+
+                  <button type="submit" (click)="delete(serviceMFPAI)" class="btn btn-danger btn-sm" data-cy="entityDeleteButton">
+                    <fa-icon icon="times"></fa-icon>
+                    <span class="d-none d-md-inline" jhiTranslate="entity.action.delete">Supprimer</span>
+                  </button>
+                </div>
+              </td>
+            </tr>
+          }
+        </tbody>
+      </table>
+    </div>
+  }
+</div>

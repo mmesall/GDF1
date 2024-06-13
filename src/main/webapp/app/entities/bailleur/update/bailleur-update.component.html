@@ -1,0 +1,96 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    <form name="editForm" novalidate (ngSubmit)="save()" [formGroup]="editForm">
+      <h2 id="jhi-bailleur-heading" data-cy="BailleurCreateUpdateHeading" jhiTranslate="gdf1App.bailleur.home.createOrEditLabel">
+        Créer ou éditer un Bailleur
+      </h2>
+
+      <div>
+        <jhi-alert-error></jhi-alert-error>
+
+        @if (editForm.controls.id.value !== null) {
+          <div class="mb-3">
+            <label class="form-label" for="field_id" jhiTranslate="gdf1App.bailleur.id">ID</label>
+            <input type="number" class="form-control" name="id" id="field_id" data-cy="id" formControlName="id" [readonly]="true" />
+          </div>
+        }
+
+        <div class="mb-3">
+          <label class="form-label" for="field_nomBailleur" jhiTranslate="gdf1App.bailleur.nomBailleur">Nom Bailleur</label>
+          <input
+            type="text"
+            class="form-control"
+            name="nomBailleur"
+            id="field_nomBailleur"
+            data-cy="nomBailleur"
+            formControlName="nomBailleur"
+          />
+          @if (editForm.get('nomBailleur')!.invalid && (editForm.get('nomBailleur')!.dirty || editForm.get('nomBailleur')!.touched)) {
+            <div>
+              @if (editForm.get('nomBailleur')?.errors?.required) {
+                <small class="form-text text-danger" jhiTranslate="entity.validation.required">Ce champ est obligatoire.</small>
+              }
+            </div>
+          }
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_budgetPrevu" jhiTranslate="gdf1App.bailleur.budgetPrevu">Budget Prevu</label>
+          <input
+            type="number"
+            class="form-control"
+            name="budgetPrevu"
+            id="field_budgetPrevu"
+            data-cy="budgetPrevu"
+            formControlName="budgetPrevu"
+          />
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_budgetDepense" jhiTranslate="gdf1App.bailleur.budgetDepense">Budget Depense</label>
+          <input
+            type="number"
+            class="form-control"
+            name="budgetDepense"
+            id="field_budgetDepense"
+            data-cy="budgetDepense"
+            formControlName="budgetDepense"
+          />
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_budgetRestant" jhiTranslate="gdf1App.bailleur.budgetRestant">Budget Restant</label>
+          <input
+            type="number"
+            class="form-control"
+            name="budgetRestant"
+            id="field_budgetRestant"
+            data-cy="budgetRestant"
+            formControlName="budgetRestant"
+          />
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_nbrePC" jhiTranslate="gdf1App.bailleur.nbrePC">Nbre PC</label>
+          <input type="number" class="form-control" name="nbrePC" id="field_nbrePC" data-cy="nbrePC" formControlName="nbrePC" />
+        </div>
+      </div>
+
+      <div>
+        <button type="button" id="cancel-save" data-cy="entityCreateCancelButton" class="btn btn-secondary" (click)="previousState()">
+          <fa-icon icon="ban"></fa-icon>&nbsp;<span jhiTranslate="entity.action.cancel">Annuler</span>
+        </button>
+
+        <button
+          type="submit"
+          id="save-entity"
+          data-cy="entityCreateSaveButton"
+          [disabled]="editForm.invalid || isSaving"
+          class="btn btn-primary"
+        >
+          <fa-icon icon="save"></fa-icon>&nbsp;<span jhiTranslate="entity.action.save">Sauvegarder</span>
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

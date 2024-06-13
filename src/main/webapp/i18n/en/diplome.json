@@ -1,0 +1,34 @@
+{
+  "gdf1App": {
+    "diplome": {
+      "home": {
+        "title": "Diplomes",
+        "refreshListLabel": "Refresh list",
+        "createLabel": "Create a new Diplome",
+        "createOrEditLabel": "Create or edit a Diplome",
+        "notFound": "No Diplomes found"
+      },
+      "created": "A new Diplome is created with identifier {{ param }}",
+      "updated": "A Diplome is updated with identifier {{ param }}",
+      "deleted": "A Diplome is deleted with identifier {{ param }}",
+      "delete": {
+        "question": "Are you sure you want to delete Diplome {{ id }}?"
+      },
+      "detail": {
+        "title": "Diplome"
+      },
+      "id": "ID",
+      "intitule": "Intitule",
+      "domaine": "Domaine",
+      "niveau": "Niveau",
+      "mention": "Mention",
+      "anneeObtention": "Annee Obtention",
+      "etablissement": "Etablissement",
+      "document": "Document",
+      "eleve": "Eleve",
+      "etudiant": "Etudiant",
+      "professionnel": "Professionnel",
+      "demandeur": "Demandeur"
+    }
+  }
+}

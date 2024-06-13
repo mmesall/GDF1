@@ -1,0 +1,29 @@
+{
+  "gdf1App": {
+    "bailleur": {
+      "home": {
+        "title": "Bailleurs",
+        "refreshListLabel": "Refresh list",
+        "createLabel": "Create a new Bailleur",
+        "createOrEditLabel": "Create or edit a Bailleur",
+        "notFound": "No Bailleurs found"
+      },
+      "created": "A new Bailleur is created with identifier {{ param }}",
+      "updated": "A Bailleur is updated with identifier {{ param }}",
+      "deleted": "A Bailleur is deleted with identifier {{ param }}",
+      "delete": {
+        "question": "Are you sure you want to delete Bailleur {{ id }}?"
+      },
+      "detail": {
+        "title": "Bailleur"
+      },
+      "id": "ID",
+      "nomBailleur": "Nom Bailleur",
+      "budgetPrevu": "Budget Prevu",
+      "budgetDepense": "Budget Depense",
+      "budgetRestant": "Budget Restant",
+      "nbrePC": "Nbre PC",
+      "priseEnCharge": "Prise En Charge"
+    }
+  }
+}

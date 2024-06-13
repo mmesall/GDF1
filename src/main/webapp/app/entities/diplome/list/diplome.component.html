@@ -1,0 +1,275 @@
+<div>
+  <h2 id="page-heading" data-cy="DiplomeHeading">
+    <span jhiTranslate="gdf1App.diplome.home.title">Diplomes</span>
+
+    <div class="d-flex justify-content-end">
+      <button class="btn btn-info me-2" (click)="load()" [disabled]="isLoading">
+        <fa-icon icon="sync" [spin]="isLoading"></fa-icon>
+        <span jhiTranslate="gdf1App.diplome.home.refreshListLabel">Actualiser la liste</span>
+      </button>
+
+      <button
+        id="jh-create-entity"
+        data-cy="entityCreateButton"
+        class="btn btn-primary jh-create-entity create-diplome"
+        [routerLink]="['/diplome/new']"
+      >
+        <fa-icon icon="plus"></fa-icon>
+        <span jhiTranslate="gdf1App.diplome.home.createLabel">Créer un nouveau Diplome</span>
+      </button>
+    </div>
+  </h2>
+
+  <jhi-alert-error></jhi-alert-error>
+
+  <jhi-alert></jhi-alert>
+
+  @if (diplomes?.length === 0) {
+    <div class="alert alert-warning" id="no-result">
+      <span jhiTranslate="gdf1App.diplome.home.notFound">Aucun Diplome trouvé</span>
+    </div>
+  }
+
+  @if (diplomes && diplomes.length > 0) {
+    <div class="table-responsive table-entities" id="entities">
+      <table class="table table-striped" aria-describedby="page-heading">
+        <thead>
+          <tr jhiSort [sortState]="sortState" (sortChange)="navigateToWithComponentValues($event)">
+            <th scope="col" jhiSortBy="id">
+              <div class="d-flex">
+                <span jhiTranslate="global.field.id">ID</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="intitule">
+              <div class="d-flex">
+                <span jhiTranslate="gdf1App.diplome.intitule">Intitule</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="domaine">
+              <div class="d-flex">
+                <span jhiTranslate="gdf1App.diplome.domaine">Domaine</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="niveau">
+              <div class="d-flex">
+                <span jhiTranslate="gdf1App.diplome.niveau">Niveau</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="mention">
+              <div class="d-flex">
+                <span jhiTranslate="gdf1App.diplome.mention">Mention</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="anneeObtention">
+              <div class="d-flex">
+                <span jhiTranslate="gdf1App.diplome.anneeObtention">Annee Obtention</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="etablissement">
+              <div class="d-flex">
+                <span jhiTranslate="gdf1App.diplome.etablissement">Etablissement</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="document">
+              <div class="d-flex">
+                <span jhiTranslate="gdf1App.diplome.document">Document</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="eleve.niveauEtude">
+              <div class="d-flex">
+                <span jhiTranslate="gdf1App.diplome.eleve">Eleve</span>
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="etudiant.carteEtudiant">
+              <div class="d-flex">
+                <span jhiTranslate="gdf1App.diplome.etudiant">Etudiant</span>
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="professionnel.profession">
+              <div class="d-flex">
+                <span jhiTranslate="gdf1App.diplome.professionnel">Professionnel</span>
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="demandeur.profil">
+              <div class="d-flex">
+                <span jhiTranslate="gdf1App.diplome.demandeur">Demandeur</span>
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col"></th>
+          </tr>
+        </thead>
+        <tbody infinite-scroll (scrolled)="loadNextPage()" [infiniteScrollDisabled]="!hasMorePage()" [infiniteScrollDistance]="0">
+          @for (diplome of diplomes; track trackId) {
+            <tr data-cy="entityTable">
+              <td>
+                <a [routerLink]="['/diplome', diplome.id, 'view']">{{ diplome.id }}</a>
+              </td>
+              <td>{{ diplome.intitule }}</td>
+              <td [jhiTranslate]="'gdf1App.NomFiliere.' + (diplome.domaine ?? 'null')">
+                {{
+                  {
+                    null: '',
+                    AGRI_ELEVAGE: 'AGRI_ELEVAGE',
+                    AGRICULTURE: 'AGRICULTURE',
+                    PECHE: 'PECHE',
+                    ELEVAGE: 'ELEVAGE',
+                    MINE_CARRIERES: 'MINE_CARRIERES',
+                    ARTISANAT: 'ARTISANAT',
+                    BATIMAT_TRAVAUX_PUBLIQUES: 'BATIMAT_TRAVAUX_PUBLIQUES',
+                    MECANIQUE: 'MECANIQUE',
+                    MENUISERIE_BOIS: 'MENUISERIE_BOIS',
+                    HABILLEMENT: 'HABILLEMENT',
+                    AGROALIMENTAIRE: 'AGROALIMENTAIRE',
+                    ELECTROTECHNIQUE_ELECTRIQUE_ENERGETIQUE: 'ELECTROTECHNIQUE_ELECTRIQUE_ENERGETIQUE',
+                    HYDRAULIQUE: 'HYDRAULIQUE',
+                    STRUCTURE_METALLIQUE: 'STRUCTURE_METALLIQUE',
+                    STRUCTURE_PLASTIQUE: 'STRUCTURE_PLASTIQUE',
+                    BEAUTE_ESTHETIQUE: 'BEAUTE_ESTHETIQUE',
+                    DEVELOPPEMENT_TERRITORIAL: 'DEVELOPPEMENT_TERRITORIAL',
+                    DROIT: 'DROIT',
+                    ECONOMIE_GESTION_COMMERCE_LOGISTIQUE: 'ECONOMIE_GESTION_COMMERCE_LOGISTIQUE',
+                    INSDUSTRIE_CULTURELLE_ET_CREATIVE: 'INSDUSTRIE_CULTURELLE_ET_CREATIVE',
+                    INFORMATIQUE_ET_NUMERIQUE: 'INFORMATIQUE_ET_NUMERIQUE',
+                    RESTAURATION_ET_HOTELLORIE: 'RESTAURATION_ET_HOTELLORIE',
+                    SANTE_BIOLOGIE_CHIMIE: 'SANTE_BIOLOGIE_CHIMIE',
+                    SPORT: 'SPORT',
+                    TOURISME: 'TOURISME',
+                    ENVIRONNEMENT: 'ENVIRONNEMENT',
+                    AUTRES: 'AUTRES'
+                  }[diplome.domaine ?? 'null']
+                }}
+              </td>
+              <td [jhiTranslate]="'gdf1App.NiveauEtude.' + (diplome.niveau ?? 'null')">
+                {{
+                  {
+                    null: '',
+                    CINQUIEME: 'CINQUIEME',
+                    QUATRIEME: 'QUATRIEME',
+                    TROISIEME: 'TROISIEME',
+                    BFEM: 'BFEM',
+                    EQUIVALENT_BFEM: 'EQUIVALENT_BFEM',
+                    SECONDE: 'SECONDE',
+                    PREMIERE: 'PREMIERE',
+                    TERMINAL: 'TERMINAL',
+                    BAC: 'BAC',
+                    EQUIVALENT_BAC: 'EQUIVALENT_BAC',
+                    LICENCE1: 'LICENCE1',
+                    LICENCE2: 'LICENCE2',
+                    LICEMCE3: 'LICEMCE3',
+                    MASTER: 'MASTER',
+                    DOCTORAT: 'DOCTORAT',
+                    ATTESTATION: 'ATTESTATION',
+                    CAP: 'CAP',
+                    CAP1: 'CAP1',
+                    CAP2: 'CAP2',
+                    CAP3: 'CAP3',
+                    CPS: 'CPS',
+                    BEP: 'BEP',
+                    BEP1: 'BEP1',
+                    BEP2: 'BEP2',
+                    BT: 'BT',
+                    BT1: 'BT1',
+                    BT2: 'BT2',
+                    BT3: 'BT3',
+                    BTS: 'BTS',
+                    BTS1: 'BTS1',
+                    BTS2: 'BTS2',
+                    CQP: 'CQP',
+                    CHEFEQUIPE: 'CHEFEQUIPE',
+                    CHEF_DE_CHANTIER: 'CHEF_DE_CHANTIER',
+                    TECHNICIENSPECIALISE: 'TECHNICIENSPECIALISE',
+                    METP: 'METP',
+                    BTI: 'BTI',
+                    TITRE_PROFESSIONNEL: 'TITRE_PROFESSIONNEL',
+                    AUTRES: 'AUTRES'
+                  }[diplome.niveau ?? 'null']
+                }}
+              </td>
+              <td [jhiTranslate]="'gdf1App.Mention.' + (diplome.mention ?? 'null')">
+                {{
+                  { null: '', PASSABLE: 'PASSABLE', ASSEZ_BIEN: 'ASSEZ_BIEN', BIEN: 'BIEN', TRES_BIEN: 'TRES_BIEN' }[
+                    diplome.mention ?? 'null'
+                  ]
+                }}
+              </td>
+              <td>{{ diplome.anneeObtention }}</td>
+              <td>{{ diplome.etablissement }}</td>
+              <td>
+                @if (diplome.document) {
+                  <a (click)="openFile(diplome.document, diplome.documentContentType)" jhiTranslate="entity.action.open">Ouvrir</a>
+                  <span>{{ diplome.documentContentType }}, {{ byteSize(diplome.document) }}</span>
+                }
+              </td>
+              <td>
+                @if (diplome.eleve) {
+                  <div>
+                    <a [routerLink]="['/eleve', diplome.eleve.id, 'view']">{{ diplome.eleve.niveauEtude }}</a>
+                  </div>
+                }
+              </td>
+              <td>
+                @if (diplome.etudiant) {
+                  <div>
+                    <a [routerLink]="['/etudiant', diplome.etudiant.id, 'view']">{{ diplome.etudiant.carteEtudiant }}</a>
+                  </div>
+                }
+              </td>
+              <td>
+                @if (diplome.professionnel) {
+                  <div>
+                    <a [routerLink]="['/professionnel', diplome.professionnel.id, 'view']">{{ diplome.professionnel.profession }}</a>
+                  </div>
+                }
+              </td>
+              <td>
+                @if (diplome.demandeur) {
+                  <div>
+                    <a [routerLink]="['/demandeur', diplome.demandeur.id, 'view']">{{ diplome.demandeur.profil }}</a>
+                  </div>
+                }
+              </td>
+              <td class="text-end">
+                <div class="btn-group">
+                  <a [routerLink]="['/diplome', diplome.id, 'view']" class="btn btn-info btn-sm" data-cy="entityDetailsButton">
+                    <fa-icon icon="eye"></fa-icon>
+                    <span class="d-none d-md-inline" jhiTranslate="entity.action.view">Voir</span>
+                  </a>
+
+                  <a [routerLink]="['/diplome', diplome.id, 'edit']" class="btn btn-primary btn-sm" data-cy="entityEditButton">
+                    <fa-icon icon="pencil-alt"></fa-icon>
+                    <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Editer</span>
+                  </a>
+
+                  <button type="submit" (click)="delete(diplome)" class="btn btn-danger btn-sm" data-cy="entityDeleteButton">
+                    <fa-icon icon="times"></fa-icon>
+                    <span class="d-none d-md-inline" jhiTranslate="entity.action.delete">Supprimer</span>
+                  </button>
+                </div>
+              </td>
+            </tr>
+          }
+        </tbody>
+      </table>
+    </div>
+  }
+</div>

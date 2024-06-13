@@ -1,0 +1,61 @@
+{
+  "annotations": {
+    "changelogDate": "20240605154334"
+  },
+  "applications": "*",
+  "entityTableName": "candidature_p",
+  "fields": [
+    {
+      "fieldName": "offreFormation",
+      "fieldType": "NomFiliere",
+      "fieldValues": "AGRI_ELEVAGE,AGRICULTURE,PECHE,ELEVAGE,MINE_CARRIERES,ARTISANAT,BATIMAT_TRAVAUX_PUBLIQUES,MECANIQUE,MENUISERIE_BOIS,HABILLEMENT,AGROALIMENTAIRE,ELECTROTECHNIQUE_ELECTRIQUE_ENERGETIQUE,HYDRAULIQUE,STRUCTURE_METALLIQUE,STRUCTURE_PLASTIQUE,BEAUTE_ESTHETIQUE,DEVELOPPEMENT_TERRITORIAL,DROIT,ECONOMIE_GESTION_COMMERCE_LOGISTIQUE,INSDUSTRIE_CULTURELLE_ET_CREATIVE,INFORMATIQUE_ET_NUMERIQUE,RESTAURATION_ET_HOTELLORIE,SANTE_BIOLOGIE_CHIMIE,SPORT,TOURISME,ENVIRONNEMENT,AUTRES"
+    },
+    {
+      "fieldName": "dateDebutOffre",
+      "fieldType": "LocalDate"
+    },
+    {
+      "fieldName": "dateFinOffre",
+      "fieldType": "LocalDate"
+    },
+    {
+      "fieldName": "dateDepot",
+      "fieldType": "LocalDate"
+    },
+    {
+      "fieldName": "resultat",
+      "fieldType": "Resultat",
+      "fieldValues": "SOUMIS,VALIDE,APPROUVE,REJETE"
+    }
+  ],
+  "name": "CandidatureP",
+  "pagination": "infinite-scroll",
+  "relationships": [
+    {
+      "otherEntityField": "profession",
+      "otherEntityName": "professionnel",
+      "otherEntityRelationshipName": "candidatureP",
+      "relationshipName": "professionnel",
+      "relationshipSide": "right",
+      "relationshipType": "many-to-one"
+    },
+    {
+      "otherEntityField": "nomFormationC",
+      "otherEntityName": "formationContinue",
+      "otherEntityRelationshipName": "candidatureP",
+      "relationshipName": "formationContinue",
+      "relationshipSide": "right",
+      "relationshipType": "many-to-one"
+    },
+    {
+      "otherEntityField": "nomEtablissement",
+      "otherEntityName": "etablissement",
+      "otherEntityRelationshipName": "candidatureP",
+      "relationshipName": "etablissement",
+      "relationshipSide": "right",
+      "relationshipType": "many-to-one"
+    }
+  ],
+  "searchEngine": "no",
+  "service": "serviceImpl"
+}

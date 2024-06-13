@@ -1,0 +1,28 @@
+{
+  "gdf1App": {
+    "serviceMFPAI": {
+      "home": {
+        "title": "Service MFPAIS",
+        "refreshListLabel": "Refresh list",
+        "createLabel": "Create a new Service MFPAI",
+        "createOrEditLabel": "Create or edit a Service MFPAI",
+        "notFound": "No Service MFPAIS found"
+      },
+      "created": "A new Service MFPAI is created with identifier {{ param }}",
+      "updated": "A Service MFPAI is updated with identifier {{ param }}",
+      "deleted": "A Service MFPAI is deleted with identifier {{ param }}",
+      "delete": {
+        "question": "Are you sure you want to delete Service MFPAI {{ id }}?"
+      },
+      "detail": {
+        "title": "Service MFPAI"
+      },
+      "id": "ID",
+      "imageService": "Image Service",
+      "nomService": "Nom Service",
+      "chefService": "Chef Service",
+      "description": "Description",
+      "agent": "Agent"
+    }
+  }
+}

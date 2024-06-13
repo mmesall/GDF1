@@ -1,0 +1,130 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    <form name="editForm" novalidate (ngSubmit)="save()" [formGroup]="editForm">
+      <h2 id="jhi-agent-heading" data-cy="AgentCreateUpdateHeading" jhiTranslate="gdf1App.agent.home.createOrEditLabel">
+        Créer ou éditer un Agent
+      </h2>
+
+      <div>
+        <jhi-alert-error></jhi-alert-error>
+
+        @if (editForm.controls.id.value !== null) {
+          <div class="mb-3">
+            <label class="form-label" for="field_id" jhiTranslate="gdf1App.agent.id">ID</label>
+            <input type="number" class="form-control" name="id" id="field_id" data-cy="id" formControlName="id" [readonly]="true" />
+          </div>
+        }
+
+        <div class="mb-3">
+          <label class="form-label" for="field_matricule" jhiTranslate="gdf1App.agent.matricule">Matricule</label>
+          <input type="text" class="form-control" name="matricule" id="field_matricule" data-cy="matricule" formControlName="matricule" />
+          @if (editForm.get('matricule')!.invalid && (editForm.get('matricule')!.dirty || editForm.get('matricule')!.touched)) {
+            <div>
+              @if (editForm.get('matricule')?.errors?.required) {
+                <small class="form-text text-danger" jhiTranslate="entity.validation.required">Ce champ est obligatoire.</small>
+              }
+            </div>
+          }
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_nomAgent" jhiTranslate="gdf1App.agent.nomAgent">Nom Agent</label>
+          <input type="text" class="form-control" name="nomAgent" id="field_nomAgent" data-cy="nomAgent" formControlName="nomAgent" />
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_prenom" jhiTranslate="gdf1App.agent.prenom">Prenom</label>
+          <input type="text" class="form-control" name="prenom" id="field_prenom" data-cy="prenom" formControlName="prenom" />
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_dateNaiss" jhiTranslate="gdf1App.agent.dateNaiss">Date Naiss</label>
+          <div class="input-group">
+            <input
+              id="field_dateNaiss"
+              data-cy="dateNaiss"
+              type="text"
+              class="form-control"
+              name="dateNaiss"
+              ngbDatepicker
+              #dateNaissDp="ngbDatepicker"
+              formControlName="dateNaiss"
+            />
+            <button type="button" class="btn btn-secondary" (click)="dateNaissDp.toggle()"><fa-icon icon="calendar-alt"></fa-icon></button>
+          </div>
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_lieuNaiss" jhiTranslate="gdf1App.agent.lieuNaiss">Lieu Naiss</label>
+          <input type="text" class="form-control" name="lieuNaiss" id="field_lieuNaiss" data-cy="lieuNaiss" formControlName="lieuNaiss" />
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_sexe" jhiTranslate="gdf1App.agent.sexe">Sexe</label>
+          <select class="form-control" name="sexe" formControlName="sexe" id="field_sexe" data-cy="sexe">
+            <option [ngValue]="null">{{ 'gdf1App.Sexe.null' | translate }}</option>
+            @for (sexe of sexeValues; track $index) {
+              <option [value]="sexe">{{ 'gdf1App.Sexe.' + sexe | translate }}</option>
+            }
+          </select>
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_telephone" jhiTranslate="gdf1App.agent.telephone">Telephone</label>
+          <input type="number" class="form-control" name="telephone" id="field_telephone" data-cy="telephone" formControlName="telephone" />
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_email" jhiTranslate="gdf1App.agent.email">Email</label>
+          <input type="text" class="form-control" name="email" id="field_email" data-cy="email" formControlName="email" />
+          @if (editForm.get('email')!.invalid && (editForm.get('email')!.dirty || editForm.get('email')!.touched)) {
+            <div></div>
+          }
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_user" jhiTranslate="gdf1App.agent.user">User</label>
+          <select class="form-control" id="field_user" data-cy="user" name="user" formControlName="user" [compareWith]="compareUser">
+            <option [ngValue]="null"></option>
+            @for (userOption of usersSharedCollection; track $index) {
+              <option [ngValue]="userOption">{{ userOption.login }}</option>
+            }
+          </select>
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_serviceMFPAI" jhiTranslate="gdf1App.agent.serviceMFPAI">Service MFPAI</label>
+          <select
+            class="form-control"
+            id="field_serviceMFPAI"
+            data-cy="serviceMFPAI"
+            name="serviceMFPAI"
+            formControlName="serviceMFPAI"
+            [compareWith]="compareServiceMFPAI"
+          >
+            <option [ngValue]="null"></option>
+            @for (serviceMFPAIOption of serviceMFPAISCollection; track $index) {
+              <option [ngValue]="serviceMFPAIOption">{{ serviceMFPAIOption.nomService }}</option>
+            }
+          </select>
+        </div>
+      </div>
+
+      <div>
+        <button type="button" id="cancel-save" data-cy="entityCreateCancelButton" class="btn btn-secondary" (click)="previousState()">
+          <fa-icon icon="ban"></fa-icon>&nbsp;<span jhiTranslate="entity.action.cancel">Annuler</span>
+        </button>
+
+        <button
+          type="submit"
+          id="save-entity"
+          data-cy="entityCreateSaveButton"
+          [disabled]="editForm.invalid || isSaving"
+          class="btn btn-primary"
+        >
+          <fa-icon icon="save"></fa-icon>&nbsp;<span jhiTranslate="entity.action.save">Sauvegarder</span>
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

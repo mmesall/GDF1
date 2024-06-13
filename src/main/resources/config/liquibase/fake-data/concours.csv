@@ -1,0 +1,11 @@
+id;nom_concours;nom_etablissement;niveau_etude;date_ouverture;date_cloture;date_concours;affiche;affiche_content_type
+1;au-dehors adepte espiègle;CFP_LALANE;LICEMCE3;2024-06-05;2024-06-05;2024-06-05;../fake-data/blob/hipster.png;image/png
+2;après-demain;CFP_FANDA;SECONDE;2024-06-05;2024-06-05;2024-06-05;../fake-data/blob/hipster.png;image/png
+3;commis de cuisine à l'encontre de;CFP_LOUGA;LICENCE2;2024-06-05;2024-06-05;2024-06-04;../fake-data/blob/hipster.png;image/png
+4;infime soupçonner;AUTRE;BTS;2024-06-04;2024-06-04;2024-06-05;../fake-data/blob/hipster.png;image/png
+5;en dépit de commissionnaire;CFP_FATICK;PREMIERE;2024-06-05;2024-06-05;2024-06-04;../fake-data/blob/hipster.png;image/png
+6;extatique mélancolique;CFP_NDOULO;AUTRES;2024-06-05;2024-06-05;2024-06-05;../fake-data/blob/hipster.png;image/png
+7;gigantesque;CFP_SEBIKHOTANE;DOCTORAT;2024-06-04;2024-06-04;2024-06-05;../fake-data/blob/hipster.png;image/png
+8;fonctionnaire certes;CFP_TIVAOUANE;CAP3;2024-06-05;2024-06-05;2024-06-04;../fake-data/blob/hipster.png;image/png
+9;tendre;CFP_SARE_YOBA;SECONDE;2024-06-04;2024-06-04;2024-06-04;../fake-data/blob/hipster.png;image/png
+10;déranger timide cacher;CDFP_PODOR;LICENCE2;2024-06-05;2024-06-05;2024-06-05;../fake-data/blob/hipster.png;image/png

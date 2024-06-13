@@ -1,0 +1,84 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    <form name="editForm" novalidate (ngSubmit)="save()" [formGroup]="editForm">
+      <h2
+        id="jhi-prise-en-charge-heading"
+        data-cy="PriseEnChargeCreateUpdateHeading"
+        jhiTranslate="gdf1App.priseEnCharge.home.createOrEditLabel"
+      >
+        Créer ou éditer un Prise En Charge
+      </h2>
+
+      <div>
+        <jhi-alert-error></jhi-alert-error>
+
+        @if (editForm.controls.id.value !== null) {
+          <div class="mb-3">
+            <label class="form-label" for="field_id" jhiTranslate="gdf1App.priseEnCharge.id">ID</label>
+            <input type="number" class="form-control" name="id" id="field_id" data-cy="id" formControlName="id" [readonly]="true" />
+          </div>
+        }
+
+        <div class="mb-3">
+          <label class="form-label" for="field_libelle" jhiTranslate="gdf1App.priseEnCharge.libelle">Libelle</label>
+          <input type="text" class="form-control" name="libelle" id="field_libelle" data-cy="libelle" formControlName="libelle" />
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_montantPC" jhiTranslate="gdf1App.priseEnCharge.montantPC">Montant PC</label>
+          <input type="number" class="form-control" name="montantPC" id="field_montantPC" data-cy="montantPC" formControlName="montantPC" />
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_formation" jhiTranslate="gdf1App.priseEnCharge.formation">Formation</label>
+          <select
+            class="form-control"
+            id="field_formation"
+            data-cy="formation"
+            name="formation"
+            formControlName="formation"
+            [compareWith]="compareFormation"
+          >
+            <option [ngValue]="null"></option>
+            @for (formationOption of formationsCollection; track $index) {
+              <option [ngValue]="formationOption">{{ formationOption.id }}</option>
+            }
+          </select>
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_bailleur" jhiTranslate="gdf1App.priseEnCharge.bailleur">Bailleur</label>
+          <select
+            class="form-control"
+            id="field_bailleur"
+            data-cy="bailleur"
+            name="bailleur"
+            formControlName="bailleur"
+            [compareWith]="compareBailleur"
+          >
+            <option [ngValue]="null"></option>
+            @for (bailleurOption of bailleursSharedCollection; track $index) {
+              <option [ngValue]="bailleurOption">{{ bailleurOption.nomBailleur }}</option>
+            }
+          </select>
+        </div>
+      </div>
+
+      <div>
+        <button type="button" id="cancel-save" data-cy="entityCreateCancelButton" class="btn btn-secondary" (click)="previousState()">
+          <fa-icon icon="ban"></fa-icon>&nbsp;<span jhiTranslate="entity.action.cancel">Annuler</span>
+        </button>
+
+        <button
+          type="submit"
+          id="save-entity"
+          data-cy="entityCreateSaveButton"
+          [disabled]="editForm.invalid || isSaving"
+          class="btn btn-primary"
+        >
+          <fa-icon icon="save"></fa-icon>&nbsp;<span jhiTranslate="entity.action.save">Sauvegarder</span>
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

@@ -1,0 +1,37 @@
+{
+  "annotations": {
+    "changelogDate": "20240605154327"
+  },
+  "applications": "*",
+  "fields": [
+    {
+      "fieldName": "libelle",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "montantPC",
+      "fieldType": "Double"
+    }
+  ],
+  "name": "PriseEnCharge",
+  "pagination": "infinite-scroll",
+  "relationships": [
+    {
+      "otherEntityName": "formation",
+      "otherEntityRelationshipName": "priseEnCharge",
+      "relationshipName": "formation",
+      "relationshipSide": "left",
+      "relationshipType": "one-to-one"
+    },
+    {
+      "otherEntityField": "nomBailleur",
+      "otherEntityName": "bailleur",
+      "otherEntityRelationshipName": "priseEnCharge",
+      "relationshipName": "bailleur",
+      "relationshipSide": "right",
+      "relationshipType": "many-to-one"
+    }
+  ],
+  "searchEngine": "no",
+  "service": "serviceImpl"
+}

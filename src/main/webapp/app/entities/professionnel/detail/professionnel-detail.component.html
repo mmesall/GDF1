@@ -1,0 +1,153 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    @if (professionnel()) {
+      <div>
+        <h2 data-cy="professionnelDetailsHeading"><span jhiTranslate="gdf1App.professionnel.detail.title">Professionnel</span></h2>
+
+        <hr />
+
+        <jhi-alert-error></jhi-alert-error>
+
+        <jhi-alert></jhi-alert>
+
+        <dl class="row-md jh-entity-details">
+          <dt><span jhiTranslate="global.field.id">ID</span></dt>
+          <dd>
+            <span>{{ professionnel()!.id }}</span>
+          </dd>
+          <dt><span jhiTranslate="gdf1App.professionnel.profession">Profession</span></dt>
+          <dd>
+            <span>{{ professionnel()!.profession }}</span>
+          </dd>
+          <dt><span jhiTranslate="gdf1App.professionnel.nom">Nom</span></dt>
+          <dd>
+            <span>{{ professionnel()!.nom }}</span>
+          </dd>
+          <dt><span jhiTranslate="gdf1App.professionnel.prenom">Prenom</span></dt>
+          <dd>
+            <span>{{ professionnel()!.prenom }}</span>
+          </dd>
+          <dt><span jhiTranslate="gdf1App.professionnel.dateNaiss">Date Naiss</span></dt>
+          <dd>
+            <span>{{ professionnel()!.dateNaiss | formatMediumDate }}</span>
+          </dd>
+          <dt><span jhiTranslate="gdf1App.professionnel.lieuNaiss">Lieu Naiss</span></dt>
+          <dd>
+            <span>{{ professionnel()!.lieuNaiss }}</span>
+          </dd>
+          <dt><span jhiTranslate="gdf1App.professionnel.sexe">Sexe</span></dt>
+          <dd>
+            <span [jhiTranslate]="'gdf1App.Sexe.' + (professionnel()!.sexe ?? 'null')">{{
+              { null: '', HOMME: 'HOMME', FEMME: 'FEMME' }[professionnel()!.sexe ?? 'null']
+            }}</span>
+          </dd>
+          <dt><span jhiTranslate="gdf1App.professionnel.telephone">Telephone</span></dt>
+          <dd>
+            <span>{{ professionnel()!.telephone }}</span>
+          </dd>
+          <dt><span jhiTranslate="gdf1App.professionnel.adressePhysique">Adresse Physique</span></dt>
+          <dd>
+            <span>{{ professionnel()!.adressePhysique }}</span>
+          </dd>
+          <dt><span jhiTranslate="gdf1App.professionnel.regionResidence">Region Residence</span></dt>
+          <dd>
+            <span [jhiTranslate]="'gdf1App.NomRegion.' + (professionnel()!.regionResidence ?? 'null')">{{
+              {
+                null: '',
+                DAKAR: 'DAKAR',
+                DIOURBEL: 'DIOURBEL',
+                FATICK: 'FATICK',
+                KAFFRINE: 'KAFFRINE',
+                KAOLACK: 'KAOLACK',
+                KEDOUGOU: 'KEDOUGOU',
+                KOLDA: 'KOLDA',
+                LOUGA: 'LOUGA',
+                MATAM: 'MATAM',
+                SAINT_LOUIS: 'SAINT_LOUIS',
+                SEDHIOU: 'SEDHIOU',
+                TAMBACOUNDA: 'TAMBACOUNDA',
+                THIES: 'THIES',
+                ZIGINCHOR: 'ZIGINCHOR',
+                AUTRE: 'AUTRE'
+              }[professionnel()!.regionResidence ?? 'null']
+            }}</span>
+          </dd>
+          <dt><span jhiTranslate="gdf1App.professionnel.departResidence">Depart Residence</span></dt>
+          <dd>
+            <span [jhiTranslate]="'gdf1App.NomDepartement.' + (professionnel()!.departResidence ?? 'null')">{{
+              {
+                null: '',
+                DAKAR: 'DAKAR',
+                GUEDIAWAYE: 'GUEDIAWAYE',
+                PIKINE: 'PIKINE',
+                RUFISQUE: 'RUFISQUE',
+                BAMBAEY: 'BAMBAEY',
+                DIOURBEL: 'DIOURBEL',
+                MBACKE: 'MBACKE',
+                FATICK: 'FATICK',
+                FOUNDIOUGNE: 'FOUNDIOUGNE',
+                GOSSAS: 'GOSSAS',
+                BIRKILANE: 'BIRKILANE',
+                KAFFRINE: 'KAFFRINE',
+                KOUNGHEUR: 'KOUNGHEUR',
+                MALEM_HODAR: 'MALEM_HODAR',
+                GUINGUINEO: 'GUINGUINEO',
+                KAOLOACK: 'KAOLOACK',
+                NIORO: 'NIORO',
+                KEDOUGOU: 'KEDOUGOU',
+                SALAMATA: 'SALAMATA',
+                SARAYA: 'SARAYA',
+                KOLDA: 'KOLDA',
+                MEDINA_YORO_FOULAH: 'MEDINA_YORO_FOULAH',
+                VELINGARA: 'VELINGARA',
+                KEBEMERE: 'KEBEMERE',
+                LINGUERE: 'LINGUERE',
+                LOUGA: 'LOUGA',
+                KANELKANEL: 'KANELKANEL',
+                MATAM: 'MATAM',
+                RANEROU_FERLO: 'RANEROU_FERLO',
+                DAGANA: 'DAGANA',
+                PODOR: 'PODOR',
+                SAINT_LOUIS: 'SAINT_LOUIS',
+                BOUNKILING: 'BOUNKILING',
+                GOUDOMP: 'GOUDOMP',
+                SEDHIOU: 'SEDHIOU',
+                BAKEL: 'BAKEL',
+                GOUDIRY: 'GOUDIRY',
+                KOUMPENTOUM: 'KOUMPENTOUM',
+                TAMBACOUNDA: 'TAMBACOUNDA',
+                MBOUR: 'MBOUR',
+                THIES: 'THIES',
+                TIVAOUANE: 'TIVAOUANE',
+                BIGNONA: 'BIGNONA',
+                OUSSOUYE: 'OUSSOUYE',
+                ZICHUINCHOR: 'ZICHUINCHOR',
+                AUTRE: 'AUTRE'
+              }[professionnel()!.departResidence ?? 'null']
+            }}</span>
+          </dd>
+          <dt><span jhiTranslate="gdf1App.professionnel.email">Email</span></dt>
+          <dd>
+            <span>{{ professionnel()!.email }}</span>
+          </dd>
+          <dt><span jhiTranslate="gdf1App.professionnel.cni">Cni</span></dt>
+          <dd>
+            <span>{{ professionnel()!.cni }}</span>
+          </dd>
+          <dt><span jhiTranslate="gdf1App.professionnel.user">User</span></dt>
+          <dd>
+            <span>{{ professionnel()!.user?.login }}</span>
+          </dd>
+        </dl>
+
+        <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+          <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Retour</span>
+        </button>
+
+        <button type="button" [routerLink]="['/professionnel', professionnel()!.id, 'edit']" class="btn btn-primary">
+          <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Editer</span>
+        </button>
+      </div>
+    }
+  </div>
+</div>

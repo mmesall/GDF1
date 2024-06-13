@@ -1,0 +1,295 @@
+<div>
+  <h2 id="page-heading" data-cy="EleveHeading">
+    <span jhiTranslate="gdf1App.eleve.home.title">Eleves</span>
+
+    <div class="d-flex justify-content-end">
+      <button class="btn btn-info me-2" (click)="load()" [disabled]="isLoading">
+        <fa-icon icon="sync" [spin]="isLoading"></fa-icon>
+        <span jhiTranslate="gdf1App.eleve.home.refreshListLabel">Actualiser la liste</span>
+      </button>
+
+      <button
+        id="jh-create-entity"
+        data-cy="entityCreateButton"
+        class="btn btn-primary jh-create-entity create-eleve"
+        [routerLink]="['/eleve/new']"
+      >
+        <fa-icon icon="plus"></fa-icon>
+        <span jhiTranslate="gdf1App.eleve.home.createLabel">Créer un nouveau Eleve</span>
+      </button>
+    </div>
+  </h2>
+
+  <jhi-alert-error></jhi-alert-error>
+
+  <jhi-alert></jhi-alert>
+
+  @if (eleves?.length === 0) {
+    <div class="alert alert-warning" id="no-result">
+      <span jhiTranslate="gdf1App.eleve.home.notFound">Aucun Eleve trouvé</span>
+    </div>
+  }
+
+  @if (eleves && eleves.length > 0) {
+    <div class="table-responsive table-entities" id="entities">
+      <table class="table table-striped" aria-describedby="page-heading">
+        <thead>
+          <tr jhiSort [sortState]="sortState" (sortChange)="navigateToWithComponentValues($event)">
+            <th scope="col" jhiSortBy="id">
+              <div class="d-flex">
+                <span jhiTranslate="global.field.id">ID</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="nom">
+              <div class="d-flex">
+                <span jhiTranslate="gdf1App.eleve.nom">Nom</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="prenom">
+              <div class="d-flex">
+                <span jhiTranslate="gdf1App.eleve.prenom">Prenom</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="dateNaiss">
+              <div class="d-flex">
+                <span jhiTranslate="gdf1App.eleve.dateNaiss">Date Naiss</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="lieuNaiss">
+              <div class="d-flex">
+                <span jhiTranslate="gdf1App.eleve.lieuNaiss">Lieu Naiss</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="sexe">
+              <div class="d-flex">
+                <span jhiTranslate="gdf1App.eleve.sexe">Sexe</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="telephone">
+              <div class="d-flex">
+                <span jhiTranslate="gdf1App.eleve.telephone">Telephone</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="adressePhysique">
+              <div class="d-flex">
+                <span jhiTranslate="gdf1App.eleve.adressePhysique">Adresse Physique</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="regionResidence">
+              <div class="d-flex">
+                <span jhiTranslate="gdf1App.eleve.regionResidence">Region Residence</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="departResidence">
+              <div class="d-flex">
+                <span jhiTranslate="gdf1App.eleve.departResidence">Depart Residence</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="niveauEtude">
+              <div class="d-flex">
+                <span jhiTranslate="gdf1App.eleve.niveauEtude">Niveau Etude</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="cni">
+              <div class="d-flex">
+                <span jhiTranslate="gdf1App.eleve.cni">Cni</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="user.login">
+              <div class="d-flex">
+                <span jhiTranslate="gdf1App.eleve.user">User</span>
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col"></th>
+          </tr>
+        </thead>
+        <tbody infinite-scroll (scrolled)="loadNextPage()" [infiniteScrollDisabled]="!hasMorePage()" [infiniteScrollDistance]="0">
+          @for (eleve of eleves; track trackId) {
+            <tr data-cy="entityTable">
+              <td>
+                <a [routerLink]="['/eleve', eleve.id, 'view']">{{ eleve.id }}</a>
+              </td>
+              <td>{{ eleve.nom }}</td>
+              <td>{{ eleve.prenom }}</td>
+              <td>{{ eleve.dateNaiss | formatMediumDate }}</td>
+              <td>{{ eleve.lieuNaiss }}</td>
+              <td [jhiTranslate]="'gdf1App.Sexe.' + (eleve.sexe ?? 'null')">
+                {{ { null: '', HOMME: 'HOMME', FEMME: 'FEMME' }[eleve.sexe ?? 'null'] }}
+              </td>
+              <td>{{ eleve.telephone }}</td>
+              <td>{{ eleve.adressePhysique }}</td>
+              <td [jhiTranslate]="'gdf1App.NomRegion.' + (eleve.regionResidence ?? 'null')">
+                {{
+                  {
+                    null: '',
+                    DAKAR: 'DAKAR',
+                    DIOURBEL: 'DIOURBEL',
+                    FATICK: 'FATICK',
+                    KAFFRINE: 'KAFFRINE',
+                    KAOLACK: 'KAOLACK',
+                    KEDOUGOU: 'KEDOUGOU',
+                    KOLDA: 'KOLDA',
+                    LOUGA: 'LOUGA',
+                    MATAM: 'MATAM',
+                    SAINT_LOUIS: 'SAINT_LOUIS',
+                    SEDHIOU: 'SEDHIOU',
+                    TAMBACOUNDA: 'TAMBACOUNDA',
+                    THIES: 'THIES',
+                    ZIGINCHOR: 'ZIGINCHOR',
+                    AUTRE: 'AUTRE'
+                  }[eleve.regionResidence ?? 'null']
+                }}
+              </td>
+              <td [jhiTranslate]="'gdf1App.NomDepartement.' + (eleve.departResidence ?? 'null')">
+                {{
+                  {
+                    null: '',
+                    DAKAR: 'DAKAR',
+                    GUEDIAWAYE: 'GUEDIAWAYE',
+                    PIKINE: 'PIKINE',
+                    RUFISQUE: 'RUFISQUE',
+                    BAMBAEY: 'BAMBAEY',
+                    DIOURBEL: 'DIOURBEL',
+                    MBACKE: 'MBACKE',
+                    FATICK: 'FATICK',
+                    FOUNDIOUGNE: 'FOUNDIOUGNE',
+                    GOSSAS: 'GOSSAS',
+                    BIRKILANE: 'BIRKILANE',
+                    KAFFRINE: 'KAFFRINE',
+                    KOUNGHEUR: 'KOUNGHEUR',
+                    MALEM_HODAR: 'MALEM_HODAR',
+                    GUINGUINEO: 'GUINGUINEO',
+                    KAOLOACK: 'KAOLOACK',
+                    NIORO: 'NIORO',
+                    KEDOUGOU: 'KEDOUGOU',
+                    SALAMATA: 'SALAMATA',
+                    SARAYA: 'SARAYA',
+                    KOLDA: 'KOLDA',
+                    MEDINA_YORO_FOULAH: 'MEDINA_YORO_FOULAH',
+                    VELINGARA: 'VELINGARA',
+                    KEBEMERE: 'KEBEMERE',
+                    LINGUERE: 'LINGUERE',
+                    LOUGA: 'LOUGA',
+                    KANELKANEL: 'KANELKANEL',
+                    MATAM: 'MATAM',
+                    RANEROU_FERLO: 'RANEROU_FERLO',
+                    DAGANA: 'DAGANA',
+                    PODOR: 'PODOR',
+                    SAINT_LOUIS: 'SAINT_LOUIS',
+                    BOUNKILING: 'BOUNKILING',
+                    GOUDOMP: 'GOUDOMP',
+                    SEDHIOU: 'SEDHIOU',
+                    BAKEL: 'BAKEL',
+                    GOUDIRY: 'GOUDIRY',
+                    KOUMPENTOUM: 'KOUMPENTOUM',
+                    TAMBACOUNDA: 'TAMBACOUNDA',
+                    MBOUR: 'MBOUR',
+                    THIES: 'THIES',
+                    TIVAOUANE: 'TIVAOUANE',
+                    BIGNONA: 'BIGNONA',
+                    OUSSOUYE: 'OUSSOUYE',
+                    ZICHUINCHOR: 'ZICHUINCHOR',
+                    AUTRE: 'AUTRE'
+                  }[eleve.departResidence ?? 'null']
+                }}
+              </td>
+              <td [jhiTranslate]="'gdf1App.NiveauEtude.' + (eleve.niveauEtude ?? 'null')">
+                {{
+                  {
+                    null: '',
+                    CINQUIEME: 'CINQUIEME',
+                    QUATRIEME: 'QUATRIEME',
+                    TROISIEME: 'TROISIEME',
+                    BFEM: 'BFEM',
+                    EQUIVALENT_BFEM: 'EQUIVALENT_BFEM',
+                    SECONDE: 'SECONDE',
+                    PREMIERE: 'PREMIERE',
+                    TERMINAL: 'TERMINAL',
+                    BAC: 'BAC',
+                    EQUIVALENT_BAC: 'EQUIVALENT_BAC',
+                    LICENCE1: 'LICENCE1',
+                    LICENCE2: 'LICENCE2',
+                    LICEMCE3: 'LICEMCE3',
+                    MASTER: 'MASTER',
+                    DOCTORAT: 'DOCTORAT',
+                    ATTESTATION: 'ATTESTATION',
+                    CAP: 'CAP',
+                    CAP1: 'CAP1',
+                    CAP2: 'CAP2',
+                    CAP3: 'CAP3',
+                    CPS: 'CPS',
+                    BEP: 'BEP',
+                    BEP1: 'BEP1',
+                    BEP2: 'BEP2',
+                    BT: 'BT',
+                    BT1: 'BT1',
+                    BT2: 'BT2',
+                    BT3: 'BT3',
+                    BTS: 'BTS',
+                    BTS1: 'BTS1',
+                    BTS2: 'BTS2',
+                    CQP: 'CQP',
+                    CHEFEQUIPE: 'CHEFEQUIPE',
+                    CHEF_DE_CHANTIER: 'CHEF_DE_CHANTIER',
+                    TECHNICIENSPECIALISE: 'TECHNICIENSPECIALISE',
+                    METP: 'METP',
+                    BTI: 'BTI',
+                    TITRE_PROFESSIONNEL: 'TITRE_PROFESSIONNEL',
+                    AUTRES: 'AUTRES'
+                  }[eleve.niveauEtude ?? 'null']
+                }}
+              </td>
+              <td>{{ eleve.cni }}</td>
+              <td>
+                {{ eleve.user?.login }}
+              </td>
+              <td class="text-end">
+                <div class="btn-group">
+                  <a [routerLink]="['/eleve', eleve.id, 'view']" class="btn btn-info btn-sm" data-cy="entityDetailsButton">
+                    <fa-icon icon="eye"></fa-icon>
+                    <span class="d-none d-md-inline" jhiTranslate="entity.action.view">Voir</span>
+                  </a>
+
+                  <a [routerLink]="['/eleve', eleve.id, 'edit']" class="btn btn-primary btn-sm" data-cy="entityEditButton">
+                    <fa-icon icon="pencil-alt"></fa-icon>
+                    <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Editer</span>
+                  </a>
+
+                  <button type="submit" (click)="delete(eleve)" class="btn btn-danger btn-sm" data-cy="entityDeleteButton">
+                    <fa-icon icon="times"></fa-icon>
+                    <span class="d-none d-md-inline" jhiTranslate="entity.action.delete">Supprimer</span>
+                  </button>
+                </div>
+              </td>
+            </tr>
+          }
+        </tbody>
+      </table>
+    </div>
+  }
+</div>

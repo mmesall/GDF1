@@ -1,0 +1,479 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    @if (etablissement()) {
+      <div>
+        <h2 data-cy="etablissementDetailsHeading"><span jhiTranslate="gdf1App.etablissement.detail.title">Etablissement</span></h2>
+
+        <hr />
+
+        <jhi-alert-error></jhi-alert-error>
+
+        <jhi-alert></jhi-alert>
+
+        <dl class="row-md jh-entity-details">
+          <dt><span jhiTranslate="global.field.id">ID</span></dt>
+          <dd>
+            <span>{{ etablissement()!.id }}</span>
+          </dd>
+          <dt><span jhiTranslate="gdf1App.etablissement.nomEtablissement">Nom Etablissement</span></dt>
+          <dd>
+            <span [jhiTranslate]="'gdf1App.NomEtablissement.' + (etablissement()!.nomEtablissement ?? 'null')">{{
+              {
+                null: '',
+                CEDT_G15: 'CEDT_G15',
+                CFP_OUAKAM: 'CFP_OUAKAM',
+                CNQP: 'CNQP',
+                CFPC_DELAFOSSE: 'CFPC_DELAFOSSE',
+                CFPJ_YMCA: 'CFPJ_YMCA',
+                CFPT_SJ: 'CFPT_SJ',
+                CNCPI: 'CNCPI',
+                CFP_MEDINA_GUEULE_TAPEE: 'CFP_MEDINA_GUEULE_TAPEE',
+                CFP_DAKAR: 'CFP_DAKAR',
+                ICCM: 'ICCM',
+                CFA: 'CFA',
+                CFP_PIKINE: 'CFP_PIKINE',
+                CFP_THIAROYE: 'CFP_THIAROYE',
+                CFP_RUFISQUE: 'CFP_RUFISQUE',
+                CFP_BARGNY: 'CFP_BARGNY',
+                CFP_SEBIKHOTANE: 'CFP_SEBIKHOTANE',
+                CFP_NIAGA: 'CFP_NIAGA',
+                LTID_DAKAR: 'LTID_DAKAR',
+                LTCD_DAKAR: 'LTCD_DAKAR',
+                LTSLL_DAKAR: 'LTSLL_DAKAR',
+                CEP_THIES: 'CEP_THIES',
+                CFP_FISSEL: 'CFP_FISSEL',
+                CFP_TIVAOUANE: 'CFP_TIVAOUANE',
+                CFP_JOAL: 'CFP_JOAL',
+                CFP_MONT_ROLLAND: 'CFP_MONT_ROLLAND',
+                CFP_NDIAGANIAO: 'CFP_NDIAGANIAO',
+                CFP_THIADIAYE: 'CFP_THIADIAYE',
+                CNAFP_THIES: 'CNAFP_THIES',
+                CAP_ENFEFS_THIES: 'CAP_ENFEFS_THIES',
+                CFP_MBOUR: 'CFP_MBOUR',
+                CFP_NGUEKHOKH: 'CFP_NGUEKHOKH',
+                CFP_KHOMBOLE: 'CFP_KHOMBOLE',
+                CFP_TAIBA_NDIAYE: 'CFP_TAIBA_NDIAYE',
+                CFP_LALANE: 'CFP_LALANE',
+                LTPFXN_THIES: 'LTPFXN_THIES',
+                CFP_LOUGA: 'CFP_LOUGA',
+                CFP_KEBEMER: 'CFP_KEBEMER',
+                CFP_LINGUERE: 'CFP_LINGUERE',
+                CFP_NGOURANE: 'CFP_NGOURANE',
+                CFP_DAHRA: 'CFP_DAHRA',
+                CFP_SAINT_LOUIS: 'CFP_SAINT_LOUIS',
+                CRFP_SAINT_LOUIS: 'CRFP_SAINT_LOUIS',
+                CDFP_RICHARD_TOLL: 'CDFP_RICHARD_TOLL',
+                CFP_DAGANA: 'CFP_DAGANA',
+                CFP_PODOR: 'CFP_PODOR',
+                CDFP_PODOR: 'CDFP_PODOR',
+                CFP_AERE_LAO: 'CFP_AERE_LAO',
+                LTAP_SAINT_LOUIS: 'LTAP_SAINT_LOUIS',
+                CFP_MATAM: 'CFP_MATAM',
+                CFP_OUROSSOGUI: 'CFP_OUROSSOGUI',
+                CFP_WAOUNDE: 'CFP_WAOUNDE',
+                CFP_KANEL: 'CFP_KANEL',
+                CFP_RANEROU: 'CFP_RANEROU',
+                SINTHIOU_BAMBAMBE: 'SINTHIOU_BAMBAMBE',
+                AGNAM_CIVOL: 'AGNAM_CIVOL',
+                THIOUBALEL: 'THIOUBALEL',
+                MBOUMBA: 'MBOUMBA',
+                CFP_DIOURBEL: 'CFP_DIOURBEL',
+                CFP_BAMBEY: 'CFP_BAMBEY',
+                CFP_MBACKE: 'CFP_MBACKE',
+                CFP_TAIF: 'CFP_TAIF',
+                CDFP_MBACKE: 'CDFP_MBACKE',
+                CFP_NDOULO: 'CFP_NDOULO',
+                CFP_TOUBA: 'CFP_TOUBA',
+                LTAB_DIOURBEL: 'LTAB_DIOURBEL',
+                CFP_FATICK: 'CFP_FATICK',
+                CFP_DIOFIOR: 'CFP_DIOFIOR',
+                CFP_DIONEWAR: 'CFP_DIONEWAR',
+                CFP_DJILOR_SALOUM: 'CFP_DJILOR_SALOUM',
+                CFP_FAOYE: 'CFP_FAOYE',
+                CFP_FOUNDIOUGNE: 'CFP_FOUNDIOUGNE',
+                CFP_LOUL_SESSENE: 'CFP_LOUL_SESSENE',
+                CFP_NIAKHAR: 'CFP_NIAKHAR',
+                CFP_GOSSAS: 'CFP_GOSSAS',
+                CFP_TOUCAR: 'CFP_TOUCAR',
+                CFP_SOKONE: 'CFP_SOKONE',
+                CFP_DIAKHAO: 'CFP_DIAKHAO',
+                LT_FATICK: 'LT_FATICK',
+                CFP_KAOLACK: 'CFP_KAOLACK',
+                CFP_MBADAKHOUNE: 'CFP_MBADAKHOUNE',
+                CFP_GUINGUINEO: 'CFP_GUINGUINEO',
+                CFP_NIORO: 'CFP_NIORO',
+                CFP_POROKHANE: 'CFP_POROKHANE',
+                LTCAN_KAOLACK: 'LTCAN_KAOLACK',
+                CFP_BAKEL2: 'CFP_BAKEL2',
+                CFP_FORAMECA: 'CFP_FORAMECA',
+                CFP_KIDIRA: 'CFP_KIDIRA',
+                CFP_VELINGARA: 'CFP_VELINGARA',
+                CFP_TAMBA: 'CFP_TAMBA',
+                CFP_BAKEL1: 'CFP_BAKEL1',
+                MEDINA_GOUNASS: 'MEDINA_GOUNASS',
+                CFP_GOUDIRY: 'CFP_GOUDIRY',
+                LETFP_TAMBA: 'LETFP_TAMBA',
+                CFP_KEDOUGOU: 'CFP_KEDOUGOU',
+                CFP_SALEMATA: 'CFP_SALEMATA',
+                LTIM_KEDOUGOU: 'LTIM_KEDOUGOU',
+                CFP_KOLDA: 'CFP_KOLDA',
+                CFP_DABO: 'CFP_DABO',
+                CFP_KOUNKANE: 'CFP_KOUNKANE',
+                CFP_MEDINA_YORO_FOULAH: 'CFP_MEDINA_YORO_FOULAH',
+                CFP_SARE_YOBA: 'CFP_SARE_YOBA',
+                CRFP_KOLDA: 'CRFP_KOLDA',
+                LEFP_KOLDA: 'LEFP_KOLDA',
+                CFP_SEDHIOU: 'CFP_SEDHIOU',
+                CPAR_SEDHIOU: 'CPAR_SEDHIOU',
+                CENTRE_REFERENCE_SEDHIOU: 'CENTRE_REFERENCE_SEDHIOU',
+                CENTRE_REFERENCE_BOUNKILING: 'CENTRE_REFERENCE_BOUNKILING',
+                CRFP_ZIGUINCHOR: 'CRFP_ZIGUINCHOR',
+                CFP_ABENE: 'CFP_ABENE',
+                CFP_BAILA: 'CFP_BAILA',
+                CFP_SAINT_MARC: 'CFP_SAINT_MARC',
+                ALBADAR: 'ALBADAR',
+                CFP_SINDIAN: 'CFP_SINDIAN',
+                CFP_TENDOUCK: 'CFP_TENDOUCK',
+                CFP_BIGNONA: 'CFP_BIGNONA',
+                CFP_COUBANAO: 'CFP_COUBANAO',
+                CFP_ZIGUINCHOR: 'CFP_ZIGUINCHOR',
+                CFP_FANDA: 'CFP_FANDA',
+                CFP_OUSSOUYE: 'CFP_OUSSOUYE',
+                LTAEB_BIGNONA: 'LTAEB_BIGNONA',
+                CFP_KAFFRINE: 'CFP_KAFFRINE',
+                CFP_BIRKELANE: 'CFP_BIRKELANE',
+                AUTRE: 'AUTRE'
+              }[etablissement()!.nomEtablissement ?? 'null']
+            }}</span>
+          </dd>
+          <dt><span jhiTranslate="gdf1App.etablissement.photo">Photo</span></dt>
+          <dd>
+            @if (etablissement()!.photo) {
+              <div>
+                <a (click)="openFile(etablissement()!.photo ?? '', etablissement()!.photoContentType)" jhiTranslate="entity.action.open"
+                  >Ouvrir</a
+                >
+                {{ etablissement()!.photoContentType }}, {{ byteSize(etablissement()!.photo ?? '') }}
+              </div>
+            }
+          </dd>
+          <dt><span jhiTranslate="gdf1App.etablissement.region">Region</span></dt>
+          <dd>
+            <span [jhiTranslate]="'gdf1App.NomRegion.' + (etablissement()!.region ?? 'null')">{{
+              {
+                null: '',
+                DAKAR: 'DAKAR',
+                DIOURBEL: 'DIOURBEL',
+                FATICK: 'FATICK',
+                KAFFRINE: 'KAFFRINE',
+                KAOLACK: 'KAOLACK',
+                KEDOUGOU: 'KEDOUGOU',
+                KOLDA: 'KOLDA',
+                LOUGA: 'LOUGA',
+                MATAM: 'MATAM',
+                SAINT_LOUIS: 'SAINT_LOUIS',
+                SEDHIOU: 'SEDHIOU',
+                TAMBACOUNDA: 'TAMBACOUNDA',
+                THIES: 'THIES',
+                ZIGINCHOR: 'ZIGINCHOR',
+                AUTRE: 'AUTRE'
+              }[etablissement()!.region ?? 'null']
+            }}</span>
+          </dd>
+          <dt><span jhiTranslate="gdf1App.etablissement.departement">Departement</span></dt>
+          <dd>
+            <span [jhiTranslate]="'gdf1App.NomDepartement.' + (etablissement()!.departement ?? 'null')">{{
+              {
+                null: '',
+                DAKAR: 'DAKAR',
+                GUEDIAWAYE: 'GUEDIAWAYE',
+                PIKINE: 'PIKINE',
+                RUFISQUE: 'RUFISQUE',
+                BAMBAEY: 'BAMBAEY',
+                DIOURBEL: 'DIOURBEL',
+                MBACKE: 'MBACKE',
+                FATICK: 'FATICK',
+                FOUNDIOUGNE: 'FOUNDIOUGNE',
+                GOSSAS: 'GOSSAS',
+                BIRKILANE: 'BIRKILANE',
+                KAFFRINE: 'KAFFRINE',
+                KOUNGHEUR: 'KOUNGHEUR',
+                MALEM_HODAR: 'MALEM_HODAR',
+                GUINGUINEO: 'GUINGUINEO',
+                KAOLOACK: 'KAOLOACK',
+                NIORO: 'NIORO',
+                KEDOUGOU: 'KEDOUGOU',
+                SALAMATA: 'SALAMATA',
+                SARAYA: 'SARAYA',
+                KOLDA: 'KOLDA',
+                MEDINA_YORO_FOULAH: 'MEDINA_YORO_FOULAH',
+                VELINGARA: 'VELINGARA',
+                KEBEMERE: 'KEBEMERE',
+                LINGUERE: 'LINGUERE',
+                LOUGA: 'LOUGA',
+                KANELKANEL: 'KANELKANEL',
+                MATAM: 'MATAM',
+                RANEROU_FERLO: 'RANEROU_FERLO',
+                DAGANA: 'DAGANA',
+                PODOR: 'PODOR',
+                SAINT_LOUIS: 'SAINT_LOUIS',
+                BOUNKILING: 'BOUNKILING',
+                GOUDOMP: 'GOUDOMP',
+                SEDHIOU: 'SEDHIOU',
+                BAKEL: 'BAKEL',
+                GOUDIRY: 'GOUDIRY',
+                KOUMPENTOUM: 'KOUMPENTOUM',
+                TAMBACOUNDA: 'TAMBACOUNDA',
+                MBOUR: 'MBOUR',
+                THIES: 'THIES',
+                TIVAOUANE: 'TIVAOUANE',
+                BIGNONA: 'BIGNONA',
+                OUSSOUYE: 'OUSSOUYE',
+                ZICHUINCHOR: 'ZICHUINCHOR',
+                AUTRE: 'AUTRE'
+              }[etablissement()!.departement ?? 'null']
+            }}</span>
+          </dd>
+          <dt><span jhiTranslate="gdf1App.etablissement.email">Email</span></dt>
+          <dd>
+            <span>{{ etablissement()!.email }}</span>
+          </dd>
+          <dt><span jhiTranslate="gdf1App.etablissement.telephone">Telephone</span></dt>
+          <dd>
+            <span>{{ etablissement()!.telephone }}</span>
+          </dd>
+          <dt><span jhiTranslate="gdf1App.etablissement.typeEtablissement">Type Etablissement</span></dt>
+          <dd>
+            <span [jhiTranslate]="'gdf1App.TypeEtablissement.' + (etablissement()!.typeEtablissement ?? 'null')">{{
+              { null: '', CFP: 'CFP', LYCEE_TECH: 'LYCEE_TECH' }[etablissement()!.typeEtablissement ?? 'null']
+            }}</span>
+          </dd>
+          <dt><span jhiTranslate="gdf1App.etablissement.statut">Statut</span></dt>
+          <dd>
+            <span [jhiTranslate]="'gdf1App.StatutEtab.' + (etablissement()!.statut ?? 'null')">{{
+              { null: '', PRIVE: 'PRIVE', PUBLIC: 'PUBLIC' }[etablissement()!.statut ?? 'null']
+            }}</span>
+          </dd>
+          <dt><span jhiTranslate="gdf1App.etablissement.autreRegion">Autre Region</span></dt>
+          <dd>
+            <span>{{ etablissement()!.autreRegion }}</span>
+          </dd>
+          <dt><span jhiTranslate="gdf1App.etablissement.autreDepartement">Autre Departement</span></dt>
+          <dd>
+            <span>{{ etablissement()!.autreDepartement }}</span>
+          </dd>
+          <dt><span jhiTranslate="gdf1App.etablissement.cfp">Cfp</span></dt>
+          <dd>
+            <span [jhiTranslate]="'gdf1App.CFP.' + (etablissement()!.cfp ?? 'null')">{{
+              {
+                null: '',
+                CEDT_G15: 'CEDT_G15',
+                CFP_OUAKAM: 'CFP_OUAKAM',
+                CNQP: 'CNQP',
+                CFPC_DELAFOSSE: 'CFPC_DELAFOSSE',
+                CFPJ_YMCA: 'CFPJ_YMCA',
+                CFPT_SJ: 'CFPT_SJ',
+                CNCPI: 'CNCPI',
+                CFP_MEDINA_GUEULE_TAPEE: 'CFP_MEDINA_GUEULE_TAPEE',
+                CFP_DAKAR: 'CFP_DAKAR',
+                ICCM: 'ICCM',
+                CFA: 'CFA',
+                CFP_PIKINE: 'CFP_PIKINE',
+                CFP_THIAROYE: 'CFP_THIAROYE',
+                CFP_RUFISQUE: 'CFP_RUFISQUE',
+                CFP_BARGNY: 'CFP_BARGNY',
+                CFP_SEBIKHOTANE: 'CFP_SEBIKHOTANE',
+                CFP_NIAGA: 'CFP_NIAGA',
+                CEP_THIES: 'CEP_THIES',
+                CFP_FISSEL: 'CFP_FISSEL',
+                CFP_TIVAOUANE: 'CFP_TIVAOUANE',
+                CFP_JOAL: 'CFP_JOAL',
+                CFP_MONT_ROLLAND: 'CFP_MONT_ROLLAND',
+                CFP_NDIAGANIAO: 'CFP_NDIAGANIAO',
+                CFP_THIADIAYE: 'CFP_THIADIAYE',
+                CNAFP_THIES: 'CNAFP_THIES',
+                CAP_ENFEFS_THIES: 'CAP_ENFEFS_THIES',
+                CFP_MBOUR: 'CFP_MBOUR',
+                CFP_NGUEKHOKH: 'CFP_NGUEKHOKH',
+                CFP_KHOMBOLE: 'CFP_KHOMBOLE',
+                CFP_TAIBA_NDIAYE: 'CFP_TAIBA_NDIAYE',
+                CFP_LALANE: 'CFP_LALANE',
+                CFP_LOUGA: 'CFP_LOUGA',
+                CFP_KEBEMER: 'CFP_KEBEMER',
+                CFP_LINGUERE: 'CFP_LINGUERE',
+                CFP_NGOURANE: 'CFP_NGOURANE',
+                CFP_DAHRA: 'CFP_DAHRA',
+                CFP_SAINT_LOUIS: 'CFP_SAINT_LOUIS',
+                CRFP_SAINT_LOUIS: 'CRFP_SAINT_LOUIS',
+                CDFP_RICHARD_TOLL: 'CDFP_RICHARD_TOLL',
+                CFP_DAGANA: 'CFP_DAGANA',
+                CFP_PODOR: 'CFP_PODOR',
+                CDFP_PODOR: 'CDFP_PODOR',
+                CFP_AERE_LAO: 'CFP_AERE_LAO',
+                CFP_MATAM: 'CFP_MATAM',
+                CFP_OUROSSOGUI: 'CFP_OUROSSOGUI',
+                CFP_WAOUNDE: 'CFP_WAOUNDE',
+                CFP_KANEL: 'CFP_KANEL',
+                CFP_RANEROU: 'CFP_RANEROU',
+                SINTHIOU_BAMBAMBE: 'SINTHIOU_BAMBAMBE',
+                AGNAM_CIVOL: 'AGNAM_CIVOL',
+                THIOUBALEL: 'THIOUBALEL',
+                MBOUMBA: 'MBOUMBA',
+                CFP_DIOURBEL: 'CFP_DIOURBEL',
+                CFP_BAMBEY: 'CFP_BAMBEY',
+                CFP_MBACKE: 'CFP_MBACKE',
+                CFP_TAIF: 'CFP_TAIF',
+                CDFP_MBACKE: 'CDFP_MBACKE',
+                CFP_NDOULO: 'CFP_NDOULO',
+                CFP_TOUBA: 'CFP_TOUBA',
+                CFP_FATICK: 'CFP_FATICK',
+                CFP_DIOFIOR: 'CFP_DIOFIOR',
+                CFP_DIONEWAR: 'CFP_DIONEWAR',
+                CFP_DJILOR_SALOUM: 'CFP_DJILOR_SALOUM',
+                CFP_FAOYE: 'CFP_FAOYE',
+                CFP_FOUNDIOUGNE: 'CFP_FOUNDIOUGNE',
+                CFP_LOUL_SESSENE: 'CFP_LOUL_SESSENE',
+                CFP_NIAKHAR: 'CFP_NIAKHAR',
+                CFP_GOSSAS: 'CFP_GOSSAS',
+                CFP_TOUCAR: 'CFP_TOUCAR',
+                CFP_SOKONE: 'CFP_SOKONE',
+                CFP_DIAKHAO: 'CFP_DIAKHAO',
+                CFP_KAOLACK: 'CFP_KAOLACK',
+                CFP_MBADAKHOUNE: 'CFP_MBADAKHOUNE',
+                CFP_GUINGUINEO: 'CFP_GUINGUINEO',
+                CFP_NIORO: 'CFP_NIORO',
+                CFP_POROKHANE: 'CFP_POROKHANE',
+                CFP_BAKEL2: 'CFP_BAKEL2',
+                CFP_FORAMECA: 'CFP_FORAMECA',
+                CFP_KIDIRA: 'CFP_KIDIRA',
+                CFP_VELINGARA: 'CFP_VELINGARA',
+                CFP_TAMBA: 'CFP_TAMBA',
+                CFP_BAKEL1: 'CFP_BAKEL1',
+                MEDINA_GOUNASS: 'MEDINA_GOUNASS',
+                CFP_GOUDIRY: 'CFP_GOUDIRY',
+                CFP_KEDOUGOU: 'CFP_KEDOUGOU',
+                CFP_SALEMATA: 'CFP_SALEMATA',
+                CFP_KOLDA: 'CFP_KOLDA',
+                CFP_DABO: 'CFP_DABO',
+                CFP_KOUNKANE: 'CFP_KOUNKANE',
+                CFP_MEDINA_YORO_FOULAH: 'CFP_MEDINA_YORO_FOULAH',
+                CFP_SARE_YOBA: 'CFP_SARE_YOBA',
+                CRFP_KOLDA: 'CRFP_KOLDA',
+                CFP_SEDHIOU: 'CFP_SEDHIOU',
+                CPAR_SEDHIOU: 'CPAR_SEDHIOU',
+                CENTRE_REFERENCE_SEDHIOU: 'CENTRE_REFERENCE_SEDHIOU',
+                CENTRE_REFERENCE_BOUNKILING: 'CENTRE_REFERENCE_BOUNKILING',
+                CRFP_ZIGUINCHOR: 'CRFP_ZIGUINCHOR',
+                CFP_ABENE: 'CFP_ABENE',
+                CFP_BAILA: 'CFP_BAILA',
+                CFP_SAINT_MARC: 'CFP_SAINT_MARC',
+                ALBADAR: 'ALBADAR',
+                CFP_SINDIAN: 'CFP_SINDIAN',
+                CFP_TENDOUCK: 'CFP_TENDOUCK',
+                CFP_BIGNONA: 'CFP_BIGNONA',
+                CFP_COUBANAO: 'CFP_COUBANAO',
+                CFP_ZIGUINCHOR: 'CFP_ZIGUINCHOR',
+                CFP_FANDA: 'CFP_FANDA',
+                CFP_OUSSOUYE: 'CFP_OUSSOUYE',
+                CFP_KAFFRINE: 'CFP_KAFFRINE',
+                CFP_BIRKELANE: 'CFP_BIRKELANE'
+              }[etablissement()!.cfp ?? 'null']
+            }}</span>
+          </dd>
+          <dt><span jhiTranslate="gdf1App.etablissement.lycee">Lycee</span></dt>
+          <dd>
+            <span [jhiTranslate]="'gdf1App.LYCEE.' + (etablissement()!.lycee ?? 'null')">{{
+              {
+                null: '',
+                LTID_DAKAR: 'LTID_DAKAR',
+                LTCD_DAKAR: 'LTCD_DAKAR',
+                LTSLL_DAKAR: 'LTSLL_DAKAR',
+                LTPFXN_THIES: 'LTPFXN_THIES',
+                LTAP_SAINT_LOUIS: 'LTAP_SAINT_LOUIS',
+                LT_FATICK: 'LT_FATICK',
+                LTCAN_KAOLACK: 'LTCAN_KAOLACK',
+                LETFP_TAMBA: 'LETFP_TAMBA',
+                LTIM_KEDOUGOU: 'LTIM_KEDOUGOU',
+                LEFP_KOLDA: 'LEFP_KOLDA',
+                LTAEB_BIGNONA: 'LTAEB_BIGNONA',
+                LTAB_DIOURBEL: 'LTAB_DIOURBEL'
+              }[etablissement()!.lycee ?? 'null']
+            }}</span>
+          </dd>
+          <dt><span jhiTranslate="gdf1App.etablissement.filiere">Filiere</span></dt>
+          <dd>
+            <span [jhiTranslate]="'gdf1App.NomFiliere.' + (etablissement()!.filiere ?? 'null')">{{
+              {
+                null: '',
+                AGRI_ELEVAGE: 'AGRI_ELEVAGE',
+                AGRICULTURE: 'AGRICULTURE',
+                PECHE: 'PECHE',
+                ELEVAGE: 'ELEVAGE',
+                MINE_CARRIERES: 'MINE_CARRIERES',
+                ARTISANAT: 'ARTISANAT',
+                BATIMAT_TRAVAUX_PUBLIQUES: 'BATIMAT_TRAVAUX_PUBLIQUES',
+                MECANIQUE: 'MECANIQUE',
+                MENUISERIE_BOIS: 'MENUISERIE_BOIS',
+                HABILLEMENT: 'HABILLEMENT',
+                AGROALIMENTAIRE: 'AGROALIMENTAIRE',
+                ELECTROTECHNIQUE_ELECTRIQUE_ENERGETIQUE: 'ELECTROTECHNIQUE_ELECTRIQUE_ENERGETIQUE',
+                HYDRAULIQUE: 'HYDRAULIQUE',
+                STRUCTURE_METALLIQUE: 'STRUCTURE_METALLIQUE',
+                STRUCTURE_PLASTIQUE: 'STRUCTURE_PLASTIQUE',
+                BEAUTE_ESTHETIQUE: 'BEAUTE_ESTHETIQUE',
+                DEVELOPPEMENT_TERRITORIAL: 'DEVELOPPEMENT_TERRITORIAL',
+                DROIT: 'DROIT',
+                ECONOMIE_GESTION_COMMERCE_LOGISTIQUE: 'ECONOMIE_GESTION_COMMERCE_LOGISTIQUE',
+                INSDUSTRIE_CULTURELLE_ET_CREATIVE: 'INSDUSTRIE_CULTURELLE_ET_CREATIVE',
+                INFORMATIQUE_ET_NUMERIQUE: 'INFORMATIQUE_ET_NUMERIQUE',
+                RESTAURATION_ET_HOTELLORIE: 'RESTAURATION_ET_HOTELLORIE',
+                SANTE_BIOLOGIE_CHIMIE: 'SANTE_BIOLOGIE_CHIMIE',
+                SPORT: 'SPORT',
+                TOURISME: 'TOURISME',
+                ENVIRONNEMENT: 'ENVIRONNEMENT',
+                AUTRES: 'AUTRES'
+              }[etablissement()!.filiere ?? 'null']
+            }}</span>
+          </dd>
+          <dt><span jhiTranslate="gdf1App.etablissement.serie">Serie</span></dt>
+          <dd>
+            <span [jhiTranslate]="'gdf1App.NomSerie.' + (etablissement()!.serie ?? 'null')">{{
+              { null: '', STEG: 'STEG', STIDD_M: 'STIDD_M', STIDD_E: 'STIDD_E', S3: 'S3', S4: 'S4', S5: 'S5', F6: 'F6', AUTRES: 'AUTRES' }[
+                etablissement()!.serie ?? 'null'
+              ]
+            }}</span>
+          </dd>
+          <dt><span jhiTranslate="gdf1App.etablissement.autreFiliere">Autre Filiere</span></dt>
+          <dd>
+            <span>{{ etablissement()!.autreFiliere }}</span>
+          </dd>
+          <dt><span jhiTranslate="gdf1App.etablissement.autreSerie">Autre Serie</span></dt>
+          <dd>
+            <span>{{ etablissement()!.autreSerie }}</span>
+          </dd>
+          <dt><span jhiTranslate="gdf1App.etablissement.autreNomEtablissement">Autre Nom Etablissement</span></dt>
+          <dd>
+            <span>{{ etablissement()!.autreNomEtablissement }}</span>
+          </dd>
+          <dt><span jhiTranslate="gdf1App.etablissement.formation">Formation</span></dt>
+          <dd>
+            @for (formation of etablissement()!.formations; track $index; let last = $last) {
+              <span>
+                <a [routerLink]="['/formation', formation.id, 'view']">{{ formation?.id }}</a
+                >{{ last ? '' : ', ' }}
+              </span>
+            }
+          </dd>
+        </dl>
+
+        <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+          <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Retour</span>
+        </button>
+
+        <button type="button" [routerLink]="['/etablissement', etablissement()!.id, 'edit']" class="btn btn-primary">
+          <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Editer</span>
+        </button>
+      </div>
+    }
+  </div>
+</div>

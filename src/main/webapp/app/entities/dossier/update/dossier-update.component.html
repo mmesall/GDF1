@@ -1,0 +1,635 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    <form name="editForm" novalidate (ngSubmit)="save()" [formGroup]="editForm">
+      <h2 id="jhi-dossier-heading" data-cy="DossierCreateUpdateHeading" jhiTranslate="gdf1App.dossier.home.createOrEditLabel">
+        Créer ou éditer un Dossier
+      </h2>
+
+      <div>
+        <jhi-alert-error></jhi-alert-error>
+
+        @if (editForm.controls.id.value !== null) {
+          <div class="mb-3">
+            <label class="form-label" for="field_id" jhiTranslate="gdf1App.dossier.id">ID</label>
+            <input type="number" class="form-control" name="id" id="field_id" data-cy="id" formControlName="id" [readonly]="true" />
+          </div>
+        }
+
+        <div class="mb-3">
+          <label class="form-label" for="field_numDossier" jhiTranslate="gdf1App.dossier.numDossier">Num Dossier</label>
+          <input
+            type="text"
+            class="form-control"
+            name="numDossier"
+            id="field_numDossier"
+            data-cy="numDossier"
+            formControlName="numDossier"
+          />
+          @if (editForm.get('numDossier')!.invalid && (editForm.get('numDossier')!.dirty || editForm.get('numDossier')!.touched)) {
+            <div></div>
+          }
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_prenom" jhiTranslate="gdf1App.dossier.prenom">Prenom</label>
+          <input type="text" class="form-control" name="prenom" id="field_prenom" data-cy="prenom" formControlName="prenom" />
+          @if (editForm.get('prenom')!.invalid && (editForm.get('prenom')!.dirty || editForm.get('prenom')!.touched)) {
+            <div>
+              @if (editForm.get('prenom')?.errors?.required) {
+                <small class="form-text text-danger" jhiTranslate="entity.validation.required">Ce champ est obligatoire.</small>
+              }
+            </div>
+          }
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_nom" jhiTranslate="gdf1App.dossier.nom">Nom</label>
+          <input type="text" class="form-control" name="nom" id="field_nom" data-cy="nom" formControlName="nom" />
+          @if (editForm.get('nom')!.invalid && (editForm.get('nom')!.dirty || editForm.get('nom')!.touched)) {
+            <div>
+              @if (editForm.get('nom')?.errors?.required) {
+                <small class="form-text text-danger" jhiTranslate="entity.validation.required">Ce champ est obligatoire.</small>
+              }
+            </div>
+          }
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_nomUtilisateur" jhiTranslate="gdf1App.dossier.nomUtilisateur">Nom Utilisateur</label>
+          <input
+            type="text"
+            class="form-control"
+            name="nomUtilisateur"
+            id="field_nomUtilisateur"
+            data-cy="nomUtilisateur"
+            formControlName="nomUtilisateur"
+          />
+          @if (
+            editForm.get('nomUtilisateur')!.invalid && (editForm.get('nomUtilisateur')!.dirty || editForm.get('nomUtilisateur')!.touched)
+          ) {
+            <div></div>
+          }
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_dateNaiss" jhiTranslate="gdf1App.dossier.dateNaiss">Date Naiss</label>
+          <div class="input-group">
+            <input
+              id="field_dateNaiss"
+              data-cy="dateNaiss"
+              type="text"
+              class="form-control"
+              name="dateNaiss"
+              ngbDatepicker
+              #dateNaissDp="ngbDatepicker"
+              formControlName="dateNaiss"
+            />
+            <button type="button" class="btn btn-secondary" (click)="dateNaissDp.toggle()"><fa-icon icon="calendar-alt"></fa-icon></button>
+          </div>
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_lieuNaiss" jhiTranslate="gdf1App.dossier.lieuNaiss">Lieu Naiss</label>
+          <input type="text" class="form-control" name="lieuNaiss" id="field_lieuNaiss" data-cy="lieuNaiss" formControlName="lieuNaiss" />
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_regionNaiss" jhiTranslate="gdf1App.dossier.regionNaiss">Region Naiss</label>
+          <select class="form-control" name="regionNaiss" formControlName="regionNaiss" id="field_regionNaiss" data-cy="regionNaiss">
+            <option [ngValue]="null">{{ 'gdf1App.NomRegion.null' | translate }}</option>
+            @for (nomRegion of nomRegionValues; track $index) {
+              <option [value]="nomRegion">{{ 'gdf1App.NomRegion.' + nomRegion | translate }}</option>
+            }
+          </select>
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_departementNaiss" jhiTranslate="gdf1App.dossier.departementNaiss">Departement Naiss</label>
+          <select
+            class="form-control"
+            name="departementNaiss"
+            formControlName="departementNaiss"
+            id="field_departementNaiss"
+            data-cy="departementNaiss"
+          >
+            <option [ngValue]="null">{{ 'gdf1App.NomDepartement.null' | translate }}</option>
+            @for (nomDepartement of nomDepartementValues; track $index) {
+              <option [value]="nomDepartement">{{ 'gdf1App.NomDepartement.' + nomDepartement | translate }}</option>
+            }
+          </select>
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_typePiece" jhiTranslate="gdf1App.dossier.typePiece">Type Piece</label>
+          <select class="form-control" name="typePiece" formControlName="typePiece" id="field_typePiece" data-cy="typePiece">
+            <option [ngValue]="null">{{ 'gdf1App.TypePiece.null' | translate }}</option>
+            @for (typePiece of typePieceValues; track $index) {
+              <option [value]="typePiece">{{ 'gdf1App.TypePiece.' + typePiece | translate }}</option>
+            }
+          </select>
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_numeroPiece" jhiTranslate="gdf1App.dossier.numeroPiece">Numero Piece</label>
+          <input
+            type="number"
+            class="form-control"
+            name="numeroPiece"
+            id="field_numeroPiece"
+            data-cy="numeroPiece"
+            formControlName="numeroPiece"
+          />
+          @if (editForm.get('numeroPiece')!.invalid && (editForm.get('numeroPiece')!.dirty || editForm.get('numeroPiece')!.touched)) {
+            <div>
+              <small
+                class="form-text text-danger"
+                [hidden]="!editForm.get('numeroPiece')?.errors?.number"
+                jhiTranslate="entity.validation.number"
+                >Ce champ doit être un nombre.</small
+              >
+            </div>
+          }
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_sexe" jhiTranslate="gdf1App.dossier.sexe">Sexe</label>
+          <select class="form-control" name="sexe" formControlName="sexe" id="field_sexe" data-cy="sexe">
+            <option [ngValue]="null">{{ 'gdf1App.Sexe.null' | translate }}</option>
+            @for (sexe of sexeValues; track $index) {
+              <option [value]="sexe">{{ 'gdf1App.Sexe.' + sexe | translate }}</option>
+            }
+          </select>
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_regionResidence" jhiTranslate="gdf1App.dossier.regionResidence">Region Residence</label>
+          <select
+            class="form-control"
+            name="regionResidence"
+            formControlName="regionResidence"
+            id="field_regionResidence"
+            data-cy="regionResidence"
+          >
+            <option [ngValue]="null">{{ 'gdf1App.NomRegion.null' | translate }}</option>
+            @for (nomRegion of nomRegionValues; track $index) {
+              <option [value]="nomRegion">{{ 'gdf1App.NomRegion.' + nomRegion | translate }}</option>
+            }
+          </select>
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_depResidence" jhiTranslate="gdf1App.dossier.depResidence">Dep Residence</label>
+          <select class="form-control" name="depResidence" formControlName="depResidence" id="field_depResidence" data-cy="depResidence">
+            <option [ngValue]="null">{{ 'gdf1App.NomDepartement.null' | translate }}</option>
+            @for (nomDepartement of nomDepartementValues; track $index) {
+              <option [value]="nomDepartement">{{ 'gdf1App.NomDepartement.' + nomDepartement | translate }}</option>
+            }
+          </select>
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_adresseResidence" jhiTranslate="gdf1App.dossier.adresseResidence">Adresse Residence</label>
+          <input
+            type="text"
+            class="form-control"
+            name="adresseResidence"
+            id="field_adresseResidence"
+            data-cy="adresseResidence"
+            formControlName="adresseResidence"
+          />
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_telephone1" jhiTranslate="gdf1App.dossier.telephone1">Telephone 1</label>
+          <input
+            type="text"
+            class="form-control"
+            name="telephone1"
+            id="field_telephone1"
+            data-cy="telephone1"
+            formControlName="telephone1"
+          />
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_telephone2" jhiTranslate="gdf1App.dossier.telephone2">Telephone 2</label>
+          <input
+            type="text"
+            class="form-control"
+            name="telephone2"
+            id="field_telephone2"
+            data-cy="telephone2"
+            formControlName="telephone2"
+          />
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_email" jhiTranslate="gdf1App.dossier.email">Email</label>
+          <input type="text" class="form-control" name="email" id="field_email" data-cy="email" formControlName="email" />
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_niveauFormation" jhiTranslate="gdf1App.dossier.niveauFormation">Niveau Formation</label>
+          <select
+            class="form-control"
+            name="niveauFormation"
+            formControlName="niveauFormation"
+            id="field_niveauFormation"
+            data-cy="niveauFormation"
+          >
+            <option [ngValue]="null">{{ 'gdf1App.NiveauEtude.null' | translate }}</option>
+            @for (niveauEtude of niveauEtudeValues; track $index) {
+              <option [value]="niveauEtude">{{ 'gdf1App.NiveauEtude.' + niveauEtude | translate }}</option>
+            }
+          </select>
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_specialite" jhiTranslate="gdf1App.dossier.specialite">Specialite</label>
+          <select class="form-control" name="specialite" formControlName="specialite" id="field_specialite" data-cy="specialite">
+            <option [ngValue]="null">{{ 'gdf1App.NomFiliere.null' | translate }}</option>
+            @for (nomFiliere of nomFiliereValues; track $index) {
+              <option [value]="nomFiliere">{{ 'gdf1App.NomFiliere.' + nomFiliere | translate }}</option>
+            }
+          </select>
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_intituleDiplome" jhiTranslate="gdf1App.dossier.intituleDiplome">Intitule Diplome</label>
+          <input
+            type="text"
+            class="form-control"
+            name="intituleDiplome"
+            id="field_intituleDiplome"
+            data-cy="intituleDiplome"
+            formControlName="intituleDiplome"
+          />
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_diplome" jhiTranslate="gdf1App.dossier.diplome">Diplome</label>
+          <div>
+            @if (editForm.get('diplome')!.value) {
+              <div class="form-text text-danger clearfix">
+                <a
+                  class="pull-start"
+                  (click)="openFile(editForm.get('diplome')!.value!, editForm.get('diplomeContentType')!.value!)"
+                  jhiTranslate="entity.action.open"
+                  >Ouvrir</a
+                ><br />
+                <span class="pull-start"
+                  >{{ editForm.get('diplomeContentType')!.value }}, {{ byteSize(editForm.get('diplome')!.value!) }}</span
+                >
+                <button
+                  type="button"
+                  (click)="editForm.patchValue({ diplome: undefined, diplomeContentType: undefined })"
+                  class="btn btn-secondary btn-xs pull-end"
+                >
+                  <fa-icon icon="times"></fa-icon>
+                </button>
+              </div>
+            }
+            <input
+              type="file"
+              id="file_diplome"
+              data-cy="diplome"
+              (change)="setFileData($event, 'diplome', false)"
+              jhiTranslate="entity.action.addblob"
+            />
+          </div>
+          <input type="hidden" class="form-control" name="diplome" id="field_diplome" data-cy="diplome" formControlName="diplome" />
+          <input
+            type="hidden"
+            class="form-control"
+            name="diplomeContentType"
+            id="field_diplomeContentType"
+            formControlName="diplomeContentType"
+          />
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_anneeObtention" jhiTranslate="gdf1App.dossier.anneeObtention">Annee Obtention</label>
+          <div class="input-group">
+            <input
+              id="field_anneeObtention"
+              data-cy="anneeObtention"
+              type="text"
+              class="form-control"
+              name="anneeObtention"
+              ngbDatepicker
+              #anneeObtentionDp="ngbDatepicker"
+              formControlName="anneeObtention"
+            />
+            <button type="button" class="btn btn-secondary" (click)="anneeObtentionDp.toggle()">
+              <fa-icon icon="calendar-alt"></fa-icon>
+            </button>
+          </div>
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_lieuObtention" jhiTranslate="gdf1App.dossier.lieuObtention">Lieu Obtention</label>
+          <input
+            type="text"
+            class="form-control"
+            name="lieuObtention"
+            id="field_lieuObtention"
+            data-cy="lieuObtention"
+            formControlName="lieuObtention"
+          />
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_cv" jhiTranslate="gdf1App.dossier.cv">Cv</label>
+          <div>
+            @if (editForm.get('cv')!.value) {
+              <div class="form-text text-danger clearfix">
+                <a
+                  class="pull-start"
+                  (click)="openFile(editForm.get('cv')!.value!, editForm.get('cvContentType')!.value!)"
+                  jhiTranslate="entity.action.open"
+                  >Ouvrir</a
+                ><br />
+                <span class="pull-start">{{ editForm.get('cvContentType')!.value }}, {{ byteSize(editForm.get('cv')!.value!) }}</span>
+                <button
+                  type="button"
+                  (click)="editForm.patchValue({ cv: undefined, cvContentType: undefined })"
+                  class="btn btn-secondary btn-xs pull-end"
+                >
+                  <fa-icon icon="times"></fa-icon>
+                </button>
+              </div>
+            }
+            <input type="file" id="file_cv" data-cy="cv" (change)="setFileData($event, 'cv', false)" jhiTranslate="entity.action.addblob" />
+          </div>
+          <input type="hidden" class="form-control" name="cv" id="field_cv" data-cy="cv" formControlName="cv" />
+          <input type="hidden" class="form-control" name="cvContentType" id="field_cvContentType" formControlName="cvContentType" />
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_lettreMotivation" jhiTranslate="gdf1App.dossier.lettreMotivation">Lettre Motivation</label>
+          <div>
+            @if (editForm.get('lettreMotivation')!.value) {
+              <div class="form-text text-danger clearfix">
+                <a
+                  class="pull-start"
+                  (click)="openFile(editForm.get('lettreMotivation')!.value!, editForm.get('lettreMotivationContentType')!.value!)"
+                  jhiTranslate="entity.action.open"
+                  >Ouvrir</a
+                ><br />
+                <span class="pull-start"
+                  >{{ editForm.get('lettreMotivationContentType')!.value }}, {{ byteSize(editForm.get('lettreMotivation')!.value!) }}</span
+                >
+                <button
+                  type="button"
+                  (click)="editForm.patchValue({ lettreMotivation: undefined, lettreMotivationContentType: undefined })"
+                  class="btn btn-secondary btn-xs pull-end"
+                >
+                  <fa-icon icon="times"></fa-icon>
+                </button>
+              </div>
+            }
+            <input
+              type="file"
+              id="file_lettreMotivation"
+              data-cy="lettreMotivation"
+              (change)="setFileData($event, 'lettreMotivation', false)"
+              jhiTranslate="entity.action.addblob"
+            />
+          </div>
+          <input
+            type="hidden"
+            class="form-control"
+            name="lettreMotivation"
+            id="field_lettreMotivation"
+            data-cy="lettreMotivation"
+            formControlName="lettreMotivation"
+          />
+          <input
+            type="hidden"
+            class="form-control"
+            name="lettreMotivationContentType"
+            id="field_lettreMotivationContentType"
+            formControlName="lettreMotivationContentType"
+          />
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_profession" jhiTranslate="gdf1App.dossier.profession">Profession</label>
+          <input
+            type="text"
+            class="form-control"
+            name="profession"
+            id="field_profession"
+            data-cy="profession"
+            formControlName="profession"
+          />
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_autreSpecialite" jhiTranslate="gdf1App.dossier.autreSpecialite">Autre Specialite</label>
+          <input
+            type="text"
+            class="form-control"
+            name="autreSpecialite"
+            id="field_autreSpecialite"
+            data-cy="autreSpecialite"
+            formControlName="autreSpecialite"
+          />
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_nomCompetence" jhiTranslate="gdf1App.dossier.nomCompetence">Nom Competence</label>
+          <input
+            type="text"
+            class="form-control"
+            name="nomCompetence"
+            id="field_nomCompetence"
+            data-cy="nomCompetence"
+            formControlName="nomCompetence"
+          />
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_niveauCompetence" jhiTranslate="gdf1App.dossier.niveauCompetence">Niveau Competence</label>
+          <select
+            class="form-control"
+            name="niveauCompetence"
+            formControlName="niveauCompetence"
+            id="field_niveauCompetence"
+            data-cy="niveauCompetence"
+          >
+            <option [ngValue]="null">{{ 'gdf1App.NIVEAUCOMP.null' | translate }}</option>
+            @for (nIVEAUCOMP of nIVEAUCOMPValues; track $index) {
+              <option [value]="nIVEAUCOMP">{{ 'gdf1App.NIVEAUCOMP.' + nIVEAUCOMP | translate }}</option>
+            }
+          </select>
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_intituleExperience" jhiTranslate="gdf1App.dossier.intituleExperience"
+            >Intitule Experience</label
+          >
+          <input
+            type="text"
+            class="form-control"
+            name="intituleExperience"
+            id="field_intituleExperience"
+            data-cy="intituleExperience"
+            formControlName="intituleExperience"
+          />
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_posteOccupe" jhiTranslate="gdf1App.dossier.posteOccupe">Poste Occupe</label>
+          <input
+            type="text"
+            class="form-control"
+            name="posteOccupe"
+            id="field_posteOccupe"
+            data-cy="posteOccupe"
+            formControlName="posteOccupe"
+          />
+          @if (editForm.get('posteOccupe')!.invalid && (editForm.get('posteOccupe')!.dirty || editForm.get('posteOccupe')!.touched)) {
+            <div>
+              @if (editForm.get('posteOccupe')?.errors?.required) {
+                <small class="form-text text-danger" jhiTranslate="entity.validation.required">Ce champ est obligatoire.</small>
+              }
+            </div>
+          }
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_dateDebut" jhiTranslate="gdf1App.dossier.dateDebut">Date Debut</label>
+          <div class="input-group">
+            <input
+              id="field_dateDebut"
+              data-cy="dateDebut"
+              type="text"
+              class="form-control"
+              name="dateDebut"
+              ngbDatepicker
+              #dateDebutDp="ngbDatepicker"
+              formControlName="dateDebut"
+            />
+            <button type="button" class="btn btn-secondary" (click)="dateDebutDp.toggle()"><fa-icon icon="calendar-alt"></fa-icon></button>
+          </div>
+          @if (editForm.get('dateDebut')!.invalid && (editForm.get('dateDebut')!.dirty || editForm.get('dateDebut')!.touched)) {
+            <div>
+              @if (editForm.get('dateDebut')?.errors?.required) {
+                <small class="form-text text-danger" jhiTranslate="entity.validation.required">Ce champ est obligatoire.</small>
+              }
+            </div>
+          }
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_dateFin" jhiTranslate="gdf1App.dossier.dateFin">Date Fin</label>
+          <div class="input-group">
+            <input
+              id="field_dateFin"
+              data-cy="dateFin"
+              type="text"
+              class="form-control"
+              name="dateFin"
+              ngbDatepicker
+              #dateFinDp="ngbDatepicker"
+              formControlName="dateFin"
+            />
+            <button type="button" class="btn btn-secondary" (click)="dateFinDp.toggle()"><fa-icon icon="calendar-alt"></fa-icon></button>
+          </div>
+          @if (editForm.get('dateFin')!.invalid && (editForm.get('dateFin')!.dirty || editForm.get('dateFin')!.touched)) {
+            <div>
+              @if (editForm.get('dateFin')?.errors?.required) {
+                <small class="form-text text-danger" jhiTranslate="entity.validation.required">Ce champ est obligatoire.</small>
+              }
+            </div>
+          }
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_nomEntreprise" jhiTranslate="gdf1App.dossier.nomEntreprise">Nom Entreprise</label>
+          <input
+            type="text"
+            class="form-control"
+            name="nomEntreprise"
+            id="field_nomEntreprise"
+            data-cy="nomEntreprise"
+            formControlName="nomEntreprise"
+          />
+          @if (editForm.get('nomEntreprise')!.invalid && (editForm.get('nomEntreprise')!.dirty || editForm.get('nomEntreprise')!.touched)) {
+            <div>
+              @if (editForm.get('nomEntreprise')?.errors?.required) {
+                <small class="form-text text-danger" jhiTranslate="entity.validation.required">Ce champ est obligatoire.</small>
+              }
+            </div>
+          }
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_mission" jhiTranslate="gdf1App.dossier.mission">Mission</label>
+          <textarea class="form-control" name="mission" id="field_mission" data-cy="mission" formControlName="mission"></textarea>
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_eleve" jhiTranslate="gdf1App.dossier.eleve">Eleve</label>
+          <select class="form-control" id="field_eleve" data-cy="eleve" name="eleve" formControlName="eleve" [compareWith]="compareEleve">
+            <option [ngValue]="null"></option>
+            @for (eleveOption of elevesCollection; track $index) {
+              <option [ngValue]="eleveOption">{{ eleveOption.niveauEtude }}</option>
+            }
+          </select>
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_etudiant" jhiTranslate="gdf1App.dossier.etudiant">Etudiant</label>
+          <select
+            class="form-control"
+            id="field_etudiant"
+            data-cy="etudiant"
+            name="etudiant"
+            formControlName="etudiant"
+            [compareWith]="compareEtudiant"
+          >
+            <option [ngValue]="null"></option>
+            @for (etudiantOption of etudiantsCollection; track $index) {
+              <option [ngValue]="etudiantOption">{{ etudiantOption.carteEtudiant }}</option>
+            }
+          </select>
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_professionnel" jhiTranslate="gdf1App.dossier.professionnel">Professionnel</label>
+          <select
+            class="form-control"
+            id="field_professionnel"
+            data-cy="professionnel"
+            name="professionnel"
+            formControlName="professionnel"
+            [compareWith]="compareProfessionnel"
+          >
+            <option [ngValue]="null"></option>
+            @for (professionnelOption of professionnelsCollection; track $index) {
+              <option [ngValue]="professionnelOption">{{ professionnelOption.profession }}</option>
+            }
+          </select>
+        </div>
+      </div>
+
+      <div>
+        <button type="button" id="cancel-save" data-cy="entityCreateCancelButton" class="btn btn-secondary" (click)="previousState()">
+          <fa-icon icon="ban"></fa-icon>&nbsp;<span jhiTranslate="entity.action.cancel">Annuler</span>
+        </button>
+
+        <button
+          type="submit"
+          id="save-entity"
+          data-cy="entityCreateSaveButton"
+          [disabled]="editForm.invalid || isSaving"
+          class="btn btn-primary"
+        >
+          <fa-icon icon="save"></fa-icon>&nbsp;<span jhiTranslate="entity.action.save">Sauvegarder</span>
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

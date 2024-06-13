@@ -1,0 +1,63 @@
+{
+  "annotations": {
+    "changelogDate": "20240605154323"
+  },
+  "applications": "*",
+  "fields": [
+    {
+      "fieldName": "nomFormation",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "imageFormation",
+      "fieldType": "byte[]",
+      "fieldTypeBlobContent": "any"
+    },
+    {
+      "fieldName": "typeFormation",
+      "fieldType": "TypeFormation",
+      "fieldValues": "INITIALE,CONTINUE"
+    },
+    {
+      "fieldName": "duree",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "admission",
+      "fieldType": "Admission",
+      "fieldValues": "CONCOURS,PC"
+    },
+    {
+      "fieldName": "diplomeRequis",
+      "fieldType": "DiplomeRequis",
+      "fieldValues": "ATTESTATION,CAP,BT,DUR,DNBA,BEP,BTS,BFEM,BAC,LICENCE,MASTER,AUTRES"
+    },
+    {
+      "fieldName": "ficheFormation",
+      "fieldType": "byte[]",
+      "fieldTypeBlobContent": "any"
+    }
+  ],
+  "name": "Formation",
+  "pagination": "infinite-scroll",
+  "relationships": [
+    {
+      "otherEntityField": "nomEtablissement",
+      "otherEntityName": "etablissement",
+      "otherEntityRelationshipName": "formation",
+      "relationshipName": "etablissement",
+      "relationshipSide": "left",
+      "relationshipType": "many-to-many",
+      "relationshipValidateRules": "required"
+    },
+    {
+      "otherEntityName": "priseEnCharge",
+      "otherEntityRelationshipName": "formation",
+      "relationshipName": "priseEnCharge",
+      "relationshipSide": "right",
+      "relationshipType": "one-to-one"
+    }
+  ],
+  "searchEngine": "no",
+  "service": "serviceImpl"
+}

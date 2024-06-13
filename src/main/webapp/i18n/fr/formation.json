@@ -1,0 +1,35 @@
+{
+  "gdf1App": {
+    "formation": {
+      "home": {
+        "title": "Formations",
+        "refreshListLabel": "Actualiser la liste",
+        "createLabel": "Créer un nouveau Formation",
+        "createOrEditLabel": "Créer ou éditer un Formation",
+        "notFound": "Aucun Formation trouvé"
+      },
+      "created": "Un nouveau Formation a été créé avec l'identifiant {{ param }}",
+      "updated": "Le Formation avec l'identifiant {{ param }} a été mis à jour",
+      "deleted": "Le Formation avec l'identifiant {{ param }} a été supprimé",
+      "delete": {
+        "question": "Êtes-vous certain de vouloir supprimer le Formation {{ id }} ?"
+      },
+      "detail": {
+        "title": "Formation"
+      },
+      "id": "ID",
+      "nomFormation": "Nom Formation",
+      "imageFormation": "Image Formation",
+      "typeFormation": "Type Formation",
+      "duree": "Duree",
+      "admission": "Admission",
+      "diplomeRequis": "Diplome Requis",
+      "ficheFormation": "Fiche Formation",
+      "etablissement": "Etablissement",
+      "priseEnCharge": "Prise En Charge",
+      "formationInitiale": "Formation Initiale",
+      "formationContinue": "Formation Continue",
+      "concours": "Concours"
+    }
+  }
+}

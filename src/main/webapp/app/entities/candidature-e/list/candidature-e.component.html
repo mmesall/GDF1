@@ -1,0 +1,208 @@
+<div>
+  <h2 id="page-heading" data-cy="CandidatureEHeading">
+    <span>Liste des candidature pour Eléve/Etudiant</span>
+
+    <div class="d-flex justify-content-end">
+      <button
+        id="jh-create-entity"
+        data-cy="entityCreateButton"
+        class="btn btn-primary jh-create-entity create-candidature-e"
+        [routerLink]="['/candidature-e/new']"
+      >
+        <fa-icon icon="plus"></fa-icon>
+        <span>Créer un nouvelle CandidatureE</span>
+      </button>
+    </div>
+  </h2>
+
+  <jhi-alert-error></jhi-alert-error>
+
+  <jhi-alert></jhi-alert>
+
+  @if (candidatureES?.length === 0) {
+    <div class="alert alert-warning" id="no-result">
+      <span>Aucune Candidature E trouvée</span>
+    </div>
+  }
+
+  @if (candidatureES && candidatureES.length > 0) {
+    <div class="table-responsive table-entities" id="entities">
+      <table class="table table-striped" aria-describedby="page-heading">
+        <thead>
+          <tr jhiSort [sortState]="sortState" (sortChange)="navigateToWithComponentValues($event)">
+            <!-- <th scope="col" jhiSortBy="id">
+              <div class="d-flex">
+                <span jhiTranslate="global.field.id">ID</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th> -->
+            <th scope="col" jhiSortBy="offreFormation">
+              <div class="d-flex">
+                <span>Offre Formation</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="dateDebutOffre">
+              <div class="d-flex">
+                <span>Date début</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="dateFinOffre">
+              <div class="d-flex">
+                <span>Date fine</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="dateDepot">
+              <div class="d-flex">
+                <span>Date dépot</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th *jhiHasAnyAuthority="'ROLE_ADMIN'" scope="col" jhiSortBy="resultat">
+              <div class="d-flex">
+                <span jhiTranslate="gdf1App.candidatureE.resultat">Resultat</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="eleve.niveauEtude">
+              <div class="d-flex">
+                <span>Niveau d'étude</span>
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <!-- <th scope="col" jhiSortBy="etudiant.carteEtudiant">
+              <div class="d-flex">
+                <span jhiTranslate="gdf1App.candidatureE.etudiant">Etudiant</span>
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th> -->
+            <th scope="col" jhiSortBy="formationInitiale.nomFormationI">
+              <div class="d-flex">
+                <span>Formation initiale</span>
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="etablissement.nomEtablissement">
+              <div class="d-flex">
+                <span>Etablissement</span>
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col"></th>
+          </tr>
+        </thead>
+        <tbody infinite-scroll (scrolled)="loadNextPage()" [infiniteScrollDisabled]="!hasMorePage()" [infiniteScrollDistance]="0">
+          @for (candidatureE of candidatureES; track trackId) {
+            <tr data-cy="entityTable">
+              <!-- <td>
+                <a [routerLink]="['/candidature-e', candidatureE.id, 'view']">{{ candidatureE.id }}</a>
+              </td> -->
+              <td [jhiTranslate]="'gdf1App.NomFiliere.' + (candidatureE.offreFormation ?? 'null')">
+                {{
+                  {
+                    null: '',
+                    AGRI_ELEVAGE: 'AGRI_ELEVAGE',
+                    AGRICULTURE: 'AGRICULTURE',
+                    PECHE: 'PECHE',
+                    ELEVAGE: 'ELEVAGE',
+                    MINE_CARRIERES: 'MINE_CARRIERES',
+                    ARTISANAT: 'ARTISANAT',
+                    BATIMAT_TRAVAUX_PUBLIQUES: 'BATIMAT_TRAVAUX_PUBLIQUES',
+                    MECANIQUE: 'MECANIQUE',
+                    MENUISERIE_BOIS: 'MENUISERIE_BOIS',
+                    HABILLEMENT: 'HABILLEMENT',
+                    AGROALIMENTAIRE: 'AGROALIMENTAIRE',
+                    ELECTROTECHNIQUE_ELECTRIQUE_ENERGETIQUE: 'ELECTROTECHNIQUE_ELECTRIQUE_ENERGETIQUE',
+                    HYDRAULIQUE: 'HYDRAULIQUE',
+                    STRUCTURE_METALLIQUE: 'STRUCTURE_METALLIQUE',
+                    STRUCTURE_PLASTIQUE: 'STRUCTURE_PLASTIQUE',
+                    BEAUTE_ESTHETIQUE: 'BEAUTE_ESTHETIQUE',
+                    DEVELOPPEMENT_TERRITORIAL: 'DEVELOPPEMENT_TERRITORIAL',
+                    DROIT: 'DROIT',
+                    ECONOMIE_GESTION_COMMERCE_LOGISTIQUE: 'ECONOMIE_GESTION_COMMERCE_LOGISTIQUE',
+                    INSDUSTRIE_CULTURELLE_ET_CREATIVE: 'INSDUSTRIE_CULTURELLE_ET_CREATIVE',
+                    INFORMATIQUE_ET_NUMERIQUE: 'INFORMATIQUE_ET_NUMERIQUE',
+                    RESTAURATION_ET_HOTELLORIE: 'RESTAURATION_ET_HOTELLORIE',
+                    SANTE_BIOLOGIE_CHIMIE: 'SANTE_BIOLOGIE_CHIMIE',
+                    SPORT: 'SPORT',
+                    TOURISME: 'TOURISME',
+                    ENVIRONNEMENT: 'ENVIRONNEMENT',
+                    AUTRES: 'AUTRES'
+                  }[candidatureE.offreFormation ?? 'null']
+                }}
+              </td>
+              <td>{{ candidatureE.dateDebutOffre | formatMediumDate }}</td>
+              <td>{{ candidatureE.dateFinOffre | formatMediumDate }}</td>
+              <td>{{ candidatureE.dateDepot | formatMediumDate }}</td>
+              <td *jhiHasAnyAuthority="'ROLE_ADMIN'" [jhiTranslate]="'gdf1App.Resultat.' + (candidatureE.resultat ?? 'null')">
+                {{
+                  { null: '', SOUMIS: 'SOUMIS', VALIDE: 'VALIDE', APPROUVE: 'APPROUVE', REJETE: 'REJETE' }[
+                    candidatureE.resultat ?? 'SOUMIS'
+                  ]
+                }}
+              </td>
+              <td>
+                @if (candidatureE.eleve) {
+                  <div>
+                    <a [routerLink]="['/eleve', candidatureE.eleve.id, 'view']">{{ candidatureE.eleve.niveauEtude }}</a>
+                  </div>
+                }
+              </td>
+              <!-- <td>
+                @if (candidatureE.etudiant) {
+                  <div>
+                    <a [routerLink]="['/etudiant', candidatureE.etudiant.id, 'view']">{{ candidatureE.etudiant.carteEtudiant }}</a>
+                  </div>
+                }
+              </td> -->
+              <td>
+                @if (candidatureE.formationInitiale) {
+                  <div>
+                    <a [routerLink]="['/formation-initiale', candidatureE.formationInitiale.id, 'view']">{{
+                      candidatureE.formationInitiale.nomFormationI
+                    }}</a>
+                  </div>
+                }
+              </td>
+              <td>
+                @if (candidatureE.etablissement) {
+                  <div>
+                    <a [routerLink]="['/etablissement', candidatureE.etablissement.id, 'view']">{{
+                      candidatureE.etablissement.nomEtablissement
+                    }}</a>
+                  </div>
+                }
+              </td>
+              <td class="text-end">
+                <div class="btn-group">
+                  <a [routerLink]="['/candidature-e', candidatureE.id, 'view']" class="btn btn-info btn-sm" data-cy="entityDetailsButton">
+                    <fa-icon icon="eye"></fa-icon>
+                    <span class="d-none d-md-inline" jhiTranslate="entity.action.view">Voir</span>
+                  </a>
+
+                  <a [routerLink]="['/candidature-e', candidatureE.id, 'edit']" class="btn btn-primary btn-sm" data-cy="entityEditButton">
+                    <fa-icon icon="pencil-alt"></fa-icon>
+                    <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Editer</span>
+                  </a>
+
+                  <button type="submit" (click)="delete(candidatureE)" class="btn btn-danger btn-sm" data-cy="entityDeleteButton">
+                    <fa-icon icon="times"></fa-icon>
+                    <span class="d-none d-md-inline" jhiTranslate="entity.action.delete">Supprimer</span>
+                  </button>
+                </div>
+              </td>
+            </tr>
+          }
+        </tbody>
+      </table>
+    </div>
+  }
+</div>

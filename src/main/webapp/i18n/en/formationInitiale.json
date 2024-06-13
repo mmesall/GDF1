@@ -1,0 +1,41 @@
+{
+  "gdf1App": {
+    "formationInitiale": {
+      "home": {
+        "title": "Formation Initiales",
+        "refreshListLabel": "Refresh list",
+        "createLabel": "Create a new Formation Initiale",
+        "createOrEditLabel": "Create or edit a Formation Initiale",
+        "notFound": "No Formation Initiales found"
+      },
+      "created": "A new Formation Initiale is created with identifier {{ param }}",
+      "updated": "A Formation Initiale is updated with identifier {{ param }}",
+      "deleted": "A Formation Initiale is deleted with identifier {{ param }}",
+      "delete": {
+        "question": "Are you sure you want to delete Formation Initiale {{ id }}?"
+      },
+      "detail": {
+        "title": "Formation Initiale"
+      },
+      "id": "ID",
+      "nomFormationI": "Nom Formation I",
+      "duree": "Duree",
+      "admission": "Admission",
+      "diplomeRequis": "Diplome Requis",
+      "niveauEtude": "Niveau Etude",
+      "ficheFormation": "Fiche Formation",
+      "filiere": "Filiere",
+      "serie": "Serie",
+      "cfp": "Cfp",
+      "lycee": "Lycee",
+      "nomConcours": "Nom Concours",
+      "dateOuverture": "Date Ouverture",
+      "dateCloture": "Date Cloture",
+      "dateConcours": "Date Concours",
+      "nomDiplome": "Nom Diplome",
+      "nomDebouche": "Nom Debouche",
+      "formation": "Formation",
+      "candidatureE": "Candidature E"
+    }
+  }
+}

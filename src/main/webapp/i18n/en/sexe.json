@@ -1,0 +1,9 @@
+{
+  "gdf1App": {
+    "Sexe": {
+      "null": "",
+      "HOMME": "HOMME",
+      "FEMME": "FEMME"
+    }
+  }
+}

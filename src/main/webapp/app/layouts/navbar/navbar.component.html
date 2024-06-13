@@ -1,9 +1,35 @@
-<nav data-cy="navbar" class="navbar navbar-dark navbar-expand-md bg-dark">
+<div class="container-fluid p-4" style="background-color: rgba(44, 43, 43, 0.05)">
+  <div class="row">
+    <div>
+      <!-- <img src="./../../../content/images/choix1.png"/> -->
+    </div>
+    <div class="col-md-6 d-flex flex-column justify-content-center align-items-start">
+      <p class="mb-1"><a href="mailto:contact&#64;mefpai.gouv.sn">contact&#64;mefpai.gouv.sn</a></p>
+      <p class="mb-1"><a href="tel:+221123456789">+221 123 456 789</a></p>
+    </div>
+    <div class="col-md-6 d-flex justify-content-center align-items-center">
+      <a href="https://facebook.com" class="text-reset me-3" target="_blank">
+        <i class="fab fa-facebook-f"></i>
+      </a>
+      <a href="https://twitter.com" class="text-reset me-3" target="_blank">
+        <i class="fab fa-twitter"></i>
+      </a>
+      <a href="https://linkedin.com" class="text-reset me-3" target="_blank">
+        <i class="fab fa-linkedin-in"></i>
+      </a>
+      <a href="https://instagram.com" class="text-reset me-3" target="_blank">
+        <i class="fab fa-instagram"></i>
+      </a>
+    </div>
+  </div>
+</div>
+
+<!-- ================================================================== -->
+<nav data-cy="navbar" class="navbar navbar-dark navbar-expand-md">
   <div class="container-fluid">
     <a class="navbar-brand logo" routerLink="/" (click)="collapseNavbar()">
       <span class="logo-img"></span>
-      <span class="navbar-title" jhiTranslate="global.title">Gdf1</span>
-      <span class="navbar-version">{{ version }}</span>
+      <span class="navbar-title">Guichet unique MFP</span>
     </a>
     <a
       class="navbar-toggler d-lg-none"
@@ -22,14 +48,68 @@
         <li class="nav-item" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">
           <a class="nav-link" routerLink="/" (click)="collapseNavbar()">
             <span>
-              <fa-icon icon="home"></fa-icon>
+              <!-- <fa-icon icon="home"></fa-icon> -->
               <span jhiTranslate="global.menu.home">Accueil</span>
             </span>
           </a>
         </li>
+
+        <li class="nav-item" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">
+          <a class="nav-link" routerLink="/etablissement" (click)="collapseNavbar()">
+            <!-- <fa-icon icon="asterisk" [fixedWidth]="true"></fa-icon> -->
+            <span jhiTranslate="global.menu.entities.etablissement">Etablissement</span>
+          </a>
+        </li>
+        <li
+          ngbDropdown
+          class="nav-item dropdown pointer"
+          display="dynamic"
+          routerLinkActive="active"
+          [routerLinkActiveOptions]="{ exact: true }"
+        >
+          <a class="nav-link dropdown-toggle" ngbDropdownToggle href="javascript:void(0);" id="entity-menu" data-cy="entity">
+            <span jhiTranslate="global.menu.entities.formation">Formation</span>
+          </a>
+          <ul class="dropdown-menu" ngbDropdownMenu aria-labelledby="entity-menu">
+            <li>
+              <a
+                class="dropdown-item"
+                routerLinkActive="active"
+                [routerLinkActiveOptions]="{ exact: true }"
+                routerLink="/formation-initiale"
+                (click)="collapseNavbar()"
+              >
+                <span>Formation initiale</span>
+              </a>
+            </li>
+            <li>
+              <a
+                class="dropdown-item"
+                routerLinkActive="active"
+                [routerLinkActiveOptions]="{ exact: true }"
+                routerLink="/formation-continue"
+                (click)="collapseNavbar()"
+              >
+                <span>Formation continue</span>
+              </a>
+            </li>
+          </ul>
+        </li>
+        <li class="nav-item" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">
+          <a class="nav-link" routerLink="/concours" (click)="collapseNavbar()">
+            <!-- <fa-icon icon="asterisk" [fixedWidth]="true"></fa-icon> -->
+            <span jhiTranslate="global.menu.entities.concours">Concours</span>
+          </a>
+        </li>
+        <li class="nav-item" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">
+          <a class="nav-link" routerLink="/prise-en-charge" (click)="collapseNavbar()">
+            <!-- <fa-icon icon="asterisk" [fixedWidth]="true"></fa-icon> -->
+            <span jhiTranslate="global.menu.entities.priseEnCharge">Prise En Charge</span>
+          </a>
+        </li>
         <!-- jhipster-needle-add-element-to-menu - JHipster will add new menu items here -->
         @if (account() !== null) {
-          <li
+          <!-- <li
             ngbDropdown
             class="nav-item dropdown pointer"
             display="dynamic"
@@ -43,9 +123,229 @@
               </span>
             </a>
             <ul class="dropdown-menu" ngbDropdownMenu aria-labelledby="entity-menu">
-              <!-- jhipster-needle-add-entity-to-menu - JHipster will add entities to the menu here -->
+              <li>
+                <a 
+                class="dropdown-item" 
+                routerLinkActive="active" 
+                [routerLinkActiveOptions]="{ exact: true }"
+                routerLink="/service-mfpai" 
+                (click)="collapseNavbar()"
+                >
+                  <fa-icon icon="asterisk" [fixedWidth]="true"></fa-icon>
+                  <span jhiTranslate="global.menu.entities.serviceMfpai">Direction/Service</span>
+                </a>
+              </li>
+
+              <li>
+                <a
+                  class="dropdown-item"
+                  routerLink="/formation"
+                  routerLinkActive="active"
+                  [routerLinkActiveOptions]="{ exact: true }"
+                  (click)="collapseNavbar()"
+                >
+                  <fa-icon icon="asterisk" [fixedWidth]="true"></fa-icon>
+                  <span jhiTranslate="global.menu.entities.formation">Formation</span>
+                </a>
+              </li>
+
+              <li>
+                <a
+                  class="dropdown-item"
+                  routerLink="/formation-initiale"
+                  routerLinkActive="active"
+                  [routerLinkActiveOptions]="{ exact: true }"
+                  (click)="collapseNavbar()"
+                >
+                  <fa-icon icon="asterisk" [fixedWidth]="true"></fa-icon>
+                  <span jhiTranslate="global.menu.entities.formationInitiale">Formation Initiale</span>
+                </a>
+              </li>
+
+              <li>
+                <a
+                  class="dropdown-item"
+                  routerLink="/formation-continue"
+                  routerLinkActive="active"
+                  [routerLinkActiveOptions]="{ exact: true }"
+                  (click)="collapseNavbar()"
+                >
+                  <fa-icon icon="asterisk" [fixedWidth]="true"></fa-icon>
+                  <span jhiTranslate="global.menu.entities.formationContinue">Formation Continue</span>
+                </a>
+              </li>
+
+              <li>
+                <a
+                  class="dropdown-item"
+                  routerLink="/concours"
+                  routerLinkActive="active"
+                  [routerLinkActiveOptions]="{ exact: true }"
+                  (click)="collapseNavbar()"
+                >
+                  <fa-icon icon="asterisk" [fixedWidth]="true"></fa-icon>
+                  <span jhiTranslate="global.menu.entities.concours">Concours</span>
+                </a>
+              </li>
+
+              <li>
+                <a
+                  class="dropdown-item"
+                  routerLink="/prise-en-charge"
+                  routerLinkActive="active"
+                  [routerLinkActiveOptions]="{ exact: true }"
+                  (click)="collapseNavbar()"
+                >
+                  <fa-icon icon="asterisk" [fixedWidth]="true"></fa-icon>
+                  <span jhiTranslate="global.menu.entities.priseEnCharge">Prise En Charge</span>
+                </a>
+              </li>
+
+              <li>
+                <a
+                  class="dropdown-item"
+                  routerLink="/bailleur"
+                  routerLinkActive="active"
+                  [routerLinkActiveOptions]="{ exact: true }"
+                  (click)="collapseNavbar()"
+                >
+                  <fa-icon icon="asterisk" [fixedWidth]="true"></fa-icon>
+                  <span jhiTranslate="global.menu.entities.bailleur">Bailleur</span>
+                </a>
+              </li>
+
+              <li>
+                <a
+                  class="dropdown-item"
+                  routerLink="/dossier"
+                  routerLinkActive="active"
+                  [routerLinkActiveOptions]="{ exact: true }"
+                  (click)="collapseNavbar()"
+                >
+                  <fa-icon icon="asterisk" [fixedWidth]="true"></fa-icon>
+                  <span jhiTranslate="global.menu.entities.dossier">Dossier</span>
+                </a>
+              </li>
+
+              <li>
+                <a
+                  class="dropdown-item"
+                  routerLink="/diplome"
+                  routerLinkActive="active"
+                  [routerLinkActiveOptions]="{ exact: true }"
+                  (click)="collapseNavbar()"
+                >
+                  <fa-icon icon="asterisk" [fixedWidth]="true"></fa-icon>
+                  <span jhiTranslate="global.menu.entities.diplome">Diplome</span>
+                </a>
+              </li>
+
+              <li>
+                <a
+                  class="dropdown-item"
+                  routerLink="/experience"
+                  routerLinkActive="active"
+                  [routerLinkActiveOptions]="{ exact: true }"
+                  (click)="collapseNavbar()"
+                >
+                  <fa-icon icon="asterisk" [fixedWidth]="true"></fa-icon>
+                  <span jhiTranslate="global.menu.entities.experience">Experience</span>
+                </a>
+              </li>
+
+              <li>
+                <a
+                  class="dropdown-item"
+                  routerLink="/candidature-e"
+                  routerLinkActive="active"
+                  [routerLinkActiveOptions]="{ exact: true }"
+                  (click)="collapseNavbar()"
+                >
+                  <fa-icon icon="asterisk" [fixedWidth]="true"></fa-icon>
+                  <span jhiTranslate="global.menu.entities.candidatureE">Candidature E</span>
+                </a>
+              </li>
+
+              <li>
+                <a
+                  class="dropdown-item"
+                  routerLink="/candidature-p"
+                  routerLinkActive="active"
+                  [routerLinkActiveOptions]="{ exact: true }"
+                  (click)="collapseNavbar()"
+                >
+                  <fa-icon icon="asterisk" [fixedWidth]="true"></fa-icon>
+                  <span jhiTranslate="global.menu.entities.candidatureP">Candidature P</span>
+                </a>
+              </li>
+
+              <li>
+                <a
+                  class="dropdown-item"
+                  routerLink="/demandeur"
+                  routerLinkActive="active"
+                  [routerLinkActiveOptions]="{ exact: true }"
+                  (click)="collapseNavbar()"
+                >
+                  <fa-icon icon="asterisk" [fixedWidth]="true"></fa-icon>
+                  <span jhiTranslate="global.menu.entities.demandeur">Demandeur</span>
+                </a>
+              </li>
+
+              <li>
+                <a
+                  class="dropdown-item"
+                  routerLink="/eleve"
+                  routerLinkActive="active"
+                  [routerLinkActiveOptions]="{ exact: true }"
+                  (click)="collapseNavbar()"
+                >
+                  <fa-icon icon="asterisk" [fixedWidth]="true"></fa-icon>
+                  <span jhiTranslate="global.menu.entities.eleve">Eleve</span>
+                </a>
+              </li>
+
+              <li>
+                <a
+                  class="dropdown-item"
+                  routerLink="/etudiant"
+                  routerLinkActive="active"
+                  [routerLinkActiveOptions]="{ exact: true }"
+                  (click)="collapseNavbar()"
+                >
+                  <fa-icon icon="asterisk" [fixedWidth]="true"></fa-icon>
+                  <span jhiTranslate="global.menu.entities.etudiant">Etudiant</span>
+                </a>
+              </li>
+
+              <li>
+                <a
+                  class="dropdown-item"
+                  routerLink="/professionnel"
+                  routerLinkActive="active"
+                  [routerLinkActiveOptions]="{ exact: true }"
+                  (click)="collapseNavbar()"
+                >
+                  <fa-icon icon="asterisk" [fixedWidth]="true"></fa-icon>
+                  <span jhiTranslate="global.menu.entities.professionnel">Professionnel</span>
+                </a>
+              </li>
+
+              <li>
+                <a
+                  class="dropdown-item"
+                  routerLink="/agent"
+                  routerLinkActive="active"
+                  [routerLinkActiveOptions]="{ exact: true }"
+                  (click)="collapseNavbar()"
+                >
+                  <fa-icon icon="asterisk" [fixedWidth]="true"></fa-icon>
+                  <span jhiTranslate="global.menu.entities.agent">Agent</span>
+                </a>
+              </li>
+             
             </ul>
-          </li>
+          </li> -->
         }
         <li
           *jhiHasAnyAuthority="'ROLE_ADMIN'"
@@ -116,7 +416,7 @@
           </ul>
         </li>
         @if (languages && languages.length > 1) {
-          <li ngbDropdown class="nav-item dropdown pointer" display="dynamic">
+          <!-- <li ngbDropdown class="nav-item dropdown pointer" display="dynamic">
             <a class="nav-link dropdown-toggle" ngbDropdownToggle href="javascript:void(0);" id="languagesnavBarDropdown">
               <span>
                 <fa-icon icon="flag"></fa-icon>
@@ -136,7 +436,7 @@
                 </li>
               }
             </ul>
-          </li>
+          </li> -->
         }
         <li
           ngbDropdown
@@ -149,7 +449,7 @@
             @if (!account()?.imageUrl) {
               <span>
                 <fa-icon icon="user"></fa-icon>
-                <span jhiTranslate="global.menu.account.main">Compte</span>
+                <!-- <span jhiTranslate="global.menu.account.main">Compte</span> -->
               </span>
             } @else {
               <span>

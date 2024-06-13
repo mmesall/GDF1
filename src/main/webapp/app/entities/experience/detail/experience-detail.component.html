@@ -1,0 +1,84 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    @if (experience()) {
+      <div>
+        <h2 data-cy="experienceDetailsHeading"><span jhiTranslate="gdf1App.experience.detail.title">Experience</span></h2>
+
+        <hr />
+
+        <jhi-alert-error></jhi-alert-error>
+
+        <jhi-alert></jhi-alert>
+
+        <dl class="row-md jh-entity-details">
+          <dt><span jhiTranslate="global.field.id">ID</span></dt>
+          <dd>
+            <span>{{ experience()!.id }}</span>
+          </dd>
+          <dt><span jhiTranslate="gdf1App.experience.dateDebut">Date Debut</span></dt>
+          <dd>
+            <span>{{ experience()!.dateDebut | formatMediumDate }}</span>
+          </dd>
+          <dt><span jhiTranslate="gdf1App.experience.dateFin">Date Fin</span></dt>
+          <dd>
+            <span>{{ experience()!.dateFin | formatMediumDate }}</span>
+          </dd>
+          <dt><span jhiTranslate="gdf1App.experience.nomEntreprise">Nom Entreprise</span></dt>
+          <dd>
+            <span>{{ experience()!.nomEntreprise }}</span>
+          </dd>
+          <dt><span jhiTranslate="gdf1App.experience.posteOccupe">Poste Occupe</span></dt>
+          <dd>
+            <span>{{ experience()!.posteOccupe }}</span>
+          </dd>
+          <dt><span jhiTranslate="gdf1App.experience.mission">Mission</span></dt>
+          <dd>
+            <span>{{ experience()!.mission }}</span>
+          </dd>
+          <dt><span jhiTranslate="gdf1App.experience.eleve">Eleve</span></dt>
+          <dd>
+            @if (experience()!.eleve) {
+              <div>
+                <a [routerLink]="['/eleve', experience()!.eleve?.id, 'view']">{{ experience()!.eleve?.niveauEtude }}</a>
+              </div>
+            }
+          </dd>
+          <dt><span jhiTranslate="gdf1App.experience.etudiant">Etudiant</span></dt>
+          <dd>
+            @if (experience()!.etudiant) {
+              <div>
+                <a [routerLink]="['/etudiant', experience()!.etudiant?.id, 'view']">{{ experience()!.etudiant?.carteEtudiant }}</a>
+              </div>
+            }
+          </dd>
+          <dt><span jhiTranslate="gdf1App.experience.professionnel">Professionnel</span></dt>
+          <dd>
+            @if (experience()!.professionnel) {
+              <div>
+                <a [routerLink]="['/professionnel', experience()!.professionnel?.id, 'view']">{{
+                  experience()!.professionnel?.profession
+                }}</a>
+              </div>
+            }
+          </dd>
+          <dt><span jhiTranslate="gdf1App.experience.demandeur">Demandeur</span></dt>
+          <dd>
+            @if (experience()!.demandeur) {
+              <div>
+                <a [routerLink]="['/demandeur', experience()!.demandeur?.id, 'view']">{{ experience()!.demandeur?.profil }}</a>
+              </div>
+            }
+          </dd>
+        </dl>
+
+        <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+          <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Retour</span>
+        </button>
+
+        <button type="button" [routerLink]="['/experience', experience()!.id, 'edit']" class="btn btn-primary">
+          <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Editer</span>
+        </button>
+      </div>
+    }
+  </div>
+</div>

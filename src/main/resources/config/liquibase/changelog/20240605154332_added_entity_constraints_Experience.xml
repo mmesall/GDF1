@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<databaseChangeLog
+    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+    xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-latest.xsd
+                        http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd">
+    <!--
+        Added the constraints for entity Experience.
+    -->
+    <changeSet id="20240605154332-2" author="jhipster">
+
+        <addForeignKeyConstraint baseColumnNames="eleve_id"
+                                 baseTableName="experience"
+                                 constraintName="fk_experience__eleve_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="eleve"
+                                 />
+
+        <addForeignKeyConstraint baseColumnNames="etudiant_id"
+                                 baseTableName="experience"
+                                 constraintName="fk_experience__etudiant_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="etudiant"
+                                 />
+
+        <addForeignKeyConstraint baseColumnNames="professionnel_id"
+                                 baseTableName="experience"
+                                 constraintName="fk_experience__professionnel_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="professionnel"
+                                 />
+
+        <addForeignKeyConstraint baseColumnNames="demandeur_id"
+                                 baseTableName="experience"
+                                 constraintName="fk_experience__demandeur_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="demandeur"
+                                 />
+    </changeSet>
+</databaseChangeLog>

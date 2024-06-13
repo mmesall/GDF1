@@ -1,0 +1,71 @@
+{
+  "annotations": {
+    "changelogDate": "20240605154332"
+  },
+  "applications": "*",
+  "fields": [
+    {
+      "fieldName": "dateDebut",
+      "fieldType": "LocalDate",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "dateFin",
+      "fieldType": "LocalDate",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "nomEntreprise",
+      "fieldType": "String",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "posteOccupe",
+      "fieldType": "String",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "mission",
+      "fieldType": "byte[]",
+      "fieldTypeBlobContent": "text"
+    }
+  ],
+  "name": "Experience",
+  "pagination": "infinite-scroll",
+  "relationships": [
+    {
+      "otherEntityField": "niveauEtude",
+      "otherEntityName": "eleve",
+      "otherEntityRelationshipName": "experience",
+      "relationshipName": "eleve",
+      "relationshipSide": "right",
+      "relationshipType": "many-to-one"
+    },
+    {
+      "otherEntityField": "carteEtudiant",
+      "otherEntityName": "etudiant",
+      "otherEntityRelationshipName": "experience",
+      "relationshipName": "etudiant",
+      "relationshipSide": "right",
+      "relationshipType": "many-to-one"
+    },
+    {
+      "otherEntityField": "profession",
+      "otherEntityName": "professionnel",
+      "otherEntityRelationshipName": "experience",
+      "relationshipName": "professionnel",
+      "relationshipSide": "right",
+      "relationshipType": "many-to-one"
+    },
+    {
+      "otherEntityField": "profil",
+      "otherEntityName": "demandeur",
+      "otherEntityRelationshipName": "experience",
+      "relationshipName": "demandeur",
+      "relationshipSide": "right",
+      "relationshipType": "many-to-one"
+    }
+  ],
+  "searchEngine": "no",
+  "service": "serviceImpl"
+}

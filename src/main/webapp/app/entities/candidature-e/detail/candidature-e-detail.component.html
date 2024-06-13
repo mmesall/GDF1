@@ -1,0 +1,119 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    @if (candidatureE()) {
+      <div>
+        <h2 data-cy="candidatureEDetailsHeading"><span jhiTranslate="gdf1App.candidatureE.detail.title">Candidature E</span></h2>
+
+        <hr />
+
+        <jhi-alert-error></jhi-alert-error>
+
+        <jhi-alert></jhi-alert>
+
+        <dl class="row-md jh-entity-details">
+          <dt><span jhiTranslate="global.field.id">ID</span></dt>
+          <dd>
+            <span>{{ candidatureE()!.id }}</span>
+          </dd>
+          <dt><span jhiTranslate="gdf1App.candidatureE.offreFormation">Offre Formation</span></dt>
+          <dd>
+            <span [jhiTranslate]="'gdf1App.NomFiliere.' + (candidatureE()!.offreFormation ?? 'null')">{{
+              {
+                null: '',
+                AGRI_ELEVAGE: 'AGRI_ELEVAGE',
+                AGRICULTURE: 'AGRICULTURE',
+                PECHE: 'PECHE',
+                ELEVAGE: 'ELEVAGE',
+                MINE_CARRIERES: 'MINE_CARRIERES',
+                ARTISANAT: 'ARTISANAT',
+                BATIMAT_TRAVAUX_PUBLIQUES: 'BATIMAT_TRAVAUX_PUBLIQUES',
+                MECANIQUE: 'MECANIQUE',
+                MENUISERIE_BOIS: 'MENUISERIE_BOIS',
+                HABILLEMENT: 'HABILLEMENT',
+                AGROALIMENTAIRE: 'AGROALIMENTAIRE',
+                ELECTROTECHNIQUE_ELECTRIQUE_ENERGETIQUE: 'ELECTROTECHNIQUE_ELECTRIQUE_ENERGETIQUE',
+                HYDRAULIQUE: 'HYDRAULIQUE',
+                STRUCTURE_METALLIQUE: 'STRUCTURE_METALLIQUE',
+                STRUCTURE_PLASTIQUE: 'STRUCTURE_PLASTIQUE',
+                BEAUTE_ESTHETIQUE: 'BEAUTE_ESTHETIQUE',
+                DEVELOPPEMENT_TERRITORIAL: 'DEVELOPPEMENT_TERRITORIAL',
+                DROIT: 'DROIT',
+                ECONOMIE_GESTION_COMMERCE_LOGISTIQUE: 'ECONOMIE_GESTION_COMMERCE_LOGISTIQUE',
+                INSDUSTRIE_CULTURELLE_ET_CREATIVE: 'INSDUSTRIE_CULTURELLE_ET_CREATIVE',
+                INFORMATIQUE_ET_NUMERIQUE: 'INFORMATIQUE_ET_NUMERIQUE',
+                RESTAURATION_ET_HOTELLORIE: 'RESTAURATION_ET_HOTELLORIE',
+                SANTE_BIOLOGIE_CHIMIE: 'SANTE_BIOLOGIE_CHIMIE',
+                SPORT: 'SPORT',
+                TOURISME: 'TOURISME',
+                ENVIRONNEMENT: 'ENVIRONNEMENT',
+                AUTRES: 'AUTRES'
+              }[candidatureE()!.offreFormation ?? 'null']
+            }}</span>
+          </dd>
+          <dt><span jhiTranslate="gdf1App.candidatureE.dateDebutOffre">Date Debut Offre</span></dt>
+          <dd>
+            <span>{{ candidatureE()!.dateDebutOffre | formatMediumDate }}</span>
+          </dd>
+          <dt><span jhiTranslate="gdf1App.candidatureE.dateFinOffre">Date Fin Offre</span></dt>
+          <dd>
+            <span>{{ candidatureE()!.dateFinOffre | formatMediumDate }}</span>
+          </dd>
+          <dt><span jhiTranslate="gdf1App.candidatureE.dateDepot">Date Depot</span></dt>
+          <dd>
+            <span>{{ candidatureE()!.dateDepot | formatMediumDate }}</span>
+          </dd>
+          <dt><span jhiTranslate="gdf1App.candidatureE.resultat">Resultat</span></dt>
+          <dd>
+            <span [jhiTranslate]="'gdf1App.Resultat.' + (candidatureE()!.resultat ?? 'null')">{{
+              { null: '', SOUMIS: 'SOUMIS', VALIDE: 'VALIDE', APPROUVE: 'APPROUVE', REJETE: 'REJETE' }[candidatureE()!.resultat ?? 'null']
+            }}</span>
+          </dd>
+          <dt><span jhiTranslate="gdf1App.candidatureE.eleve">Eleve</span></dt>
+          <dd>
+            @if (candidatureE()!.eleve) {
+              <div>
+                <a [routerLink]="['/eleve', candidatureE()!.eleve?.id, 'view']">{{ candidatureE()!.eleve?.niveauEtude }}</a>
+              </div>
+            }
+          </dd>
+          <dt><span jhiTranslate="gdf1App.candidatureE.etudiant">Etudiant</span></dt>
+          <dd>
+            @if (candidatureE()!.etudiant) {
+              <div>
+                <a [routerLink]="['/etudiant', candidatureE()!.etudiant?.id, 'view']">{{ candidatureE()!.etudiant?.carteEtudiant }}</a>
+              </div>
+            }
+          </dd>
+          <dt><span jhiTranslate="gdf1App.candidatureE.formationInitiale">Formation Initiale</span></dt>
+          <dd>
+            @if (candidatureE()!.formationInitiale) {
+              <div>
+                <a [routerLink]="['/formation-initiale', candidatureE()!.formationInitiale?.id, 'view']">{{
+                  candidatureE()!.formationInitiale?.nomFormationI
+                }}</a>
+              </div>
+            }
+          </dd>
+          <dt><span jhiTranslate="gdf1App.candidatureE.etablissement">Etablissement</span></dt>
+          <dd>
+            @if (candidatureE()!.etablissement) {
+              <div>
+                <a [routerLink]="['/etablissement', candidatureE()!.etablissement?.id, 'view']">{{
+                  candidatureE()!.etablissement?.nomEtablissement
+                }}</a>
+              </div>
+            }
+          </dd>
+        </dl>
+
+        <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+          <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Retour</span>
+        </button>
+
+        <button type="button" [routerLink]="['/candidature-e', candidatureE()!.id, 'edit']" class="btn btn-primary">
+          <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Editer</span>
+        </button>
+      </div>
+    }
+  </div>
+</div>

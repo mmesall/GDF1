@@ -1,0 +1,48 @@
+<div>
+  <h2 id="page-heading" data-cy="ConcoursHeading">
+    <span>Liste des concours</span>
+
+    <div class="d-flex justify-content-end">
+      <!-- <button class="btn btn-info me-2" (click)="load()" [disabled]="isLoading">
+        <fa-icon icon="sync" [spin]="isLoading"></fa-icon>
+        <span jhiTranslate="gdf1App.concours.home.refreshListLabel">Actualiser la liste</span>
+      </button> -->
+
+      <button
+        id="jh-create-entity"
+        data-cy="entityCreateButton"
+        class="btn btn-primary jh-create-entity create-formation-initiale"
+        [routerLink]="['/formation-initiale/new']"
+      >
+        <fa-icon icon="plus"></fa-icon>
+        <span jhiTranslate="gdf1App.concours.home.createLabel">Créer un nouveau Formation Initiale</span>
+      </button>
+    </div>
+  </h2>
+
+  <jhi-alert-error></jhi-alert-error>
+  <jhi-alert></jhi-alert>
+
+  @if (concours?.length === 0) {
+    <div class="alert alert-warning" id="no-result">
+      <span jhiTranslate="gdf1App.concour.home.notFound">Aucun Formation Initiale trouvé</span>
+    </div>
+  }
+
+  @if (concours && concours.length > 0) {
+    <div class="card-container">
+      @for (concour of concours; track trackId) {
+        <div class="card">
+          <div class="card-body">
+            <h5 class="card-title">{{ concour.nomConcours }}</h5>
+            <!-- <p class="card-text"><strong>Description:</strong> {{ concour.description }}</p> -->
+            <p class="card-text"><strong>Nom de l'etablissement:</strong> {{ concour.nomEtablissement }}</p>
+            <p class="card-text"><strong>Niveau Etude:</strong> {{ concour.niveauEtude }}</p>
+            <!-- Ajoutez d'autres champs ici selon vos besoins -->
+            <a [routerLink]="['/concour', concour.id, 'view']" class="btn btn-primary">Voir les détails</a>
+          </div>
+        </div>
+      }
+    </div>
+  }
+</div>

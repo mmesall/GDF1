@@ -8,7 +8,24 @@
       "entities": {
         "main": "Entités",
         "jhipster-needle-menu-add-entry": "JHipster will add additional entities here (do not translate!)",
-        "adminAuthority": "Authority"
+        "etablissement": "Etablissement",
+        "formation": "Formation",
+        "formationInitiale": "Formation Initiale",
+        "formationContinue": "Formation Continue",
+        "concours": "Concours",
+        "priseEnCharge": "Prise En Charge",
+        "bailleur": "Bailleur",
+        "dossier": "Dossier",
+        "diplome": "Diplome",
+        "experience": "Experience",
+        "candidatureE": "Candidature E",
+        "candidatureP": "Candidature P",
+        "demandeur": "Demandeur",
+        "eleve": "Eleve",
+        "etudiant": "Etudiant",
+        "professionnel": "Professionnel",
+        "agent": "Agent",
+        "serviceMfpai": "Service MFPAI"
       },
       "account": {
         "main": "Compte",

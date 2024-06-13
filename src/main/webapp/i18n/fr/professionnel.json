@@ -1,0 +1,41 @@
+{
+  "gdf1App": {
+    "professionnel": {
+      "home": {
+        "title": "Professionnels",
+        "refreshListLabel": "Actualiser la liste",
+        "createLabel": "Créer un nouveau Professionnel",
+        "createOrEditLabel": "Créer ou éditer un Professionnel",
+        "notFound": "Aucun Professionnel trouvé"
+      },
+      "created": "Un nouveau Professionnel a été créé avec l'identifiant {{ param }}",
+      "updated": "Le Professionnel avec l'identifiant {{ param }} a été mis à jour",
+      "deleted": "Le Professionnel avec l'identifiant {{ param }} a été supprimé",
+      "delete": {
+        "question": "Êtes-vous certain de vouloir supprimer le Professionnel {{ id }} ?"
+      },
+      "detail": {
+        "title": "Professionnel"
+      },
+      "id": "ID",
+      "profession": "Profession",
+      "nom": "Nom",
+      "prenom": "Prenom",
+      "dateNaiss": "Date Naiss",
+      "lieuNaiss": "Lieu Naiss",
+      "sexe": "Sexe",
+      "telephone": "Telephone",
+      "adressePhysique": "Adresse Physique",
+      "regionResidence": "Region Residence",
+      "departResidence": "Depart Residence",
+      "email": "Email",
+      "cni": "Cni",
+      "user": "User",
+      "diplome": "Diplome",
+      "experience": "Experience",
+      "candidatureP": "Candidature P",
+      "dossier": "Dossier",
+      "demandeur": "Demandeur"
+    }
+  }
+}

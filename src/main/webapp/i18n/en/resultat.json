@@ -1,0 +1,11 @@
+{
+  "gdf1App": {
+    "Resultat": {
+      "null": "",
+      "SOUMIS": "SOUMIS",
+      "VALIDE": "VALIDE",
+      "APPROUVE": "APPROUVE",
+      "REJETE": "REJETE"
+    }
+  }
+}

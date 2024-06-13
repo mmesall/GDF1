@@ -1,0 +1,102 @@
+{
+  "annotations": {
+    "changelogDate": "20240605154335"
+  },
+  "applications": "*",
+  "fields": [
+    {
+      "fieldName": "nom",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "prenom",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "dateNaiss",
+      "fieldType": "LocalDate"
+    },
+    {
+      "fieldName": "lieuNaiss",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "sexe",
+      "fieldType": "Sexe",
+      "fieldValues": "HOMME,FEMME"
+    },
+    {
+      "fieldName": "telephone",
+      "fieldType": "Long"
+    },
+    {
+      "fieldName": "email",
+      "fieldType": "String",
+      "fieldValidateRules": ["unique"]
+    },
+    {
+      "fieldName": "profil",
+      "fieldType": "Profil",
+      "fieldValues": "ELEVE,ETUDIANT,PROFESSIONNEL"
+    }
+  ],
+  "name": "Demandeur",
+  "pagination": "infinite-scroll",
+  "relationships": [
+    {
+      "otherEntityField": "login",
+      "otherEntityName": "user",
+      "relationshipName": "user",
+      "relationshipSide": "left",
+      "relationshipType": "one-to-one"
+    },
+    {
+      "otherEntityField": "numDossier",
+      "otherEntityName": "dossier",
+      "otherEntityRelationshipName": "demandeur",
+      "relationshipName": "dossier",
+      "relationshipSide": "left",
+      "relationshipType": "one-to-one"
+    },
+    {
+      "otherEntityField": "cni",
+      "otherEntityName": "eleve",
+      "otherEntityRelationshipName": "demandeur",
+      "relationshipName": "eleve",
+      "relationshipSide": "left",
+      "relationshipType": "one-to-one"
+    },
+    {
+      "otherEntityField": "cni",
+      "otherEntityName": "etudiant",
+      "otherEntityRelationshipName": "demandeur",
+      "relationshipName": "etudiant",
+      "relationshipSide": "left",
+      "relationshipType": "one-to-one"
+    },
+    {
+      "otherEntityField": "cni",
+      "otherEntityName": "professionnel",
+      "otherEntityRelationshipName": "demandeur",
+      "relationshipName": "professionnel",
+      "relationshipSide": "left",
+      "relationshipType": "one-to-one"
+    },
+    {
+      "otherEntityName": "diplome",
+      "otherEntityRelationshipName": "demandeur",
+      "relationshipName": "diplome",
+      "relationshipSide": "left",
+      "relationshipType": "one-to-many"
+    },
+    {
+      "otherEntityName": "experience",
+      "otherEntityRelationshipName": "demandeur",
+      "relationshipName": "experience",
+      "relationshipSide": "left",
+      "relationshipType": "one-to-many"
+    }
+  ],
+  "searchEngine": "no",
+  "service": "serviceImpl"
+}

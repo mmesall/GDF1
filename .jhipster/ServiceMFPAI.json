@@ -1,0 +1,42 @@
+{
+  "annotations": {
+    "changelogDate": "20240605154340"
+  },
+  "applications": "*",
+  "entityTableName": "service_mfpai",
+  "fields": [
+    {
+      "fieldName": "imageService",
+      "fieldType": "byte[]",
+      "fieldTypeBlobContent": "any"
+    },
+    {
+      "fieldName": "nomService",
+      "fieldType": "String",
+      "fieldValidateRules": ["unique"]
+    },
+    {
+      "fieldName": "chefService",
+      "fieldType": "String",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "description",
+      "fieldType": "byte[]",
+      "fieldTypeBlobContent": "text"
+    }
+  ],
+  "name": "ServiceMFPAI",
+  "pagination": "infinite-scroll",
+  "relationships": [
+    {
+      "otherEntityName": "agent",
+      "otherEntityRelationshipName": "serviceMFPAI",
+      "relationshipName": "agent",
+      "relationshipSide": "right",
+      "relationshipType": "one-to-one"
+    }
+  ],
+  "searchEngine": "no",
+  "service": "serviceImpl"
+}

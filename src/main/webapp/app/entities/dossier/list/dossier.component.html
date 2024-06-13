@@ -1,0 +1,646 @@
+<div>
+  <h2 id="page-heading" data-cy="DossierHeading">
+    <span jhiTranslate="gdf1App.dossier.home.title">Dossiers</span>
+
+    <div class="d-flex justify-content-end">
+      <button class="btn btn-info me-2" (click)="load()" [disabled]="isLoading">
+        <fa-icon icon="sync" [spin]="isLoading"></fa-icon>
+        <span jhiTranslate="gdf1App.dossier.home.refreshListLabel">Actualiser la liste</span>
+      </button>
+
+      <button
+        id="jh-create-entity"
+        data-cy="entityCreateButton"
+        class="btn btn-primary jh-create-entity create-dossier"
+        [routerLink]="['/dossier/new']"
+      >
+        <fa-icon icon="plus"></fa-icon>
+        <span jhiTranslate="gdf1App.dossier.home.createLabel">Créer un nouveau Dossier</span>
+      </button>
+    </div>
+  </h2>
+
+  <jhi-alert-error></jhi-alert-error>
+
+  <jhi-alert></jhi-alert>
+
+  @if (dossiers?.length === 0) {
+    <div class="alert alert-warning" id="no-result">
+      <span jhiTranslate="gdf1App.dossier.home.notFound">Aucun Dossier trouvé</span>
+    </div>
+  }
+
+  @if (dossiers && dossiers.length > 0) {
+    <div class="table-responsive table-entities" id="entities">
+      <table class="table table-striped" aria-describedby="page-heading">
+        <thead>
+          <tr jhiSort [sortState]="sortState" (sortChange)="navigateToWithComponentValues($event)">
+            <th scope="col" jhiSortBy="id">
+              <div class="d-flex">
+                <span jhiTranslate="global.field.id">ID</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="numDossier">
+              <div class="d-flex">
+                <span jhiTranslate="gdf1App.dossier.numDossier">Num Dossier</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="prenom">
+              <div class="d-flex">
+                <span jhiTranslate="gdf1App.dossier.prenom">Prenom</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="nom">
+              <div class="d-flex">
+                <span jhiTranslate="gdf1App.dossier.nom">Nom</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="nomUtilisateur">
+              <div class="d-flex">
+                <span jhiTranslate="gdf1App.dossier.nomUtilisateur">Nom Utilisateur</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="dateNaiss">
+              <div class="d-flex">
+                <span jhiTranslate="gdf1App.dossier.dateNaiss">Date Naiss</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="lieuNaiss">
+              <div class="d-flex">
+                <span jhiTranslate="gdf1App.dossier.lieuNaiss">Lieu Naiss</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="regionNaiss">
+              <div class="d-flex">
+                <span jhiTranslate="gdf1App.dossier.regionNaiss">Region Naiss</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="departementNaiss">
+              <div class="d-flex">
+                <span jhiTranslate="gdf1App.dossier.departementNaiss">Departement Naiss</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="typePiece">
+              <div class="d-flex">
+                <span jhiTranslate="gdf1App.dossier.typePiece">Type Piece</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="numeroPiece">
+              <div class="d-flex">
+                <span jhiTranslate="gdf1App.dossier.numeroPiece">Numero Piece</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="sexe">
+              <div class="d-flex">
+                <span jhiTranslate="gdf1App.dossier.sexe">Sexe</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="regionResidence">
+              <div class="d-flex">
+                <span jhiTranslate="gdf1App.dossier.regionResidence">Region Residence</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="depResidence">
+              <div class="d-flex">
+                <span jhiTranslate="gdf1App.dossier.depResidence">Dep Residence</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="adresseResidence">
+              <div class="d-flex">
+                <span jhiTranslate="gdf1App.dossier.adresseResidence">Adresse Residence</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="telephone1">
+              <div class="d-flex">
+                <span jhiTranslate="gdf1App.dossier.telephone1">Telephone 1</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="telephone2">
+              <div class="d-flex">
+                <span jhiTranslate="gdf1App.dossier.telephone2">Telephone 2</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="email">
+              <div class="d-flex">
+                <span jhiTranslate="gdf1App.dossier.email">Email</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="niveauFormation">
+              <div class="d-flex">
+                <span jhiTranslate="gdf1App.dossier.niveauFormation">Niveau Formation</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="specialite">
+              <div class="d-flex">
+                <span jhiTranslate="gdf1App.dossier.specialite">Specialite</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="intituleDiplome">
+              <div class="d-flex">
+                <span jhiTranslate="gdf1App.dossier.intituleDiplome">Intitule Diplome</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="diplome">
+              <div class="d-flex">
+                <span jhiTranslate="gdf1App.dossier.diplome">Diplome</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="anneeObtention">
+              <div class="d-flex">
+                <span jhiTranslate="gdf1App.dossier.anneeObtention">Annee Obtention</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="lieuObtention">
+              <div class="d-flex">
+                <span jhiTranslate="gdf1App.dossier.lieuObtention">Lieu Obtention</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="cv">
+              <div class="d-flex">
+                <span jhiTranslate="gdf1App.dossier.cv">Cv</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="lettreMotivation">
+              <div class="d-flex">
+                <span jhiTranslate="gdf1App.dossier.lettreMotivation">Lettre Motivation</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="profession">
+              <div class="d-flex">
+                <span jhiTranslate="gdf1App.dossier.profession">Profession</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="autreSpecialite">
+              <div class="d-flex">
+                <span jhiTranslate="gdf1App.dossier.autreSpecialite">Autre Specialite</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="nomCompetence">
+              <div class="d-flex">
+                <span jhiTranslate="gdf1App.dossier.nomCompetence">Nom Competence</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="niveauCompetence">
+              <div class="d-flex">
+                <span jhiTranslate="gdf1App.dossier.niveauCompetence">Niveau Competence</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="intituleExperience">
+              <div class="d-flex">
+                <span jhiTranslate="gdf1App.dossier.intituleExperience">Intitule Experience</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="posteOccupe">
+              <div class="d-flex">
+                <span jhiTranslate="gdf1App.dossier.posteOccupe">Poste Occupe</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="dateDebut">
+              <div class="d-flex">
+                <span jhiTranslate="gdf1App.dossier.dateDebut">Date Debut</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="dateFin">
+              <div class="d-flex">
+                <span jhiTranslate="gdf1App.dossier.dateFin">Date Fin</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="nomEntreprise">
+              <div class="d-flex">
+                <span jhiTranslate="gdf1App.dossier.nomEntreprise">Nom Entreprise</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="mission">
+              <div class="d-flex">
+                <span jhiTranslate="gdf1App.dossier.mission">Mission</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="eleve.niveauEtude">
+              <div class="d-flex">
+                <span jhiTranslate="gdf1App.dossier.eleve">Eleve</span>
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="etudiant.carteEtudiant">
+              <div class="d-flex">
+                <span jhiTranslate="gdf1App.dossier.etudiant">Etudiant</span>
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="professionnel.profession">
+              <div class="d-flex">
+                <span jhiTranslate="gdf1App.dossier.professionnel">Professionnel</span>
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col"></th>
+          </tr>
+        </thead>
+        <tbody infinite-scroll (scrolled)="loadNextPage()" [infiniteScrollDisabled]="!hasMorePage()" [infiniteScrollDistance]="0">
+          @for (dossier of dossiers; track trackId) {
+            <tr data-cy="entityTable">
+              <td>
+                <a [routerLink]="['/dossier', dossier.id, 'view']">{{ dossier.id }}</a>
+              </td>
+              <td>{{ dossier.numDossier }}</td>
+              <td>{{ dossier.prenom }}</td>
+              <td>{{ dossier.nom }}</td>
+              <td>{{ dossier.nomUtilisateur }}</td>
+              <td>{{ dossier.dateNaiss | formatMediumDate }}</td>
+              <td>{{ dossier.lieuNaiss }}</td>
+              <td [jhiTranslate]="'gdf1App.NomRegion.' + (dossier.regionNaiss ?? 'null')">
+                {{
+                  {
+                    null: '',
+                    DAKAR: 'DAKAR',
+                    DIOURBEL: 'DIOURBEL',
+                    FATICK: 'FATICK',
+                    KAFFRINE: 'KAFFRINE',
+                    KAOLACK: 'KAOLACK',
+                    KEDOUGOU: 'KEDOUGOU',
+                    KOLDA: 'KOLDA',
+                    LOUGA: 'LOUGA',
+                    MATAM: 'MATAM',
+                    SAINT_LOUIS: 'SAINT_LOUIS',
+                    SEDHIOU: 'SEDHIOU',
+                    TAMBACOUNDA: 'TAMBACOUNDA',
+                    THIES: 'THIES',
+                    ZIGINCHOR: 'ZIGINCHOR',
+                    AUTRE: 'AUTRE'
+                  }[dossier.regionNaiss ?? 'null']
+                }}
+              </td>
+              <td [jhiTranslate]="'gdf1App.NomDepartement.' + (dossier.departementNaiss ?? 'null')">
+                {{
+                  {
+                    null: '',
+                    DAKAR: 'DAKAR',
+                    GUEDIAWAYE: 'GUEDIAWAYE',
+                    PIKINE: 'PIKINE',
+                    RUFISQUE: 'RUFISQUE',
+                    BAMBAEY: 'BAMBAEY',
+                    DIOURBEL: 'DIOURBEL',
+                    MBACKE: 'MBACKE',
+                    FATICK: 'FATICK',
+                    FOUNDIOUGNE: 'FOUNDIOUGNE',
+                    GOSSAS: 'GOSSAS',
+                    BIRKILANE: 'BIRKILANE',
+                    KAFFRINE: 'KAFFRINE',
+                    KOUNGHEUR: 'KOUNGHEUR',
+                    MALEM_HODAR: 'MALEM_HODAR',
+                    GUINGUINEO: 'GUINGUINEO',
+                    KAOLOACK: 'KAOLOACK',
+                    NIORO: 'NIORO',
+                    KEDOUGOU: 'KEDOUGOU',
+                    SALAMATA: 'SALAMATA',
+                    SARAYA: 'SARAYA',
+                    KOLDA: 'KOLDA',
+                    MEDINA_YORO_FOULAH: 'MEDINA_YORO_FOULAH',
+                    VELINGARA: 'VELINGARA',
+                    KEBEMERE: 'KEBEMERE',
+                    LINGUERE: 'LINGUERE',
+                    LOUGA: 'LOUGA',
+                    KANELKANEL: 'KANELKANEL',
+                    MATAM: 'MATAM',
+                    RANEROU_FERLO: 'RANEROU_FERLO',
+                    DAGANA: 'DAGANA',
+                    PODOR: 'PODOR',
+                    SAINT_LOUIS: 'SAINT_LOUIS',
+                    BOUNKILING: 'BOUNKILING',
+                    GOUDOMP: 'GOUDOMP',
+                    SEDHIOU: 'SEDHIOU',
+                    BAKEL: 'BAKEL',
+                    GOUDIRY: 'GOUDIRY',
+                    KOUMPENTOUM: 'KOUMPENTOUM',
+                    TAMBACOUNDA: 'TAMBACOUNDA',
+                    MBOUR: 'MBOUR',
+                    THIES: 'THIES',
+                    TIVAOUANE: 'TIVAOUANE',
+                    BIGNONA: 'BIGNONA',
+                    OUSSOUYE: 'OUSSOUYE',
+                    ZICHUINCHOR: 'ZICHUINCHOR',
+                    AUTRE: 'AUTRE'
+                  }[dossier.departementNaiss ?? 'null']
+                }}
+              </td>
+              <td [jhiTranslate]="'gdf1App.TypePiece.' + (dossier.typePiece ?? 'null')">
+                {{ { null: '', CNI: 'CNI', PASSEPORT: 'PASSEPORT' }[dossier.typePiece ?? 'null'] }}
+              </td>
+              <td>{{ dossier.numeroPiece }}</td>
+              <td [jhiTranslate]="'gdf1App.Sexe.' + (dossier.sexe ?? 'null')">
+                {{ { null: '', HOMME: 'HOMME', FEMME: 'FEMME' }[dossier.sexe ?? 'null'] }}
+              </td>
+              <td [jhiTranslate]="'gdf1App.NomRegion.' + (dossier.regionResidence ?? 'null')">
+                {{
+                  {
+                    null: '',
+                    DAKAR: 'DAKAR',
+                    DIOURBEL: 'DIOURBEL',
+                    FATICK: 'FATICK',
+                    KAFFRINE: 'KAFFRINE',
+                    KAOLACK: 'KAOLACK',
+                    KEDOUGOU: 'KEDOUGOU',
+                    KOLDA: 'KOLDA',
+                    LOUGA: 'LOUGA',
+                    MATAM: 'MATAM',
+                    SAINT_LOUIS: 'SAINT_LOUIS',
+                    SEDHIOU: 'SEDHIOU',
+                    TAMBACOUNDA: 'TAMBACOUNDA',
+                    THIES: 'THIES',
+                    ZIGINCHOR: 'ZIGINCHOR',
+                    AUTRE: 'AUTRE'
+                  }[dossier.regionResidence ?? 'null']
+                }}
+              </td>
+              <td [jhiTranslate]="'gdf1App.NomDepartement.' + (dossier.depResidence ?? 'null')">
+                {{
+                  {
+                    null: '',
+                    DAKAR: 'DAKAR',
+                    GUEDIAWAYE: 'GUEDIAWAYE',
+                    PIKINE: 'PIKINE',
+                    RUFISQUE: 'RUFISQUE',
+                    BAMBAEY: 'BAMBAEY',
+                    DIOURBEL: 'DIOURBEL',
+                    MBACKE: 'MBACKE',
+                    FATICK: 'FATICK',
+                    FOUNDIOUGNE: 'FOUNDIOUGNE',
+                    GOSSAS: 'GOSSAS',
+                    BIRKILANE: 'BIRKILANE',
+                    KAFFRINE: 'KAFFRINE',
+                    KOUNGHEUR: 'KOUNGHEUR',
+                    MALEM_HODAR: 'MALEM_HODAR',
+                    GUINGUINEO: 'GUINGUINEO',
+                    KAOLOACK: 'KAOLOACK',
+                    NIORO: 'NIORO',
+                    KEDOUGOU: 'KEDOUGOU',
+                    SALAMATA: 'SALAMATA',
+                    SARAYA: 'SARAYA',
+                    KOLDA: 'KOLDA',
+                    MEDINA_YORO_FOULAH: 'MEDINA_YORO_FOULAH',
+                    VELINGARA: 'VELINGARA',
+                    KEBEMERE: 'KEBEMERE',
+                    LINGUERE: 'LINGUERE',
+                    LOUGA: 'LOUGA',
+                    KANELKANEL: 'KANELKANEL',
+                    MATAM: 'MATAM',
+                    RANEROU_FERLO: 'RANEROU_FERLO',
+                    DAGANA: 'DAGANA',
+                    PODOR: 'PODOR',
+                    SAINT_LOUIS: 'SAINT_LOUIS',
+                    BOUNKILING: 'BOUNKILING',
+                    GOUDOMP: 'GOUDOMP',
+                    SEDHIOU: 'SEDHIOU',
+                    BAKEL: 'BAKEL',
+                    GOUDIRY: 'GOUDIRY',
+                    KOUMPENTOUM: 'KOUMPENTOUM',
+                    TAMBACOUNDA: 'TAMBACOUNDA',
+                    MBOUR: 'MBOUR',
+                    THIES: 'THIES',
+                    TIVAOUANE: 'TIVAOUANE',
+                    BIGNONA: 'BIGNONA',
+                    OUSSOUYE: 'OUSSOUYE',
+                    ZICHUINCHOR: 'ZICHUINCHOR',
+                    AUTRE: 'AUTRE'
+                  }[dossier.depResidence ?? 'null']
+                }}
+              </td>
+              <td>{{ dossier.adresseResidence }}</td>
+              <td>{{ dossier.telephone1 }}</td>
+              <td>{{ dossier.telephone2 }}</td>
+              <td>{{ dossier.email }}</td>
+              <td [jhiTranslate]="'gdf1App.NiveauEtude.' + (dossier.niveauFormation ?? 'null')">
+                {{
+                  {
+                    null: '',
+                    CINQUIEME: 'CINQUIEME',
+                    QUATRIEME: 'QUATRIEME',
+                    TROISIEME: 'TROISIEME',
+                    BFEM: 'BFEM',
+                    EQUIVALENT_BFEM: 'EQUIVALENT_BFEM',
+                    SECONDE: 'SECONDE',
+                    PREMIERE: 'PREMIERE',
+                    TERMINAL: 'TERMINAL',
+                    BAC: 'BAC',
+                    EQUIVALENT_BAC: 'EQUIVALENT_BAC',
+                    LICENCE1: 'LICENCE1',
+                    LICENCE2: 'LICENCE2',
+                    LICEMCE3: 'LICEMCE3',
+                    MASTER: 'MASTER',
+                    DOCTORAT: 'DOCTORAT',
+                    ATTESTATION: 'ATTESTATION',
+                    CAP: 'CAP',
+                    CAP1: 'CAP1',
+                    CAP2: 'CAP2',
+                    CAP3: 'CAP3',
+                    CPS: 'CPS',
+                    BEP: 'BEP',
+                    BEP1: 'BEP1',
+                    BEP2: 'BEP2',
+                    BT: 'BT',
+                    BT1: 'BT1',
+                    BT2: 'BT2',
+                    BT3: 'BT3',
+                    BTS: 'BTS',
+                    BTS1: 'BTS1',
+                    BTS2: 'BTS2',
+                    CQP: 'CQP',
+                    CHEFEQUIPE: 'CHEFEQUIPE',
+                    CHEF_DE_CHANTIER: 'CHEF_DE_CHANTIER',
+                    TECHNICIENSPECIALISE: 'TECHNICIENSPECIALISE',
+                    METP: 'METP',
+                    BTI: 'BTI',
+                    TITRE_PROFESSIONNEL: 'TITRE_PROFESSIONNEL',
+                    AUTRES: 'AUTRES'
+                  }[dossier.niveauFormation ?? 'null']
+                }}
+              </td>
+              <td [jhiTranslate]="'gdf1App.NomFiliere.' + (dossier.specialite ?? 'null')">
+                {{
+                  {
+                    null: '',
+                    AGRI_ELEVAGE: 'AGRI_ELEVAGE',
+                    AGRICULTURE: 'AGRICULTURE',
+                    PECHE: 'PECHE',
+                    ELEVAGE: 'ELEVAGE',
+                    MINE_CARRIERES: 'MINE_CARRIERES',
+                    ARTISANAT: 'ARTISANAT',
+                    BATIMAT_TRAVAUX_PUBLIQUES: 'BATIMAT_TRAVAUX_PUBLIQUES',
+                    MECANIQUE: 'MECANIQUE',
+                    MENUISERIE_BOIS: 'MENUISERIE_BOIS',
+                    HABILLEMENT: 'HABILLEMENT',
+                    AGROALIMENTAIRE: 'AGROALIMENTAIRE',
+                    ELECTROTECHNIQUE_ELECTRIQUE_ENERGETIQUE: 'ELECTROTECHNIQUE_ELECTRIQUE_ENERGETIQUE',
+                    HYDRAULIQUE: 'HYDRAULIQUE',
+                    STRUCTURE_METALLIQUE: 'STRUCTURE_METALLIQUE',
+                    STRUCTURE_PLASTIQUE: 'STRUCTURE_PLASTIQUE',
+                    BEAUTE_ESTHETIQUE: 'BEAUTE_ESTHETIQUE',
+                    DEVELOPPEMENT_TERRITORIAL: 'DEVELOPPEMENT_TERRITORIAL',
+                    DROIT: 'DROIT',
+                    ECONOMIE_GESTION_COMMERCE_LOGISTIQUE: 'ECONOMIE_GESTION_COMMERCE_LOGISTIQUE',
+                    INSDUSTRIE_CULTURELLE_ET_CREATIVE: 'INSDUSTRIE_CULTURELLE_ET_CREATIVE',
+                    INFORMATIQUE_ET_NUMERIQUE: 'INFORMATIQUE_ET_NUMERIQUE',
+                    RESTAURATION_ET_HOTELLORIE: 'RESTAURATION_ET_HOTELLORIE',
+                    SANTE_BIOLOGIE_CHIMIE: 'SANTE_BIOLOGIE_CHIMIE',
+                    SPORT: 'SPORT',
+                    TOURISME: 'TOURISME',
+                    ENVIRONNEMENT: 'ENVIRONNEMENT',
+                    AUTRES: 'AUTRES'
+                  }[dossier.specialite ?? 'null']
+                }}
+              </td>
+              <td>{{ dossier.intituleDiplome }}</td>
+              <td>
+                @if (dossier.diplome) {
+                  <a (click)="openFile(dossier.diplome, dossier.diplomeContentType)" jhiTranslate="entity.action.open">Ouvrir</a>
+                  <span>{{ dossier.diplomeContentType }}, {{ byteSize(dossier.diplome) }}</span>
+                }
+              </td>
+              <td>{{ dossier.anneeObtention | formatMediumDate }}</td>
+              <td>{{ dossier.lieuObtention }}</td>
+              <td>
+                @if (dossier.cv) {
+                  <a (click)="openFile(dossier.cv, dossier.cvContentType)" jhiTranslate="entity.action.open">Ouvrir</a>
+                  <span>{{ dossier.cvContentType }}, {{ byteSize(dossier.cv) }}</span>
+                }
+              </td>
+              <td>
+                @if (dossier.lettreMotivation) {
+                  <a (click)="openFile(dossier.lettreMotivation, dossier.lettreMotivationContentType)" jhiTranslate="entity.action.open"
+                    >Ouvrir</a
+                  >
+                  <span>{{ dossier.lettreMotivationContentType }}, {{ byteSize(dossier.lettreMotivation) }}</span>
+                }
+              </td>
+              <td>{{ dossier.profession }}</td>
+              <td>{{ dossier.autreSpecialite }}</td>
+              <td>{{ dossier.nomCompetence }}</td>
+              <td [jhiTranslate]="'gdf1App.NIVEAUCOMP.' + (dossier.niveauCompetence ?? 'null')">
+                {{
+                  { null: '', DEBUTANT: 'DEBUTANT', INTERMEDIAIRE: 'INTERMEDIAIRE', EXPERT: 'EXPERT' }[dossier.niveauCompetence ?? 'null']
+                }}
+              </td>
+              <td>{{ dossier.intituleExperience }}</td>
+              <td>{{ dossier.posteOccupe }}</td>
+              <td>{{ dossier.dateDebut | formatMediumDate }}</td>
+              <td>{{ dossier.dateFin | formatMediumDate }}</td>
+              <td>{{ dossier.nomEntreprise }}</td>
+              <td>{{ dossier.mission }}</td>
+              <td>
+                @if (dossier.eleve) {
+                  <div>
+                    <a [routerLink]="['/eleve', dossier.eleve.id, 'view']">{{ dossier.eleve.niveauEtude }}</a>
+                  </div>
+                }
+              </td>
+              <td>
+                @if (dossier.etudiant) {
+                  <div>
+                    <a [routerLink]="['/etudiant', dossier.etudiant.id, 'view']">{{ dossier.etudiant.carteEtudiant }}</a>
+                  </div>
+                }
+              </td>
+              <td>
+                @if (dossier.professionnel) {
+                  <div>
+                    <a [routerLink]="['/professionnel', dossier.professionnel.id, 'view']">{{ dossier.professionnel.profession }}</a>
+                  </div>
+                }
+              </td>
+              <td class="text-end">
+                <div class="btn-group">
+                  <a [routerLink]="['/dossier', dossier.id, 'view']" class="btn btn-info btn-sm" data-cy="entityDetailsButton">
+                    <fa-icon icon="eye"></fa-icon>
+                    <span class="d-none d-md-inline" jhiTranslate="entity.action.view">Voir</span>
+                  </a>
+
+                  <a [routerLink]="['/dossier', dossier.id, 'edit']" class="btn btn-primary btn-sm" data-cy="entityEditButton">
+                    <fa-icon icon="pencil-alt"></fa-icon>
+                    <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Editer</span>
+                  </a>
+
+                  <button type="submit" (click)="delete(dossier)" class="btn btn-danger btn-sm" data-cy="entityDeleteButton">
+                    <fa-icon icon="times"></fa-icon>
+                    <span class="d-none d-md-inline" jhiTranslate="entity.action.delete">Supprimer</span>
+                  </button>
+                </div>
+              </td>
+            </tr>
+          }
+        </tbody>
+      </table>
+    </div>
+  }
+</div>

@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<databaseChangeLog
+    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+    xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-latest.xsd
+                        http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd">
+    <!--
+        Added the constraints for entity CandidatureP.
+    -->
+    <changeSet id="20240605154334-2" author="jhipster">
+
+        <addForeignKeyConstraint baseColumnNames="professionnel_id"
+                                 baseTableName="candidature_p"
+                                 constraintName="fk_candidature_p__professionnel_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="professionnel"
+                                 />
+
+        <addForeignKeyConstraint baseColumnNames="formation_continue_id"
+                                 baseTableName="candidature_p"
+                                 constraintName="fk_candidature_p__formation_continue_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="formation_continue"
+                                 />
+
+        <addForeignKeyConstraint baseColumnNames="etablissement_id"
+                                 baseTableName="candidature_p"
+                                 constraintName="fk_candidature_p__etablissement_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="etablissement"
+                                 />
+    </changeSet>
+</databaseChangeLog>

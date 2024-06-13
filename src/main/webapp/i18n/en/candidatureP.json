@@ -1,0 +1,31 @@
+{
+  "gdf1App": {
+    "candidatureP": {
+      "home": {
+        "title": "Candidature PS",
+        "refreshListLabel": "Refresh list",
+        "createLabel": "Create a new Candidature P",
+        "createOrEditLabel": "Create or edit a Candidature P",
+        "notFound": "No Candidature PS found"
+      },
+      "created": "A new Candidature P is created with identifier {{ param }}",
+      "updated": "A Candidature P is updated with identifier {{ param }}",
+      "deleted": "A Candidature P is deleted with identifier {{ param }}",
+      "delete": {
+        "question": "Are you sure you want to delete Candidature P {{ id }}?"
+      },
+      "detail": {
+        "title": "Candidature P"
+      },
+      "id": "ID",
+      "offreFormation": "Offre Formation",
+      "dateDebutOffre": "Date Debut Offre",
+      "dateFinOffre": "Date Fin Offre",
+      "dateDepot": "Date Depot",
+      "resultat": "Resultat",
+      "professionnel": "Professionnel",
+      "formationContinue": "Formation Continue",
+      "etablissement": "Etablissement"
+    }
+  }
+}

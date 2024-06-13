@@ -1,0 +1,166 @@
+<div>
+  <h2 id="page-heading" data-cy="AgentHeading">
+    <span jhiTranslate="gdf1App.agent.home.title">Agents</span>
+
+    <div class="d-flex justify-content-end">
+      <button class="btn btn-info me-2" (click)="load()" [disabled]="isLoading">
+        <fa-icon icon="sync" [spin]="isLoading"></fa-icon>
+        <span jhiTranslate="gdf1App.agent.home.refreshListLabel">Actualiser la liste</span>
+      </button>
+
+      <button
+        id="jh-create-entity"
+        data-cy="entityCreateButton"
+        class="btn btn-primary jh-create-entity create-agent"
+        [routerLink]="['/agent/new']"
+      >
+        <fa-icon icon="plus"></fa-icon>
+        <span jhiTranslate="gdf1App.agent.home.createLabel">Créer un nouveau Agent</span>
+      </button>
+    </div>
+  </h2>
+
+  <jhi-alert-error></jhi-alert-error>
+
+  <jhi-alert></jhi-alert>
+
+  @if (agents?.length === 0) {
+    <div class="alert alert-warning" id="no-result">
+      <span jhiTranslate="gdf1App.agent.home.notFound">Aucun Agent trouvé</span>
+    </div>
+  }
+
+  @if (agents && agents.length > 0) {
+    <div class="table-responsive table-entities" id="entities">
+      <table class="table table-striped" aria-describedby="page-heading">
+        <thead>
+          <tr jhiSort [sortState]="sortState" (sortChange)="navigateToWithComponentValues($event)">
+            <th scope="col" jhiSortBy="id">
+              <div class="d-flex">
+                <span jhiTranslate="global.field.id">ID</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="matricule">
+              <div class="d-flex">
+                <span jhiTranslate="gdf1App.agent.matricule">Matricule</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="nomAgent">
+              <div class="d-flex">
+                <span jhiTranslate="gdf1App.agent.nomAgent">Nom Agent</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="prenom">
+              <div class="d-flex">
+                <span jhiTranslate="gdf1App.agent.prenom">Prenom</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="dateNaiss">
+              <div class="d-flex">
+                <span jhiTranslate="gdf1App.agent.dateNaiss">Date Naiss</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="lieuNaiss">
+              <div class="d-flex">
+                <span jhiTranslate="gdf1App.agent.lieuNaiss">Lieu Naiss</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="sexe">
+              <div class="d-flex">
+                <span jhiTranslate="gdf1App.agent.sexe">Sexe</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="telephone">
+              <div class="d-flex">
+                <span jhiTranslate="gdf1App.agent.telephone">Telephone</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="email">
+              <div class="d-flex">
+                <span jhiTranslate="gdf1App.agent.email">Email</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="user.login">
+              <div class="d-flex">
+                <span jhiTranslate="gdf1App.agent.user">User</span>
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="serviceMFPAI.nomService">
+              <div class="d-flex">
+                <span jhiTranslate="gdf1App.agent.serviceMFPAI">Service MFPAI</span>
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col"></th>
+          </tr>
+        </thead>
+        <tbody infinite-scroll (scrolled)="loadNextPage()" [infiniteScrollDisabled]="!hasMorePage()" [infiniteScrollDistance]="0">
+          @for (agent of agents; track trackId) {
+            <tr data-cy="entityTable">
+              <td>
+                <a [routerLink]="['/agent', agent.id, 'view']">{{ agent.id }}</a>
+              </td>
+              <td>{{ agent.matricule }}</td>
+              <td>{{ agent.nomAgent }}</td>
+              <td>{{ agent.prenom }}</td>
+              <td>{{ agent.dateNaiss | formatMediumDate }}</td>
+              <td>{{ agent.lieuNaiss }}</td>
+              <td [jhiTranslate]="'gdf1App.Sexe.' + (agent.sexe ?? 'null')">
+                {{ { null: '', HOMME: 'HOMME', FEMME: 'FEMME' }[agent.sexe ?? 'null'] }}
+              </td>
+              <td>{{ agent.telephone }}</td>
+              <td>{{ agent.email }}</td>
+              <td>
+                {{ agent.user?.login }}
+              </td>
+              <td>
+                @if (agent.serviceMFPAI) {
+                  <div>
+                    <a [routerLink]="['/service-mfpai', agent.serviceMFPAI.id, 'view']">{{ agent.serviceMFPAI.nomService }}</a>
+                  </div>
+                }
+              </td>
+              <td class="text-end">
+                <div class="btn-group">
+                  <a [routerLink]="['/agent', agent.id, 'view']" class="btn btn-info btn-sm" data-cy="entityDetailsButton">
+                    <fa-icon icon="eye"></fa-icon>
+                    <span class="d-none d-md-inline" jhiTranslate="entity.action.view">Voir</span>
+                  </a>
+
+                  <a [routerLink]="['/agent', agent.id, 'edit']" class="btn btn-primary btn-sm" data-cy="entityEditButton">
+                    <fa-icon icon="pencil-alt"></fa-icon>
+                    <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Editer</span>
+                  </a>
+
+                  <button type="submit" (click)="delete(agent)" class="btn btn-danger btn-sm" data-cy="entityDeleteButton">
+                    <fa-icon icon="times"></fa-icon>
+                    <span class="d-none d-md-inline" jhiTranslate="entity.action.delete">Supprimer</span>
+                  </button>
+                </div>
+              </td>
+            </tr>
+          }
+        </tbody>
+      </table>
+    </div>
+  }
+</div>

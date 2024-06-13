@@ -1,0 +1,105 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    @if (formation()) {
+      <div>
+        <h2 data-cy="formationDetailsHeading"><span jhiTranslate="gdf1App.formation.detail.title">Formation</span></h2>
+
+        <hr />
+
+        <jhi-alert-error></jhi-alert-error>
+
+        <jhi-alert></jhi-alert>
+
+        <dl class="row-md jh-entity-details">
+          <dt><span jhiTranslate="global.field.id">ID</span></dt>
+          <dd>
+            <span>{{ formation()!.id }}</span>
+          </dd>
+          <dt><span jhiTranslate="gdf1App.formation.nomFormation">Nom Formation</span></dt>
+          <dd>
+            <span>{{ formation()!.nomFormation }}</span>
+          </dd>
+          <dt><span jhiTranslate="gdf1App.formation.imageFormation">Image Formation</span></dt>
+          <dd>
+            @if (formation()!.imageFormation) {
+              <div>
+                <a
+                  (click)="openFile(formation()!.imageFormation ?? '', formation()!.imageFormationContentType)"
+                  jhiTranslate="entity.action.open"
+                  >Ouvrir</a
+                >
+                {{ formation()!.imageFormationContentType }}, {{ byteSize(formation()!.imageFormation ?? '') }}
+              </div>
+            }
+          </dd>
+          <dt><span jhiTranslate="gdf1App.formation.typeFormation">Type Formation</span></dt>
+          <dd>
+            <span [jhiTranslate]="'gdf1App.TypeFormation.' + (formation()!.typeFormation ?? 'null')">{{
+              { null: '', INITIALE: 'INITIALE', CONTINUE: 'CONTINUE' }[formation()!.typeFormation ?? 'null']
+            }}</span>
+          </dd>
+          <dt><span jhiTranslate="gdf1App.formation.duree">Duree</span></dt>
+          <dd>
+            <span>{{ formation()!.duree }}</span>
+          </dd>
+          <dt><span jhiTranslate="gdf1App.formation.admission">Admission</span></dt>
+          <dd>
+            <span [jhiTranslate]="'gdf1App.Admission.' + (formation()!.admission ?? 'null')">{{
+              { null: '', CONCOURS: 'CONCOURS', PC: 'PC' }[formation()!.admission ?? 'null']
+            }}</span>
+          </dd>
+          <dt><span jhiTranslate="gdf1App.formation.diplomeRequis">Diplome Requis</span></dt>
+          <dd>
+            <span [jhiTranslate]="'gdf1App.DiplomeRequis.' + (formation()!.diplomeRequis ?? 'null')">{{
+              {
+                null: '',
+                ATTESTATION: 'ATTESTATION',
+                CAP: 'CAP',
+                BT: 'BT',
+                DUR: 'DUR',
+                DNBA: 'DNBA',
+                BEP: 'BEP',
+                BTS: 'BTS',
+                BFEM: 'BFEM',
+                BAC: 'BAC',
+                LICENCE: 'LICENCE',
+                MASTER: 'MASTER',
+                AUTRES: 'AUTRES'
+              }[formation()!.diplomeRequis ?? 'null']
+            }}</span>
+          </dd>
+          <dt><span jhiTranslate="gdf1App.formation.ficheFormation">Fiche Formation</span></dt>
+          <dd>
+            @if (formation()!.ficheFormation) {
+              <div>
+                <a
+                  (click)="openFile(formation()!.ficheFormation ?? '', formation()!.ficheFormationContentType)"
+                  jhiTranslate="entity.action.open"
+                  >Ouvrir</a
+                >
+                {{ formation()!.ficheFormationContentType }}, {{ byteSize(formation()!.ficheFormation ?? '') }}
+              </div>
+            }
+          </dd>
+          <dt><span jhiTranslate="gdf1App.formation.etablissement">Etablissement</span></dt>
+          <dd>
+            @for (etablissement of formation()!.etablissements; track $index; let last = $last) {
+              <span>
+                <a [routerLink]="['/etablissement', etablissement.id, 'view']">{{ etablissement?.nomEtablissement }}</a
+                >{{ last ? '' : ', ' }}
+              </span>
+            }
+          </dd>
+        </dl>
+
+        <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+          <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Retour</span>
+        </button>
+
+        <button type="button" [routerLink]="['/formation', formation()!.id, 'edit']" class="btn btn-primary">
+          <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Editer</span>
+        </button>
+      </div>
+    }
+  </div>
+</div>

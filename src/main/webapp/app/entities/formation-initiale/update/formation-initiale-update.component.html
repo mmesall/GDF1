@@ -1,0 +1,291 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    <form name="editForm" novalidate (ngSubmit)="save()" [formGroup]="editForm">
+      <h2
+        id="jhi-formation-initiale-heading"
+        data-cy="FormationInitialeCreateUpdateHeading"
+        jhiTranslate="gdf1App.formationInitiale.home.createOrEditLabel"
+      >
+        Créer ou éditer un Formation Initiale
+      </h2>
+
+      <div>
+        <jhi-alert-error></jhi-alert-error>
+
+        @if (editForm.controls.id.value !== null) {
+          <div class="mb-3">
+            <label class="form-label" for="field_id" jhiTranslate="gdf1App.formationInitiale.id">ID</label>
+            <input type="number" class="form-control" name="id" id="field_id" data-cy="id" formControlName="id" [readonly]="true" />
+          </div>
+        }
+
+        <div class="mb-3">
+          <label class="form-label" for="field_nomFormationI" jhiTranslate="gdf1App.formationInitiale.nomFormationI">Nom Formation I</label>
+          <input
+            type="text"
+            class="form-control"
+            name="nomFormationI"
+            id="field_nomFormationI"
+            data-cy="nomFormationI"
+            formControlName="nomFormationI"
+          />
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_duree" jhiTranslate="gdf1App.formationInitiale.duree">Duree</label>
+          <input type="text" class="form-control" name="duree" id="field_duree" data-cy="duree" formControlName="duree" />
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_admission" jhiTranslate="gdf1App.formationInitiale.admission">Admission</label>
+          <select class="form-control" name="admission" formControlName="admission" id="field_admission" data-cy="admission">
+            <option [ngValue]="null">{{ 'gdf1App.Admission.null' | translate }}</option>
+            @for (admission of admissionValues; track $index) {
+              <option [value]="admission">{{ 'gdf1App.Admission.' + admission | translate }}</option>
+            }
+          </select>
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_diplomeRequis" jhiTranslate="gdf1App.formationInitiale.diplomeRequis">Diplome Requis</label>
+          <select
+            class="form-control"
+            name="diplomeRequis"
+            formControlName="diplomeRequis"
+            id="field_diplomeRequis"
+            data-cy="diplomeRequis"
+          >
+            <option [ngValue]="null">{{ 'gdf1App.DiplomeRequis.null' | translate }}</option>
+            @for (diplomeRequis of diplomeRequisValues; track $index) {
+              <option [value]="diplomeRequis">{{ 'gdf1App.DiplomeRequis.' + diplomeRequis | translate }}</option>
+            }
+          </select>
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_niveauEtude" jhiTranslate="gdf1App.formationInitiale.niveauEtude">Niveau Etude</label>
+          <select class="form-control" name="niveauEtude" formControlName="niveauEtude" id="field_niveauEtude" data-cy="niveauEtude">
+            <option [ngValue]="null">{{ 'gdf1App.NiveauEtude.null' | translate }}</option>
+            @for (niveauEtude of niveauEtudeValues; track $index) {
+              <option [value]="niveauEtude">{{ 'gdf1App.NiveauEtude.' + niveauEtude | translate }}</option>
+            }
+          </select>
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_ficheFormation" jhiTranslate="gdf1App.formationInitiale.ficheFormation"
+            >Fiche Formation</label
+          >
+          <div>
+            @if (editForm.get('ficheFormation')!.value) {
+              <div class="form-text text-danger clearfix">
+                <a
+                  class="pull-start"
+                  (click)="openFile(editForm.get('ficheFormation')!.value!, editForm.get('ficheFormationContentType')!.value!)"
+                  jhiTranslate="entity.action.open"
+                  >Ouvrir</a
+                ><br />
+                <span class="pull-start"
+                  >{{ editForm.get('ficheFormationContentType')!.value }}, {{ byteSize(editForm.get('ficheFormation')!.value!) }}</span
+                >
+                <button
+                  type="button"
+                  (click)="editForm.patchValue({ ficheFormation: undefined, ficheFormationContentType: undefined })"
+                  class="btn btn-secondary btn-xs pull-end"
+                >
+                  <fa-icon icon="times"></fa-icon>
+                </button>
+              </div>
+            }
+            <input
+              type="file"
+              id="file_ficheFormation"
+              data-cy="ficheFormation"
+              (change)="setFileData($event, 'ficheFormation', false)"
+              jhiTranslate="entity.action.addblob"
+            />
+          </div>
+          <input
+            type="hidden"
+            class="form-control"
+            name="ficheFormation"
+            id="field_ficheFormation"
+            data-cy="ficheFormation"
+            formControlName="ficheFormation"
+          />
+          <input
+            type="hidden"
+            class="form-control"
+            name="ficheFormationContentType"
+            id="field_ficheFormationContentType"
+            formControlName="ficheFormationContentType"
+          />
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_filiere" jhiTranslate="gdf1App.formationInitiale.filiere">Filiere</label>
+          <select class="form-control" name="filiere" formControlName="filiere" id="field_filiere" data-cy="filiere">
+            <option [ngValue]="null">{{ 'gdf1App.NomFiliere.null' | translate }}</option>
+            @for (nomFiliere of nomFiliereValues; track $index) {
+              <option [value]="nomFiliere">{{ 'gdf1App.NomFiliere.' + nomFiliere | translate }}</option>
+            }
+          </select>
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_serie" jhiTranslate="gdf1App.formationInitiale.serie">Serie</label>
+          <select class="form-control" name="serie" formControlName="serie" id="field_serie" data-cy="serie">
+            <option [ngValue]="null">{{ 'gdf1App.NomSerie.null' | translate }}</option>
+            @for (nomSerie of nomSerieValues; track $index) {
+              <option [value]="nomSerie">{{ 'gdf1App.NomSerie.' + nomSerie | translate }}</option>
+            }
+          </select>
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_cfp" jhiTranslate="gdf1App.formationInitiale.cfp">Cfp</label>
+          <select class="form-control" name="cfp" formControlName="cfp" id="field_cfp" data-cy="cfp">
+            <option [ngValue]="null">{{ 'gdf1App.CFP.null' | translate }}</option>
+            @for (cFP of cFPValues; track $index) {
+              <option [value]="cFP">{{ 'gdf1App.CFP.' + cFP | translate }}</option>
+            }
+          </select>
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_lycee" jhiTranslate="gdf1App.formationInitiale.lycee">Lycee</label>
+          <select class="form-control" name="lycee" formControlName="lycee" id="field_lycee" data-cy="lycee">
+            <option [ngValue]="null">{{ 'gdf1App.LYCEE.null' | translate }}</option>
+            @for (lYCEE of lYCEEValues; track $index) {
+              <option [value]="lYCEE">{{ 'gdf1App.LYCEE.' + lYCEE | translate }}</option>
+            }
+          </select>
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_nomConcours" jhiTranslate="gdf1App.formationInitiale.nomConcours">Nom Concours</label>
+          <input
+            type="text"
+            class="form-control"
+            name="nomConcours"
+            id="field_nomConcours"
+            data-cy="nomConcours"
+            formControlName="nomConcours"
+          />
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_dateOuverture" jhiTranslate="gdf1App.formationInitiale.dateOuverture">Date Ouverture</label>
+          <div class="input-group">
+            <input
+              id="field_dateOuverture"
+              data-cy="dateOuverture"
+              type="text"
+              class="form-control"
+              name="dateOuverture"
+              ngbDatepicker
+              #dateOuvertureDp="ngbDatepicker"
+              formControlName="dateOuverture"
+            />
+            <button type="button" class="btn btn-secondary" (click)="dateOuvertureDp.toggle()">
+              <fa-icon icon="calendar-alt"></fa-icon>
+            </button>
+          </div>
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_dateCloture" jhiTranslate="gdf1App.formationInitiale.dateCloture">Date Cloture</label>
+          <div class="input-group">
+            <input
+              id="field_dateCloture"
+              data-cy="dateCloture"
+              type="text"
+              class="form-control"
+              name="dateCloture"
+              ngbDatepicker
+              #dateClotureDp="ngbDatepicker"
+              formControlName="dateCloture"
+            />
+            <button type="button" class="btn btn-secondary" (click)="dateClotureDp.toggle()">
+              <fa-icon icon="calendar-alt"></fa-icon>
+            </button>
+          </div>
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_dateConcours" jhiTranslate="gdf1App.formationInitiale.dateConcours">Date Concours</label>
+          <div class="input-group">
+            <input
+              id="field_dateConcours"
+              data-cy="dateConcours"
+              type="text"
+              class="form-control"
+              name="dateConcours"
+              ngbDatepicker
+              #dateConcoursDp="ngbDatepicker"
+              formControlName="dateConcours"
+            />
+            <button type="button" class="btn btn-secondary" (click)="dateConcoursDp.toggle()">
+              <fa-icon icon="calendar-alt"></fa-icon>
+            </button>
+          </div>
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_nomDiplome" jhiTranslate="gdf1App.formationInitiale.nomDiplome">Nom Diplome</label>
+          <select class="form-control" name="nomDiplome" formControlName="nomDiplome" id="field_nomDiplome" data-cy="nomDiplome">
+            <option [ngValue]="null">{{ 'gdf1App.DiplomeObtenu.null' | translate }}</option>
+            @for (diplomeObtenu of diplomeObtenuValues; track $index) {
+              <option [value]="diplomeObtenu">{{ 'gdf1App.DiplomeObtenu.' + diplomeObtenu | translate }}</option>
+            }
+          </select>
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_nomDebouche" jhiTranslate="gdf1App.formationInitiale.nomDebouche">Nom Debouche</label>
+          <input
+            type="text"
+            class="form-control"
+            name="nomDebouche"
+            id="field_nomDebouche"
+            data-cy="nomDebouche"
+            formControlName="nomDebouche"
+          />
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_formation" jhiTranslate="gdf1App.formationInitiale.formation">Formation</label>
+          <select
+            class="form-control"
+            id="field_formation"
+            data-cy="formation"
+            name="formation"
+            formControlName="formation"
+            [compareWith]="compareFormation"
+          >
+            <option [ngValue]="null"></option>
+            @for (formationOption of formationsCollection; track $index) {
+              <option [ngValue]="formationOption">{{ formationOption.id }}</option>
+            }
+          </select>
+        </div>
+      </div>
+
+      <div>
+        <button type="button" id="cancel-save" data-cy="entityCreateCancelButton" class="btn btn-secondary" (click)="previousState()">
+          <fa-icon icon="ban"></fa-icon>&nbsp;<span jhiTranslate="entity.action.cancel">Annuler</span>
+        </button>
+
+        <button
+          type="submit"
+          id="save-entity"
+          data-cy="entityCreateSaveButton"
+          [disabled]="editForm.invalid || isSaving"
+          class="btn btn-primary"
+        >
+          <fa-icon icon="save"></fa-icon>&nbsp;<span jhiTranslate="entity.action.save">Sauvegarder</span>
+        </button>
+      </div>
+    </form>
+  </div>
+</div>
